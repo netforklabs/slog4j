@@ -39,6 +39,6 @@ public interface MerantiLogger {
      * @param level 级别名称,例如:INFO DEBUG ERROR
      * @return
      */
-    String prefixGenerator(String level);
+    String prefixGenerate(String level);
 
 }
