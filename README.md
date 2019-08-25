@@ -1,14 +1,6 @@
 # mlog4j
 mlog4j 全称为Java智子日志记录框架,英文为 sophon logger for java
 
-# 与 slf4j 速度对比
-经测试,slf4j大约要快slog4j 4倍左右
-
-测试条件为slog4j和slf4j分别输出1w次,结果如下
-
-    slf4j/60ms    
-    mlog4j/240ms
-
 # slog4j的优点
 1.不用在每个类中都加上下面这段代码
 
