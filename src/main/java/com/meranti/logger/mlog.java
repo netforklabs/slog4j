@@ -42,6 +42,10 @@ public class mlog {
         logger.warn(format(v,args));
     }
 
+    public static void exception(Throwable throwable){
+        logger.exception(throwable);
+    }
+
     /**
      * 将字符串格式化
      * @param v

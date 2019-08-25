@@ -2,6 +2,9 @@ package com.meranti.logger;
 
 import com.meranti.config.ConfigVo;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -79,8 +82,25 @@ public final class MLoggerImpl implements MerantiLogger {
 
     @Override
     public void exception(Throwable e) {
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+        e.printStackTrace(printWriter);
+        String exceptionInfo = stringWriter.toString();
+        System.out.println(exceptionInfo);
+        // 关闭流
+        try {
+            printWriter.close();
+            stringWriter.close();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
     }
 
+    /**
+     * 前缀生成
+     * @param level 级别名称,例如:INFO DEBUG ERROR
+     * @return
+     */
     public String prefixGenerate(String level) {
         String className = Thread.currentThread().getStackTrace()[trace].getClassName();
         String methodName = Thread.currentThread().getStackTrace()[trace].getMethodName();
