@@ -2,10 +2,6 @@ package com.meranti.config;
 
 
 import com.meranti.util.StringUtils;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -23,7 +19,7 @@ public class ConfigVo {
     private static ResourceBundle bundle = null;
 
     static {
-        bundle = ResourceBundle.getBundle("mlog4j");
+        bundle = ResourceBundle.getBundle("slog4j");
     }
 
     /**
@@ -42,6 +38,27 @@ public class ConfigVo {
         return v;
     }
 
+    // 统计写出了多少条数据
+    private static long writeCount = 0L;
+    // 统计打印了多少条数据
+    private static long printCount = 0L;
+
+    public static void writePlus() {
+        writeCount++;
+    }
+
+    public static void printPlus() {
+        printCount++;
+    }
+
+    public static long getWriteCount() {
+        return writeCount;
+    }
+
+    public static long getPrintCount() {
+        return printCount;
+    }
+
     /**
      * logger 文件输出路径
      */
@@ -55,6 +72,8 @@ public class ConfigVo {
     /**
      * logger 文件生成规则,按天数还是按大小
      */
+    public static final String BY_DAYS = "days";
+    public static final String BY_SIZE = "size";
     private static final String LOGGER_GENERATE_RULE = getValue("logger.generate.rule");
 
     /**
@@ -92,8 +111,38 @@ public class ConfigVo {
      */
     public static String getLoggerPrintTemplate() {
         String v = LOGGER_PRINT_TEMPLATE;
-        v = v.replaceAll("\\$\\{datetime:(.*?)\\}","\\$\\{datetime\\}");
+        v = v.replaceAll("\\$\\{datetime:(.*?)\\}", "\\$\\{datetime\\}");
         return v;
+    }
+
+    public static String getLoggerPrintPath() {
+        return LOGGER_PRINT_PATH;
+    }
+
+    /**
+     * 文件生成规则
+     *
+     * @return
+     */
+    public static String[] getLoggerGenerateRule() {
+        String[] v = new String[2];
+        String rule = LOGGER_GENERATE_RULE;
+        if (rule.contains(BY_DAYS) || rule.contains(BY_SIZE)) {
+             return rule.split(":");
+        } else {
+            // 默认一天是生成一个文件
+            v[0] = BY_DAYS;
+            v[1] = "1";
+            return v;
+        }
+    }
+
+    public static String getLoggerProhibitLevelConsole() {
+        return LOGGER_PROHIBIT_LEVEL_CONSOLE;
+    }
+
+    public static String getLoggerProhibitLevelFile() {
+        return LOGGER_PROHIBIT_LEVEL_FILE;
     }
 
     public static void main(String[] args) {

@@ -5,10 +5,10 @@ package com.meranti.logger;
  * @Date 2019/8/25 1:31
  * @Description TODO
  */
-public class mlog {
+public class slog {
 
     private static final String formatString = "\\{\\}";
-    private static final MerantiLogger logger = new MLoggerImpl(4);
+    private static final SophonLogger logger = new SophonLoggerImpl(4);
 
     public static void info(String v){
         logger.info(v);

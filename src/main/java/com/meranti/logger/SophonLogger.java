@@ -5,7 +5,7 @@ package com.meranti.logger;
  * @Date 2019/8/25 0:08
  * @Description sophon-logger
  */
-public interface MerantiLogger {
+public interface SophonLogger {
 
     /**
      * info
