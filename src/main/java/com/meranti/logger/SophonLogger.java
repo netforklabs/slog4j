@@ -31,7 +31,7 @@ public interface SophonLogger {
      * 异常改为输出,不会对程序运行造成影响
      * @param e 异常信息
      */
-    void exception(Throwable e);
+    void exception(String s,Throwable e);
 
     /**
      * 生成日志前缀,例如:

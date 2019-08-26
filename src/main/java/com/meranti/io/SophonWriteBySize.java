@@ -9,7 +9,10 @@ public class SophonWriteBySize implements AbsSophonWrite {
 
     @Override
     public void write(String v) {
+        if(SophonLoggerIO.getSizeByKB() >= 1024){
 
+        }
+        SophonLoggerIO.write(v);
     }
 
 }

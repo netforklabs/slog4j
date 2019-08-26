@@ -8,7 +8,7 @@ package com.meranti.io;
 public interface AbsSophonWrite {
 
     /**
-     * 写书数据
+     * 写出日志
      * @param v
      */
     void write(String v);

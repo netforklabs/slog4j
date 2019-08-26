@@ -2,8 +2,6 @@ package com.meranti.io;
 
 import com.meranti.config.ConfigVo;
 
-import java.util.Vector;
-
 /**
  * @Author Mr.luo
  * @Date 2019/8/25 13:00

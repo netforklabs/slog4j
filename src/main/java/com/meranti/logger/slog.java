@@ -42,8 +42,8 @@ public class slog {
         logger.warn(format(v,args));
     }
 
-    public static void exception(Throwable throwable){
-        logger.exception(throwable);
+    public static void exception(String s,Throwable throwable){
+        logger.exception(s,throwable);
     }
 
     /**

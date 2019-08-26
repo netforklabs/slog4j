@@ -81,11 +81,12 @@ public final class SophonLoggerImpl implements SophonLogger {
     }
 
     @Override
-    public void exception(Throwable e) {
+    public void exception(String s,Throwable e) {
         StringWriter stringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stringWriter);
         e.printStackTrace(printWriter);
         String exceptionInfo = stringWriter.toString();
+        System.out.println(s);
         System.out.println(exceptionInfo);
         // 关闭流
         try {

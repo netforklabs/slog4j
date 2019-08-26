@@ -9,7 +9,7 @@ public class SophonWriteByDays implements AbsSophonWrite {
 
     @Override
     public void write(String v) {
-
+        SophonLoggerIO.write(v);
     }
 
 }

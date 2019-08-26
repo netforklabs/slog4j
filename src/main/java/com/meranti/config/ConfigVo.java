@@ -1,6 +1,7 @@
 package com.meranti.config;
 
 
+import com.meranti.logger.slog;
 import com.meranti.util.StringUtils;
 
 import java.io.UnsupportedEncodingException;
@@ -128,7 +129,7 @@ public class ConfigVo {
         String[] v = new String[2];
         String rule = LOGGER_GENERATE_RULE;
         if (rule.contains(BY_DAYS) || rule.contains(BY_SIZE)) {
-             return rule.split(":");
+            return rule.split(":");
         } else {
             // 默认一天是生成一个文件
             v[0] = BY_DAYS;
