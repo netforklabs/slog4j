@@ -35,10 +35,38 @@ public class StringUtils {
      * @return
      */
     public static boolean isExist(String s, String regex) {
-        if(s.contains(regex)) return true;
+        if (s.contains(regex)) return true;
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(s);
         return matcher.find();
+    }
+
+    /**
+     * 获取最后一个字符
+     *
+     * @param v
+     * @return
+     */
+    public static String getLastString(String v) {
+        return v.substring(v.length() - 1);
+    }
+
+    /**
+     * 判断当前字符串是不是数字
+     * @param v
+     * @return
+     */
+    public static boolean isNumber(String v){
+        return v.matches("^[0-9]*$");
+    }
+
+    /**
+     * 删除所有非数字的字符
+     * @param v
+     * @return
+     */
+    public static String removeNotNumber(String v){
+        return v.replaceAll("[^\\d]","");
     }
 
 }

@@ -22,7 +22,7 @@ public class SophonLoggerWrite {
     /**
      * 数据写出接口
      */
-    private static AbsSophonWrite loggerWrite = null;
+    private static SophonWrite loggerWrite = null;
 
     static {
         // 根据规则判断选择哪种方式生成
