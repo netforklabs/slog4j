@@ -14,6 +14,7 @@ slog.info("xxx");
 slog.debug("xxx");
 slog.error("xxx");
 slog.warn("xxx");
+slog.exception(e);
 ```
 
 2. 可将异常转换为打印输出在控制台,让异常不影响程序后面的运行
