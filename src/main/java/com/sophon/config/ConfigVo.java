@@ -1,8 +1,7 @@
-package com.meranti.config;
+package com.sophon.config;
 
 
-import com.meranti.logger.slog;
-import com.meranti.util.StringUtils;
+import com.sophon.util.StringUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;

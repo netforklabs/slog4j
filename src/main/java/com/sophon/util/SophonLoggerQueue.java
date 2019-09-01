@@ -1,6 +1,6 @@
-package com.meranti.util;
+package com.sophon.util;
 
-import com.meranti.config.ConfigVo;
+import com.sophon.config.ConfigVo;
 
 import java.util.Vector;
 

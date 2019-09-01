@@ -1,4 +1,4 @@
-package com.meranti.io;
+package com.sophon.io;
 
 /**
  * @Author Mr.luo
@@ -9,7 +9,6 @@ public class SophonWriteByDays implements SophonWrite {
 
     @Override
     public void write(String v) {
-        SophonLoggerIO.write(v);
     }
 
 }

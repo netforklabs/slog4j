@@ -1,7 +1,8 @@
-package com.meranti.logger;
+package com.sophon.logger;
 
-import com.meranti.config.ConfigVo;
-import com.meranti.util.SophonLoggerQueue;
+import com.sophon.config.ConfigVo;
+import com.sophon.io.SophonLoggerIO;
+import com.sophon.util.SophonLoggerQueue;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -122,6 +123,8 @@ public final class SophonLoggerImpl implements SophonLogger {
         SophonLoggerQueue.put(v);
         System.out.println(v);
         ConfigVo.writePlus();
+        // 写出数据
+        SophonLoggerIO.write(v);
     }
 
 }

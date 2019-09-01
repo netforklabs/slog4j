@@ -1,12 +1,10 @@
-package com.meranti.io;
+package com.sophon.io;
 
 import com.google.common.collect.Lists;
 
-import java.io.File;
+import java.io.*;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @Author Mr.luo
@@ -65,6 +63,14 @@ public class SophonFiles extends File {
     }
 
     /**
+     * 创建当前文件
+     * @return
+     */
+    public boolean create(){
+        return create(this.getName());
+    }
+
+    /**
      * 获取当前文件夹下所有文件名(不带后缀)
      * @return
      */
@@ -82,7 +88,7 @@ public class SophonFiles extends File {
      * 获取当前文件夹下所有文件名(不带后缀)
      * @return
      */
-    public String getFileName(){
+    public String getNoSuffixName(){
         String name = this.getName();
         return name.substring(0,name.lastIndexOf("."));
     }

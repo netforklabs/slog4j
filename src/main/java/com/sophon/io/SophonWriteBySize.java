@@ -1,4 +1,4 @@
-package com.meranti.io;
+package com.sophon.io;
 
 /**
  * @Author Mr.luo
@@ -9,10 +9,6 @@ public class SophonWriteBySize implements SophonWrite {
 
     @Override
     public void write(String v) {
-        if(SophonLoggerIO.getSize() >= 1024L){
-
-        }
-        SophonLoggerIO.write(v);
     }
 
 }

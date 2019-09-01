@@ -1,6 +1,6 @@
-package com.meranti.io;
+package com.sophon.io;
 
-import com.meranti.config.ConfigVo;
+import com.sophon.config.ConfigVo;
 
 /**
  * @Author Mr.luo

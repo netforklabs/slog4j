@@ -1,11 +1,11 @@
-package com.meranti.logger;
+package com.sophon.logger;
 
 /**
  * @Author Mr.luo
  * @Date 2019/8/25 1:31
  * @Description TODO
  */
-public class slog {
+public final class slog {
 
     private static final String formatString = "\\{\\}";
     private static final SophonLogger logger = new SophonLoggerImpl(4);
