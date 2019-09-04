@@ -9,6 +9,7 @@ public class SophonWriteByDays implements SophonWrite {
 
     @Override
     public void write(String v) {
+
     }
 
 }

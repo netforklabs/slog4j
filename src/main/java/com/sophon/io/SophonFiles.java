@@ -31,9 +31,10 @@ public class SophonFiles extends File {
 
     /**
      * 获取文件后缀
+     *
      * @return
      */
-    public String getSuffix(){
+    public String getSuffix() {
         String suffix = this.getName();
         return suffix.substring(suffix.lastIndexOf("."));
     }
@@ -49,14 +50,18 @@ public class SophonFiles extends File {
 
     /**
      * 在当前文件夹下创建文件
+     *
      * @param filename
      * @return
      */
-    public boolean create(String filename){
-        File file = new File(this.getParent(),filename);
-        try{
+    public boolean create(String filename) {
+        File file = new File(this.getParent(), filename);
+        try {
+            if (!file.getParentFile().exists()) {
+                new File(file.getParent()).mkdirs();
+            }
             return file.createNewFile();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -64,33 +69,36 @@ public class SophonFiles extends File {
 
     /**
      * 创建当前文件
+     *
      * @return
      */
-    public boolean create(){
+    public boolean create() {
         return create(this.getName());
     }
 
     /**
      * 获取当前文件夹下所有文件名(不带后缀)
+     *
      * @return
      */
-    public ArrayList<String> getFileNamesByFolder(){
+    public ArrayList<String> getFileNamesByFolder() {
         ArrayList<String> names = Lists.newArrayList();
         File[] files = this.getParentFile().listFiles();
-        for(File file : files){
+        for (File file : files) {
             String name = file.getName();
-            names.add(name.substring(0,name.lastIndexOf(".")));
+            names.add(name.substring(0, name.lastIndexOf(".")));
         }
         return names;
     }
 
     /**
      * 获取当前文件夹下所有文件名(不带后缀)
+     *
      * @return
      */
-    public String getNoSuffixName(){
+    public String getNoSuffixName() {
         String name = this.getName();
-        return name.substring(0,name.lastIndexOf("."));
+        return name.substring(0, name.lastIndexOf("."));
     }
 
 }

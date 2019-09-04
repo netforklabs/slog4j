@@ -4,6 +4,7 @@ import com.sophon.config.ConfigVo;
 import com.sophon.logger.slog;
 import com.sophon.util.StringUtils;
 import com.sophon.util.TimeCalc;
+import lombok.Getter;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -31,6 +32,9 @@ public class SophonLoggerIO {
      * 数据写出接口
      */
     private static SophonWrite loggerWrite = null;
+    public static SophonWrite getLoggerWrite(){
+        return loggerWrite;
+    }
 
     static {
         // 根据规则判断选择哪种方式生成
@@ -114,10 +118,6 @@ public class SophonLoggerIO {
             }
         }
         return endNumber;
-    }
-
-    public static void main(String[] args) {
-        TimeCalc.invoke(SophonLoggerIO.class,"t");
     }
 
 }

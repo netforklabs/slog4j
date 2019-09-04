@@ -2,6 +2,7 @@ package com.sophon.logger;
 
 import com.sophon.config.ConfigVo;
 import com.sophon.io.SophonLoggerIO;
+import com.sophon.io.SophonWrite;
 import com.sophon.util.SophonLoggerQueue;
 
 import java.io.IOException;
@@ -38,6 +39,8 @@ public final class SophonLoggerImpl implements SophonLogger {
      * 简单的说就是经过了一个类,追踪值为 2,经过两个 追踪值为 3,经过了三个追踪值为 4
      */
     private int trace = 2;
+
+    private static SophonWrite loggerWrite = SophonLoggerIO.getLoggerWrite();
 
     // 日期格式化工具
     private static final DateFormat sdf = ConfigVo.getSimpleDateFormat();
@@ -124,7 +127,7 @@ public final class SophonLoggerImpl implements SophonLogger {
         System.out.println(v);
         ConfigVo.writePlus();
         // 写出数据
-        SophonLoggerIO.write(v);
+        loggerWrite.write(v);
     }
 
 }

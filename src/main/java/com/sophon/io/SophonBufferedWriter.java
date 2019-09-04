@@ -4,8 +4,10 @@ import com.google.common.collect.Lists;
 
 import java.io.*;
 import java.nio.Buffer;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * @Author Mr.luo
@@ -22,7 +24,7 @@ public class SophonBufferedWriter extends Thread {
     /**
      * 日志缓冲区
      */
-    static LinkedList<String> logs = Lists.newLinkedList();
+    static Vector<String> logs = new Vector<>();
 
     /**
      * 当前是否在更新out对象
@@ -39,11 +41,14 @@ public class SophonBufferedWriter extends Thread {
     public void createWriter(File file) {
         try {
             isUpdateOut = true;
+            if (out != null) {
+                out.close();
+            }
             out = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream(file, true)
             ));
             isUpdateOut = false;
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -63,11 +68,12 @@ public class SophonBufferedWriter extends Thread {
         try {
             while (true) {
                 if (!isUpdateOut && !logs.isEmpty()) {
-                    out.write(logs.get(0));
+                    for (String log : logs) {
+                        out.write(log);
+                        logs.remove(0);
+                    }
                     out.flush();
-                    logs.remove(0);
                 }
-                Thread.sleep(10);
             }
         } catch (Exception e) {
             e.printStackTrace();
