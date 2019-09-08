@@ -1,16 +1,13 @@
 package com.sophon.io;
 
 import com.sophon.config.ConfigVo;
-import com.sophon.logger.slog;
 import com.sophon.util.StringUtils;
-import com.sophon.util.TimeCalc;
-import lombok.Getter;
 
 import java.io.*;
 import java.util.ArrayList;
 
 /**
- * @Author Mr.luo
+ * @Author tiansheng
  * @Date 2019/8/26 11:21
  * @Description 文件工具类
  */

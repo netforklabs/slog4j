@@ -3,7 +3,7 @@ package com.sophon.io;
 import com.sophon.config.ConfigVo;
 
 /**
- * @Author Mr.luo
+ * @Author tiansheng
  * @Date 2019/8/25 13:00
  * @Description 日志文件管理工具
  */

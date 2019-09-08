@@ -1,7 +1,7 @@
 package com.sophon.io;
 
 /**
- * @Author Mr.luo
+ * @Author tiansheng
  * @Date 2019/8/26 1:15
  * @Description 数据写出接口
  */

@@ -3,7 +3,6 @@ package com.sophon.logger;
 import com.sophon.config.ConfigVo;
 import com.sophon.io.SophonLoggerIO;
 import com.sophon.io.SophonWrite;
-import com.sophon.util.SophonLoggerQueue;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,7 +11,7 @@ import java.text.DateFormat;
 import java.util.Date;
 
 /**
- * @Author Mr.luo
+ * @Author tiansheng
  * @Date 2019/8/24 23:56
  */
 public final class SophonLoggerImpl implements SophonLogger {
@@ -123,10 +122,8 @@ public final class SophonLoggerImpl implements SophonLogger {
      * @param v
      */
     private void console(String v){
-        SophonLoggerQueue.put(v);
         System.out.println(v);
         ConfigVo.writePlus();
-        // 写出数据
         loggerWrite.write(v);
     }
 

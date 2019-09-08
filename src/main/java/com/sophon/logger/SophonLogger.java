@@ -1,7 +1,7 @@
 package com.sophon.logger;
 
 /**
- * @Author Mr.luo
+ * @Author tiansheng
  * @Date 2019/8/25 0:08
  * @Description sophon-logger
  */
