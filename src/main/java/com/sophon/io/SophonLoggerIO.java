@@ -117,5 +117,13 @@ public class SophonLoggerIO {
         return endNumber;
     }
 
+    public static SophonFiles getFile(){
+        return file;
+    }
+
+    public static String getSuffix(){
+        return suffix;
+    }
+
 }
 

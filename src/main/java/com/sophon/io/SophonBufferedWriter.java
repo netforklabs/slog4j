@@ -1,12 +1,13 @@
 package com.sophon.io;
 
-import com.google.common.collect.Lists;
+import com.sophon.logger.SophonLogger;
 
-import java.io.*;
-import java.nio.Buffer;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Vector;
 
 /**
@@ -25,7 +26,7 @@ public class SophonBufferedWriter extends Thread {
      * 日志缓冲区
      * volatile关键字会使两个线程的数据及时更新
      */
-    static volatile LinkedList<String> logs = new LinkedList<>();
+    static volatile Vector<String> logs = new Vector<>();
 
     /**
      * 当前是否在更新out对象
@@ -61,20 +62,21 @@ public class SophonBufferedWriter extends Thread {
      */
     public void add(String log) {
         logs.add(log.concat("\n"));
-        System.out.println(logs.size());
     }
 
     @Override
     public void run() {
         try {
-            while (isNext()) {
-                /* Iterator接口能够防止在遍历的时候List又在新增从而出现错误的情况 */
-                Iterator<String> iterator = logs.iterator();
-                while (iterator.hasNext()) {
-                    out.write(iterator.next());
-                    iterator.remove();
+            while (true) {
+                while (isNext()) {
+                    /* Iterator接口能够防止在遍历的时候List又在新增从而出现错误的情况 */
+                    Iterator<String> iterator = logs.iterator();
+                    while (iterator.hasNext()) {
+                        out.write(iterator.next());
+                        iterator.remove();
+                    }
+                    out.flush();
                 }
-                out.flush();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,8 +84,37 @@ public class SophonBufferedWriter extends Thread {
         }
     }
 
+    /**
+     * 当前状态是否可以写入
+     *
+     * @return
+     */
     public boolean isNext() {
         return !isUpdateOut && !logs.isEmpty();
+    }
+
+    /**
+     * 重新实例化out流
+     */
+    public void reNewIOInstance() {
+        // 判断文件是否存在,不存在则创建
+        SophonFiles file = SophonLoggerIO.getFile();
+        if (!file.exists()) {
+            file.create();
+            createWriter(file);
+        } else {
+            int number = SophonLoggerIO.getNewestLoggerFile();
+            if (number > 0) {
+                createWriter(new File(
+                        file.getParent()
+                                .concat(file.getNoSuffixName())
+                                .concat(String.valueOf(number))
+                                .concat(SophonLoggerIO.getSuffix())
+                ));
+            } else if (number == 0) {
+                createWriter(file);
+            }
+        }
     }
 
 }
