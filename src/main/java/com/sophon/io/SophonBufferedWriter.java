@@ -23,13 +23,14 @@ public class SophonBufferedWriter extends Thread {
 
     /**
      * 日志缓冲区
+     * volatile关键字会使两个线程的数据及时更新
      */
-    static LinkedList<String> logs = new LinkedList<>();
+    static volatile LinkedList<String> logs = new LinkedList<>();
 
     /**
      * 当前是否在更新out对象
      */
-    private boolean isUpdateOut = false;
+    private volatile boolean isUpdateOut = false;
 
     private BufferedWriter out = null;
 
@@ -66,18 +67,15 @@ public class SophonBufferedWriter extends Thread {
     @Override
     public void run() {
         try {
-            do {
-                while (isNext()) {
-                    System.out.println("-------------->");
-                    /* Iterator接口能够防止在遍历的时候List又在新增从而出现错误的情况 */
-                    Iterator<String> iterator = logs.iterator();
-                    while (iterator.hasNext()) {
-                        out.write(iterator.next());
-                        iterator.remove();
-                    }
-                    out.flush();
+            while (isNext()) {
+                /* Iterator接口能够防止在遍历的时候List又在新增从而出现错误的情况 */
+                Iterator<String> iterator = logs.iterator();
+                while (iterator.hasNext()) {
+                    out.write(iterator.next());
+                    iterator.remove();
                 }
-            } while (true);
+                out.flush();
+            }
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(0);
