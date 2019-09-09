@@ -101,4 +101,8 @@ public class SophonFiles extends File {
         return name.substring(0, name.lastIndexOf("."));
     }
 
+    public File getFileObject(){
+        return this;
+    }
+
 }

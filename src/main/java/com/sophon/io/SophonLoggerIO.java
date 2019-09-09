@@ -16,7 +16,7 @@ public class SophonLoggerIO {
     private static SophonFiles file = new SophonFiles(
             System.getProperty("user.dir") + ConfigVo.getLoggerPrintPath());
 
-    private static SophonBufferedWriter out = new SophonBufferedWriter();
+    private static SophonWriteIO out = new SophonWriteIO();
 
     /**
      * 日志记录写出规则,按天数或按大小
@@ -60,6 +60,7 @@ public class SophonLoggerIO {
                 out.createWriter(file);
             }
         }
+        out.start();
     }
 
     /**

@@ -1,9 +1,10 @@
 package com.sophon;
 
+import com.sophon.io.SophonBufferedWriter;
 import com.sophon.logger.slog;
 import com.sophon.util.TimeCalc;
 
-import java.io.IOException;
+import java.io.*;
 
 /**
  * @Author tiansheng
@@ -16,7 +17,7 @@ public class Test {
         TimeCalc.invoke(Test.class, "test");
     }
 
-    public void test() {
+    public void test() throws Exception {
         for (int i = 0; i < 10000; i++) {
             slog.info("HelloWorld[{}]", i);
         }
