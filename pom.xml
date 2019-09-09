@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.sophon</groupId>
-    <artifactId>sophon-logger</artifactId>
+    <artifactId>slog4j</artifactId>
     <version>1.0</version>
 
     <properties>

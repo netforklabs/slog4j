@@ -1,13 +1,10 @@
 package com.sophon.io;
 
-import com.sophon.logger.SophonLogger;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Vector;
 
 /**
@@ -91,30 +88,6 @@ public class SophonBufferedWriter extends Thread {
      */
     public boolean isNext() {
         return !isUpdateOut && !logs.isEmpty();
-    }
-
-    /**
-     * 重新实例化out流
-     */
-    public void reNewIOInstance() {
-        // 判断文件是否存在,不存在则创建
-        SophonFiles file = SophonLoggerIO.getFile();
-        if (!file.exists()) {
-            file.create();
-            createWriter(file);
-        } else {
-            int number = SophonLoggerIO.getNewestLoggerFile();
-            if (number > 0) {
-                createWriter(new File(
-                        file.getParent()
-                                .concat(file.getNoSuffixName())
-                                .concat(String.valueOf(number))
-                                .concat(SophonLoggerIO.getSuffix())
-                ));
-            } else if (number == 0) {
-                createWriter(file);
-            }
-        }
     }
 
 }
