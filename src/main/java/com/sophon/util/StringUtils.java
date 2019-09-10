@@ -52,6 +52,16 @@ public class StringUtils {
     }
 
     /**
+     * 删除最后一个字符
+     *
+     * @param v
+     * @return
+     */
+    public static String removeLastString(String v) {
+        return v.substring(0,v.length() - 1);
+    }
+
+    /**
      * 判断当前字符串是不是数字
      * @param v
      * @return

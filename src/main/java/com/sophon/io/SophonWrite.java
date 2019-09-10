@@ -8,6 +8,16 @@ package com.sophon.io;
 public interface SophonWrite {
 
     /**
+     * 根据大小生成文件
+     */
+    String BYSIZE = "size";
+
+    /**
+     * 根据天数生成文件
+     */
+    String BYDAYS = "days";
+
+    /**
      * 写出数据
      * @param v
      */

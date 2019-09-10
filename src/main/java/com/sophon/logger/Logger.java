@@ -5,7 +5,7 @@ package com.sophon.logger;
  * @Date 2019/8/25 1:31
  * @Description TODO
  */
-public final class log {
+public final class Logger {
 
     private static final String formatString = "\\{\\}";
     private static final SophonLogger logger = new SophonLoggerImpl(4);

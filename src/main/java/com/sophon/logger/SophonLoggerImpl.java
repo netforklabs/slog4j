@@ -1,6 +1,7 @@
 package com.sophon.logger;
 
 import com.sophon.config.ConfigVo;
+import com.sophon.io.SophonIO;
 import com.sophon.io.SophonWrite;
 
 import java.io.IOException;
@@ -8,6 +9,8 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @Author tiansheng
@@ -38,11 +41,17 @@ public final class SophonLoggerImpl implements SophonLogger {
      */
     private int trace = 2;
 
+    // 已被忽略的级别
+    private final Set<Level> printIgnore = new HashSet<>(4); // 忽略打印
+    private final Set<Level> writeIgnore = new HashSet<>(4); // 忽略写出
+
     // 日期格式化工具
-    private static final DateFormat sdf = ConfigVo.getSimpleDateFormat();
+    private final DateFormat sdf = ConfigVo.getSimpleDateFormat();
 
     // 日期打印模板
-    private static final String printTemplate = ConfigVo.getLoggerPrintTemplate();
+    private final String printTemplate = ConfigVo.getLoggerPrintTemplate();
+
+    private final SophonWrite write = SophonIO.getWrite();
 
     public SophonLoggerImpl() {
     }
@@ -59,25 +68,25 @@ public final class SophonLoggerImpl implements SophonLogger {
     @Override
     public void info(String v) {
         v = prefixGenerate("INFO").concat(v);
-        console(v);
+        console(v,Level.INFO);
     }
 
     @Override
     public void debug(String v) {
         v = prefixGenerate("DEBUG").concat(v);
-        console(v);
+        console(v,Level.DEBUG);
     }
 
     @Override
     public void error(String v) {
         v = prefixGenerate("ERROR").concat(v);
-        console(v);
+        console(v,Level.ERROR);
     }
 
     @Override
     public void warn(String v) {
         v = prefixGenerate("WARN").concat(v);
-        console(v);
+        console(v,Level.WARN);
     }
 
     @Override
@@ -118,9 +127,16 @@ public final class SophonLoggerImpl implements SophonLogger {
      * 打印
      * @param v
      */
-    private void console(String v){
-        System.out.println(v);
-        ConfigVo.writePlus();
+    private synchronized void console(String v,Level level){
+        // 没有被忽略的级别才进入输出
+        if(!printIgnore.contains(level)) {
+            System.out.println(v);
+            ConfigVo.printPlus();
+            if(!writeIgnore.contains(level)){
+                // 输出到日志文件
+                write.write(v);
+            }
+        }
     }
 
 }

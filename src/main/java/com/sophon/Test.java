@@ -1,10 +1,13 @@
 package com.sophon;
 
-import com.sophon.anno.Alone;
-import com.sophon.logger.log;
+import com.sophon.component.anno.Alone;
+import com.sophon.logger.Level;
+import com.sophon.logger.Logger;
 import com.sophon.util.TimeCalc;
 
 import java.io.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @Author tiansheng
@@ -19,7 +22,9 @@ public class Test {
     }
 
     public void test() throws Exception {
-        log.debug("a:{}",1);
+        for(int i=0; i<10000; i++){
+            Logger.debug("count:{}",i);
+        }
     }
 
 }

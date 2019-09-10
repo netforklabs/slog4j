@@ -1,8 +1,9 @@
-package com.sophon.io;
+package com.sophon.component.io;
 
 import com.google.common.collect.Lists;
 import com.sophon.config.ConfigVo;
 import com.sophon.util.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.net.URI;
@@ -13,21 +14,24 @@ import java.util.ArrayList;
  * @Date 2019/8/30 14:55
  * @Description file
  */
-public class SophonFiles extends File {
+public class SophonFile extends File {
 
-    public SophonFiles(String pathname) {
+    public SophonFile(@NotNull String pathname) {
         super(pathname);
+        if(!exists()){
+            create();
+        }
     }
 
-    public SophonFiles(String parent, String child) {
+    public SophonFile(String parent, String child) {
         super(parent, child);
     }
 
-    public SophonFiles(File parent, String child) {
+    public SophonFile(File parent, String child) {
         super(parent, child);
     }
 
-    public SophonFiles(URI uri) {
+    public SophonFile(URI uri) {
         super(uri);
     }
 
@@ -126,6 +130,29 @@ public class SophonFiles extends File {
             }
         }
         return endNumber;
+    }
+
+    /**
+     * 获取最新的文件对象
+     * @return
+     */
+    public SophonFile getNewFileObject(){
+        String address = getParent();
+        int index = getNewestFileIndex() + 1;
+        String filename = getNoSuffixName();
+        if(StringUtils.isNumber(StringUtils.getLastString(filename))){
+            StringUtils.removeLastString(filename);
+        }
+        address = address.concat("/")
+                .concat(filename)
+                .concat(String.valueOf(index))
+                .concat(getSuffix());
+        return new SophonFile(address);
+    }
+
+    public static void main(String[] args) {
+        SophonFile file = new SophonFile(System.getProperty("user.dir") + ConfigVo.getLoggerPrintPath());
+        file.getNewFileObject();
     }
 
 }
