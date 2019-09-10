@@ -1,7 +1,7 @@
 package com.sophon;
 
 import com.sophon.anno.Alone;
-import com.sophon.logger.slog;
+import com.sophon.logger.log;
 import com.sophon.util.TimeCalc;
 
 import java.io.*;
@@ -19,10 +19,7 @@ public class Test {
     }
 
     public void test() throws Exception {
-        /*for (int i = 0; i < 10000; i++) {
-            slog.info("HelloWorld[{}]", i);
-        }*/
-        System.out.println(System.getProperty("java.home"));
+        log.debug("a:{}",1);
     }
 
 }

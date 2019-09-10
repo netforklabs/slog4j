@@ -34,7 +34,7 @@ public final class SophonLoggerImpl implements SophonLogger {
      * <p>
      * 那么 trace 值就应该为 5 了,因为经过了 B、A、slog、MloggerImpl 4 个类,然后以此类推
      * <p>
-     * 简单的说就是经过了一个类,追踪值为 2,经过两个 追踪值为 3,经过了三个追踪值为 4
+     * 简单的说就是经过了一个类,追踪值为 2,经过两个追踪值为 3,经过了三个追踪值为 4
      */
     private int trace = 2;
 

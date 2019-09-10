@@ -8,7 +8,7 @@ slog4j 全称为Java智子日志记录框架,英文为 sophon logger for java
 private static final Logger log = LoggerFactory.getLogger(Main.class);
 ```
 
-可以直接在类中使用,并且不用声明任何对象
+2.可以直接在类中使用,并且不用声明任何对象
 ```java
 slog.info("xxx");
 slog.debug("xxx");
@@ -16,11 +16,7 @@ slog.error("xxx");
 slog.warn("xxx");
 slog.exception(e);
 ```
-
-2. 可将异常转换为打印输出在控制台,让异常不影响程序后面的运行
-
-# 缺点
-目前slog4j内容还很少,比如不可配置等必要操作,后续会进行更新
+2.
 
 # 为什么我会写 slog4j?
 我这个人其实是非常偷懒的,先开始使用日志的时候需要在每个类中都加上private...LoggerFactory.getLogger(xxx.class);
