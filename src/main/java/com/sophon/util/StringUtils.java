@@ -79,4 +79,16 @@ public class StringUtils {
         return v.replaceAll("[^\\d]","");
     }
 
+    /**
+     * 获取两个字符之前的数字
+     * 从右到左截取。
+     * @param v 原字符串
+     * @param var1 第一个字符
+     * @param var2 第二个字符
+     * @return
+     */
+    public static String getS2SChars(String v,String var1,String var2){
+        return v.substring(v.lastIndexOf(var1)+1,v.lastIndexOf(var2));
+    }
+
 }

@@ -18,9 +18,19 @@ public class SophonFile extends File {
 
     public SophonFile(@NotNull String pathname) {
         super(pathname);
-        if(!exists()){
+        if (!exists()) {
             create();
         }
+    }
+
+    /**
+     * 调用此构造函数在实例化的时候不会创建文件
+     *
+     * @param pathname
+     * @param var
+     */
+    public SophonFile(String pathname, boolean var) {
+        super(pathname);
     }
 
     public SophonFile(String parent, String child) {
@@ -55,6 +65,15 @@ public class SophonFile extends File {
     }
 
     /**
+     * 创建当前文件
+     *
+     * @return
+     */
+    public boolean create() {
+        return create(this.getName());
+    }
+
+    /**
      * 在当前文件夹下创建文件
      *
      * @param filename
@@ -74,16 +93,22 @@ public class SophonFile extends File {
     }
 
     /**
-     * 创建当前文件
+     * 获取当前文件夹下所有文件名(不带后缀)
      *
      * @return
      */
-    public boolean create() {
-        return create(this.getName());
+    public ArrayList<String> getFileNamesByFolderNoSuffix() {
+        ArrayList<String> names = Lists.newArrayList();
+        File[] files = this.getParentFile().listFiles();
+        for (File file : files) {
+            String name = file.getName();
+            names.add(name.substring(0, name.lastIndexOf(".")));
+        }
+        return names;
     }
 
     /**
-     * 获取当前文件夹下所有文件名(不带后缀)
+     * 获取当前文件夹下所有文件名(带后缀)
      *
      * @return
      */
@@ -92,7 +117,7 @@ public class SophonFile extends File {
         File[] files = this.getParentFile().listFiles();
         for (File file : files) {
             String name = file.getName();
-            names.add(name.substring(0, name.lastIndexOf(".")));
+            names.add(name);
         }
         return names;
     }
@@ -108,6 +133,17 @@ public class SophonFile extends File {
     }
 
     /**
+     * 创建新的文件名
+     *
+     * @return
+     */
+    public String getNewFileName() {
+        String name = this.getName();
+        name = name.replaceAll("_.*?\\.", "_" + (getNewestFileIndex() + 1) + ".");
+        return name;
+    }
+
+    /**
      * 获取最新的文件索引
      *
      * @return
@@ -117,9 +153,9 @@ public class SophonFile extends File {
         ArrayList<String> names = getFileNamesByFolder();
         int endNumber = 0; // 记录创建到了第几个日志文件了
         for (String name : names) {
-            String lastString = StringUtils.getLastString(name);
-            if (StringUtils.isNumber(lastString)) {
-                int lastStringToInt = Integer.parseInt(lastString);
+            String index = StringUtils.getS2SChars(name, "_", ".");
+            if (StringUtils.isNumber(index)) {
+                int lastStringToInt = Integer.parseInt(index);
                 // 如果是创建的第2个文件的话,那么就命名为xxx2.log
                 // 因为第一个文件的命名为 xxx.log, 第二个的为 xxx1.log
                 if (lastStringToInt > endNumber) {
@@ -134,25 +170,11 @@ public class SophonFile extends File {
 
     /**
      * 获取最新的文件对象
+     *
      * @return
      */
-    public SophonFile getNewFileObject(){
-        String address = getParent();
-        int index = getNewestFileIndex() + 1;
-        String filename = getNoSuffixName();
-        if(StringUtils.isNumber(StringUtils.getLastString(filename))){
-            StringUtils.removeLastString(filename);
-        }
-        address = address.concat("/")
-                .concat(filename)
-                .concat(String.valueOf(index))
-                .concat(getSuffix());
-        return new SophonFile(address);
-    }
-
-    public static void main(String[] args) {
-        SophonFile file = new SophonFile(System.getProperty("user.dir") + ConfigVo.getLoggerPrintPath());
-        file.getNewFileObject();
+    public SophonFile getNewFileObject() {
+        return new SophonFile(getParent().concat("/").concat(getNewFileName()));
     }
 
 }
