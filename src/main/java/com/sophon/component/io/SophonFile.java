@@ -139,8 +139,20 @@ public class SophonFile extends File {
      */
     public String getNewFileName() {
         String name = this.getName();
-        name = name.replaceAll("_.*?\\.", "_" + (getNewestFileIndex() + 1) + ".");
-        return name;
+        String var1 = name.substring(0,name.lastIndexOf("_") + 1);
+        String var2 = name.substring(name.lastIndexOf("."));
+        return var1 + (getNewestFileIndex() + 1) + var2;
+    }
+
+    public static void main(String[] args) {
+        SophonFile file = new SophonFile(
+                System.getProperty("user.dir") + ConfigVo.getLoggerPrintPath(), true);
+        file = new SophonFile(file.getParent()
+                .concat("/")
+                .concat(file.getNoSuffixName())
+                .concat("_0")
+                .concat(file.getSuffix()));
+        System.out.println(file.getNewFileName());
     }
 
     /**
