@@ -1,6 +1,8 @@
 package com.sophon.io;
 
 import com.google.common.collect.Lists;
+import com.sophon.config.ConfigVo;
+import com.sophon.util.StringUtils;
 
 import java.io.*;
 import java.net.URI;
@@ -92,7 +94,7 @@ public class SophonFiles extends File {
     }
 
     /**
-     * 获取当前文件夹下所有文件名(不带后缀)
+     * 获取没有后缀的文件名
      *
      * @return
      */
@@ -101,8 +103,29 @@ public class SophonFiles extends File {
         return name.substring(0, name.lastIndexOf("."));
     }
 
-    public File getFileObject(){
-        return this;
+    /**
+     * 获取最新的文件索引
+     *
+     * @return
+     */
+    public int getNewestFileIndex() {
+        // 获取当前文件夹下的所有文件名
+        ArrayList<String> names = getFileNamesByFolder();
+        int endNumber = 0; // 记录创建到了第几个日志文件了
+        for (String name : names) {
+            String lastString = StringUtils.getLastString(name);
+            if (StringUtils.isNumber(lastString)) {
+                int lastStringToInt = Integer.parseInt(lastString);
+                // 如果是创建的第2个文件的话,那么就命名为xxx2.log
+                // 因为第一个文件的命名为 xxx.log, 第二个的为 xxx1.log
+                if (lastStringToInt > endNumber) {
+                    endNumber = lastStringToInt;
+                }
+            } else {
+                continue;
+            }
+        }
+        return endNumber;
     }
 
 }

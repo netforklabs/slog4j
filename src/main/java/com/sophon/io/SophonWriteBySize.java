@@ -11,11 +11,7 @@ public class SophonWriteBySize implements SophonWrite {
 
     @Override
     public void write(String v) {
-        if(SophonLoggerIO.getSize() >= 1024){
-            SophonLoggerIO.createFile();
-        }else{
-            SophonLoggerIO.write(v);
-        }
+
     }
 
 }

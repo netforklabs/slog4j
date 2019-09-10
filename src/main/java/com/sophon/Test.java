@@ -1,6 +1,6 @@
 package com.sophon;
 
-import com.sophon.io.SophonBufferedWriter;
+import com.sophon.anno.Alone;
 import com.sophon.logger.slog;
 import com.sophon.util.TimeCalc;
 
@@ -11,6 +11,7 @@ import java.io.*;
  * @Date 2019/8/25 1:32
  * @Description TODO
  */
+@Alone("test.log")
 public class Test {
 
     public static void main(String[] args) throws IOException {
@@ -18,14 +19,10 @@ public class Test {
     }
 
     public void test() throws Exception {
-        for (int i = 0; i < 10000; i++) {
+        /*for (int i = 0; i < 10000; i++) {
             slog.info("HelloWorld[{}]", i);
-        }
-        /*Scanner s = new Scanner(System.in);
-        while (true) {
-            String v = s.next();
-            slog.debug(v);
         }*/
+        System.out.println(System.getProperty("java.home"));
     }
 
 }
