@@ -2,6 +2,7 @@ package com.sophon.io;
 
 import com.sophon.component.io.SophonFile;
 import com.sophon.config.ConfigVo;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @Author tiansheng
@@ -17,13 +18,7 @@ public class SophonIO {
 
     static {
         // 获取要操作的文件
-        SophonFile file = new SophonFile(
-                System.getProperty("user.dir") + ConfigVo.getLoggerPrintPath(),true);
-        file = new SophonFile(file.getParent()
-                .concat("/")
-                .concat(file.getNoSuffixName())
-                .concat("_0")
-                .concat(file.getSuffix()));
+        SophonFile file = SophonFile.getFile(ConfigVo.getLoggerPrintPath());
         // 获取数据写出接口实例
         String[] rule = ConfigVo.getLoggerGenerateRule();
         switch (rule[0]){

@@ -1,5 +1,7 @@
 package com.sophon.component.anno;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -20,6 +22,6 @@ public @interface Alone {
      * log文件名默认为：类名.log。
      * @return
      */
-    String value();
+    String value() default "";
 
 }

@@ -144,17 +144,6 @@ public class SophonFile extends File {
         return var1 + (getNewestFileIndex() + 1) + var2;
     }
 
-    public static void main(String[] args) {
-        SophonFile file = new SophonFile(
-                System.getProperty("user.dir") + ConfigVo.getLoggerPrintPath(), true);
-        file = new SophonFile(file.getParent()
-                .concat("/")
-                .concat(file.getNoSuffixName())
-                .concat("_0")
-                .concat(file.getSuffix()));
-        System.out.println(file.getNewFileName());
-    }
-
     /**
      * 获取最新的文件索引
      *
@@ -166,6 +155,7 @@ public class SophonFile extends File {
         int endNumber = 0; // 记录创建到了第几个日志文件了
         for (String name : names) {
             String index = StringUtils.getS2SChars(name, "_", ".");
+            if(StringUtils.isEmpty(index)) index = "0";
             if (StringUtils.isNumber(index)) {
                 int lastStringToInt = Integer.parseInt(index);
                 // 如果是创建的第2个文件的话,那么就命名为xxx2.log
@@ -187,6 +177,17 @@ public class SophonFile extends File {
      */
     public SophonFile getNewFileObject() {
         return new SophonFile(getParent().concat("/").concat(getNewFileName()));
+    }
+
+    public static SophonFile getFile(@NotNull String pathname){
+        // 获取要操作的文件
+        SophonFile file = new SophonFile(
+                System.getProperty("user.dir") + pathname,true);
+        return new SophonFile(file.getParent()
+                .concat("/")
+                .concat(file.getNoSuffixName())
+                .concat("_0")
+                .concat(file.getSuffix()));
     }
 
 }

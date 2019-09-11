@@ -1,5 +1,7 @@
 package com.sophon.io;
 
+import com.sophon.component.io.SophonFile;
+
 /**
  * @Author tiansheng
  * @Date 2019/8/26 1:15
@@ -22,5 +24,11 @@ public interface SophonWrite {
      * @param v
      */
     void write(String v);
+
+    /**
+     * 传入file对象
+     * @param file
+     */
+    void setFile(SophonFile file);
 
 }

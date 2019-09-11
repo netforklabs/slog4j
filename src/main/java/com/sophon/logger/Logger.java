@@ -2,10 +2,10 @@ package com.sophon.logger;
 
 /**
  * @Author tiansheng
- * @Date 2019/8/25 1:31
+ * @Date 2019/9/11 15:05
  * @Description TODO
  */
-public final class Logger {
+public class Logger {
 
     private static final String formatString = "\\{\\}";
     private static final SophonLogger logger = new SophonLoggerImpl(4);
@@ -15,7 +15,7 @@ public final class Logger {
     }
 
     public static void info(String v,Object... args){
-        logger.info(format(v,args));
+        logger.info(v,args);
     }
 
     public static void debug(String v){
@@ -23,7 +23,7 @@ public final class Logger {
     }
 
     public static void debug(String v,Object... args){
-        logger.debug(format(v,args));
+        logger.debug(v,args);
     }
 
     public static void error(String v){
@@ -31,7 +31,7 @@ public final class Logger {
     }
 
     public static void error(String v,Object... args){
-        logger.error(format(v,args));
+        logger.error(v,args);
     }
 
     public static void warn(String v){
@@ -39,23 +39,11 @@ public final class Logger {
     }
 
     public static void warn(String v,Object... args){
-        logger.warn(format(v,args));
+        logger.warn(v,args);
     }
 
     public static void exception(String s,Throwable throwable){
         logger.exception(s,throwable);
-    }
-
-    /**
-     * 将字符串格式化
-     * @param v
-     * @param args
-     * @return
-     */
-    private static String format(String v,Object... args) {
-        v = v.replaceAll(formatString,"%s");
-        v = String.format(v,args);
-        return v;
     }
 
 }

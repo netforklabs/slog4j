@@ -11,21 +11,25 @@ public interface SophonLogger {
      * info
      */
     void info(String v);
+    void info(String v,Object... args);
 
     /**
      * debug()
      */
     void debug(String v);
+    void debug(String v,Object... args);
 
     /**
      * error()
      */
     void error(String v);
+    void error(String v,Object... args);
 
     /**
      * warn()
      */
     void warn(String v);
+    void warn(String v,Object... args);
 
     /**
      * 异常改为输出,不会对程序运行造成影响
