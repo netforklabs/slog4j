@@ -87,6 +87,11 @@ public class ConfigVo {
     private static final String LOGGER_PROHIBIT_LEVEL_FILE = getValue("logger.prohibit.level.file");
 
     /**
+     * 国家语言
+     */
+    private static final String SLOG4j_SYSTEM_PROMPT_LANGUAGE = getValue("slog4j.system.prompt.language");
+
+    /**
      * 获取日期格式化配置
      *
      * @return
@@ -135,6 +140,12 @@ public class ConfigVo {
             v[1] = "1";
             return v;
         }
+    }
+
+    public static String getSlog4jSystemPromptLanguage() {
+        return System.getProperty("user.dir")
+                .concat("\\language\\")
+                .concat(SLOG4j_SYSTEM_PROMPT_LANGUAGE);
     }
 
     public static String getLoggerProhibitLevelConsole() {

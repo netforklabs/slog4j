@@ -1,11 +1,13 @@
 package com.sophon.component.io;
 
 import com.google.common.collect.Lists;
-import com.sophon.config.ConfigVo;
+import com.sophon.component.security.Security;
+import com.sophon.component.security.SecurityManager;
+import com.sophon.logger.SystemLogger;
 import com.sophon.util.StringUtils;
 import com.sun.istack.internal.NotNull;
 
-import java.io.*;
+import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
 
@@ -16,6 +18,16 @@ import java.util.ArrayList;
  */
 public class SophonFile extends File {
 
+    /**
+     * 调用该构造函数不会在初始化的时候创建文件
+     *
+     * @param pathname
+     * @param isCreate
+     */
+    public SophonFile(@NotNull String pathname, boolean isCreate) {
+        super(pathname);
+    }
+
     public SophonFile(@NotNull String pathname) {
         super(pathname);
         if (!exists()) {
@@ -23,18 +35,9 @@ public class SophonFile extends File {
         }
     }
 
-    /**
-     * 调用此构造函数在实例化的时候不会创建文件
-     *
-     * @param pathname
-     * @param var
-     */
-    public SophonFile(String pathname, boolean var) {
-        super(pathname);
-    }
-
     public SophonFile(String parent, String child) {
         super(parent, child);
+        
     }
 
     public SophonFile(File parent, String child) {
@@ -180,9 +183,17 @@ public class SophonFile extends File {
     }
 
     public static SophonFile getFile(@NotNull String pathname) {
+        String classpath = "classpath:";
+        // 如果是以classpath:开头的路劲,使用当前项目目录
+        if (classpath.equals(pathname.substring(0, classpath.length()))) {
+            pathname = pathname.replaceAll(classpath,"");
+            pathname = System.getProperty("user.dir").concat(pathname);
+            pathname = pathname.replaceAll("/","\\\\");
+            SystemLogger.debug(pathname);
+        }
         // 获取要操作的文件
         SophonFile file = new SophonFile(
-                System.getProperty("user.dir") + pathname, true);
+                pathname,false);
         return new SophonFile(file.getParent()
                 .concat("/")
                 .concat(file.getNoSuffixName())

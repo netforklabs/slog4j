@@ -1,6 +1,7 @@
 package com.sophon.component.security;
 
 import com.sophon.component.anno.Alone;
+import com.sophon.component.io.SophonFile;
 
 import java.lang.annotation.Annotation;
 
@@ -11,15 +12,6 @@ import java.lang.annotation.Annotation;
  */
 public interface Security {
 
-    /**
-     * 是否启用安全管理检查组件
-     * @param enable
-     */
-    void enable(boolean enable);
 
-    /**
-     * 注解检查。
-     */
-    void annoCheck(Class<? extends Object> aClass, Class<? extends Annotation> anno);
 
 }
