@@ -1,11 +1,11 @@
 package com.sophon.component.logger;
 
 import com.sophon.component.anno.Alone;
-import com.sophon.component.io.SophonFile;
-import com.sophon.config.ConfigVo;
 import com.sophon.logger.SingleLogger;
 import com.sophon.logger.SophonLogger;
 import com.sophon.util.StringUtils;
+
+import java.util.LinkedList;
 
 /**
  * @Author tiansheng
@@ -15,11 +15,10 @@ import com.sophon.util.StringUtils;
 public class LoggerFactory {
 
     public static SophonLogger getLogger(Class<?> target) {
-        SophonFile file = SophonFile.getFile(ConfigVo.getLoggerPrintPath());
         String classname = target.getName();
         classname = classname.substring(classname.lastIndexOf(".") + 1);
         String pathname = "/loggers/".concat(classname).concat("/").concat(classname).concat(".log");
-        System.out.println(pathname);
+        // 获取注解信息
         if(target.isAnnotationPresent(Alone.class)){
             Alone alone = target.getDeclaredAnnotation(Alone.class);
             if(!StringUtils.isEmpty(alone.value())){
@@ -27,6 +26,14 @@ public class LoggerFactory {
             }
         }
         return new SingleLogger(pathname);
+    }
+
+    /**
+     * 注解扫描器
+     * @param aClass
+     * @return
+     */
+    private static void checkAnnotation(Class<?> aClass){
     }
 
 }

@@ -1,7 +1,7 @@
 package com.sophon.io;
 
 import com.sophon.component.io.SophonFile;
-import org.jetbrains.annotations.NotNull;
+import com.sun.istack.internal.NotNull;
 
 import java.io.*;
 

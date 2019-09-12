@@ -3,7 +3,7 @@ package com.sophon.component.io;
 import com.google.common.collect.Lists;
 import com.sophon.config.ConfigVo;
 import com.sophon.util.StringUtils;
-import org.jetbrains.annotations.NotNull;
+import com.sun.istack.internal.NotNull;
 
 import java.io.*;
 import java.net.URI;
@@ -74,7 +74,7 @@ public class SophonFile extends File {
     }
 
     /**
-     * 在当前文件夹下创建文件
+     * 单独开启一个线程创建文件
      *
      * @param filename
      * @return
@@ -139,7 +139,7 @@ public class SophonFile extends File {
      */
     public String getNewFileName() {
         String name = this.getName();
-        String var1 = name.substring(0,name.lastIndexOf("_") + 1);
+        String var1 = name.substring(0, name.lastIndexOf("_") + 1);
         String var2 = name.substring(name.lastIndexOf("."));
         return var1 + (getNewestFileIndex() + 1) + var2;
     }
@@ -155,7 +155,7 @@ public class SophonFile extends File {
         int endNumber = 0; // 记录创建到了第几个日志文件了
         for (String name : names) {
             String index = StringUtils.getS2SChars(name, "_", ".");
-            if(StringUtils.isEmpty(index)) index = "0";
+            if (StringUtils.isEmpty(index)) index = "0";
             if (StringUtils.isNumber(index)) {
                 int lastStringToInt = Integer.parseInt(index);
                 // 如果是创建的第2个文件的话,那么就命名为xxx2.log
@@ -179,10 +179,10 @@ public class SophonFile extends File {
         return new SophonFile(getParent().concat("/").concat(getNewFileName()));
     }
 
-    public static SophonFile getFile(@NotNull String pathname){
+    public static SophonFile getFile(@NotNull String pathname) {
         // 获取要操作的文件
         SophonFile file = new SophonFile(
-                System.getProperty("user.dir") + pathname,true);
+                System.getProperty("user.dir") + pathname, true);
         return new SophonFile(file.getParent()
                 .concat("/")
                 .concat(file.getNoSuffixName())

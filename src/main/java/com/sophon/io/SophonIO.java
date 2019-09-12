@@ -2,7 +2,7 @@ package com.sophon.io;
 
 import com.sophon.component.io.SophonFile;
 import com.sophon.config.ConfigVo;
-import org.jetbrains.annotations.NotNull;
+import com.sun.istack.internal.NotNull;
 
 /**
  * @Author tiansheng

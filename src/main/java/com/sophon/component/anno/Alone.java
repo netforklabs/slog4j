@@ -1,6 +1,6 @@
 package com.sophon.component.anno;
 
-import org.jetbrains.annotations.NotNull;
+import com.sun.istack.internal.NotNull;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  * @Author tiansheng
  * @Date 2019/9/10 15:46
  */
-@Target(ElementType.TYPE)
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Alone {
 
@@ -23,5 +23,12 @@ public @interface Alone {
      * @return
      */
     String value() default "";
+
+    /**
+     * 如果一个类中存在多个日志对象,那么需要指定日志对象的名字。
+     * 这样的话系统才会知道你要怎样去分配日志文件。
+     * @return
+     */
+    String name() default "";
 
 }
