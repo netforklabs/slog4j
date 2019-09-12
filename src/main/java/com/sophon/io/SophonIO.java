@@ -11,12 +11,9 @@ import com.sun.istack.internal.NotNull;
  */
 public class SophonIO {
 
-    /**
-     * 输出写出接口
-     */
-    private static SophonWrite write;
-
-    static {
+    public static SophonWrite getWrite(){
+        // 数据写出接口
+        SophonWrite write;
         // 获取要操作的文件
         SophonFile file = SophonFile.getFile(ConfigVo.getLoggerPrintPath());
         // 获取数据写出接口实例
@@ -32,9 +29,6 @@ public class SophonIO {
                 write = new SophonWriteBySize(1024,file);
                 break;
         }
-    }
-
-    public static SophonWrite getWrite(){
         return write;
     }
 

@@ -28,7 +28,7 @@ public class SecurityManager implements Security {
         security.enable(true);
     }
 
-    public static Security getSecurity() {
+    public static Security getSecurityManager() {
         return security;
     }
 
@@ -40,45 +40,6 @@ public class SecurityManager implements Security {
     @Override
     public void annoCheck(Class<? extends Object> aClass, Class<? extends Annotation> anno) {
         if (enable) {
-            try {
-                Logger.debug("anno name:{}",anno.getName());
-                /** @link com.sophon.component.anno.Alone **/
-                checkAnnoAlone(aClass);
-            } catch (ParamException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * 检查Alone注解使用是否合法
-     *
-     * @param aClass
-     */
-    private void checkAnnoAlone(Class<?> aClass) throws ParamException {
-        ArrayList<Alone> alones = new ArrayList<>();
-        Field[] fields = aClass.getDeclaredFields();
-        for (Field field : fields) {
-            if (field.isAnnotationPresent(Alone.class)) {
-                alones.add(field.getDeclaredAnnotation(Alone.class));
-            }
-        }
-        if (alones.size() >= 2) {
-            for (Alone alone : alones) {
-                boolean v1 = StringUtils.isEmpty(alone.name());
-                boolean v2 = StringUtils.isEmpty(alone.value());
-                if (v1 && v2) {
-                    String message = aClass.getName()+"name && value 不可为空";
-                    throw new ParamException(message);
-                } else if (v1) {
-                    String message = aClass.getName()+"在多个注解的场景下,name属性不可为空";
-                    throw new ParamException(message);
-                } else if (v2) {
-                    Annotation anno = alone;
-                    String message = aClass.getName()+"在多个注解的场景下,value属性不可为空";
-                    throw new ParamException(message);
-                }
-            }
         }
     }
 

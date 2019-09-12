@@ -24,11 +24,4 @@ public @interface Alone {
      */
     String value() default "";
 
-    /**
-     * 如果一个类中存在多个日志对象,那么需要指定日志对象的名字。
-     * 这样的话系统才会知道你要怎样去分配日志文件。
-     * @return
-     */
-    String name() default "";
-
 }

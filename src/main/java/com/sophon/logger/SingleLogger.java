@@ -18,4 +18,9 @@ public class SingleLogger extends SophonLoggerImpl implements SophonLogger {
         write.setFile(SophonFile.getFile(pathname));
     }
 
+    public SingleLogger(String pathname,int trace){
+        this.trace = trace;
+        write.setFile(SophonFile.getFile(pathname));
+    }
+
 }
