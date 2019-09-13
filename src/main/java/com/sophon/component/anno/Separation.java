@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Alone {
+public @interface Separation {
 
     /**
      * 选择输出到哪个路径。

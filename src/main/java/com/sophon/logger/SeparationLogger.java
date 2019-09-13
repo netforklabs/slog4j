@@ -11,14 +11,14 @@ import com.sophon.logger.SophonLoggerImpl;
  * @Date 2019/9/11 13:40
  * @Description 独立的日志文件
  */
-public class SingleLogger extends SophonLoggerImpl implements SophonLogger {
+public class SeparationLogger extends SophonLoggerImpl implements SophonLogger {
 
-    public SingleLogger(String pathname){
+    public SeparationLogger(String pathname){
         this.trace = 4;
         write.setFile(SophonFile.getFile(pathname));
     }
 
-    public SingleLogger(String pathname,int trace){
+    public SeparationLogger(String pathname, int trace){
         this.trace = trace;
         write.setFile(SophonFile.getFile(pathname));
     }

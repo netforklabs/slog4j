@@ -31,7 +31,7 @@ public class SophonFile extends File {
 
     public SophonFile(@NotNull String pathname) {
         super(pathname);
-        if (!exists()) {
+        if (!exists() && ConfigVo.getLoggerPrintWrite()) {
             create();
         }
     }
