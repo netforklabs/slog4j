@@ -11,6 +11,7 @@ import com.sun.istack.internal.NotNull;
 import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * @Author tiansheng
@@ -149,35 +150,31 @@ public class SophonFile extends File {
     }
 
     /**
-     * 获取最新的文件索引
-     *
+     * 获取当前文件的最新索引
      * @return
      */
     public int getNewestFileIndex() {
-        // 获取当前文件夹下的所有文件名
-        ArrayList<String> names = getFileNamesByFolder();
-        int endNumber = 0; // 记录创建到了第几个日志文件了
-        // 当前file文件名
-        String current = getNoSuffixName();
-        current = current.substring(0, current.length() - 2);
-        for (String filename : names) {
-            if (filename.contains(current)) {
-                String index = StringUtils.getS2SChars(filename, "_", ".");
-                if (StringUtils.isEmpty(index)) index = "0";
-                if (StringUtils.isNumber(index)) {
-                    int lastStringToInt = Integer.parseInt(index);
-                    // 如果是创建的第2个文件的话,那么就命名为xxx2.log
-                    // 因为第一个文件的命名为 xxx.log, 第二个的为 xxx1.log
-                    if (lastStringToInt > endNumber) {
-                        endNumber = lastStringToInt;
-                    }
-                } else {
-                    continue;
+        // 索引
+        int index = 0;
+        // 当前文件的索引列表
+        ArrayList<Integer> indexs = Lists.newArrayList();
+        // 当前文件名
+        String currentName = getNoSuffixName();
+        for (String filename : getFileNamesByFolderNoSuffix()) {
+            // 获取没有索引的文件名
+            String filenameNoIndex = filename.substring(0, filename.length() - 2);
+            if (filenameNoIndex.equals(currentName)) {
+                String indexstr = StringUtils.getLastString(filename);
+                if (StringUtils.isNumber(indexstr)) {
+                    indexs.add(Integer.parseInt(indexstr));
                 }
             }
-            return endNumber;
         }
-        return 0;
+        if (!indexs.isEmpty() && indexs.size() >= 1) {
+            Collections.sort(indexs, Collections.reverseOrder());
+            return (indexs.get(0) + 1);
+        }
+        return index;
     }
 
     /**
