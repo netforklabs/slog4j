@@ -3,6 +3,7 @@ package com.sophon.component.io;
 import com.google.common.collect.Lists;
 import com.sophon.component.security.Security;
 import com.sophon.component.security.SecurityManager;
+import com.sophon.config.ConfigVo;
 import com.sophon.logger.SystemLogger;
 import com.sophon.util.StringUtils;
 import com.sun.istack.internal.NotNull;
@@ -37,7 +38,7 @@ public class SophonFile extends File {
 
     public SophonFile(String parent, String child) {
         super(parent, child);
-        
+
     }
 
     public SophonFile(File parent, String child) {
@@ -156,21 +157,27 @@ public class SophonFile extends File {
         // 获取当前文件夹下的所有文件名
         ArrayList<String> names = getFileNamesByFolder();
         int endNumber = 0; // 记录创建到了第几个日志文件了
-        for (String name : names) {
-            String index = StringUtils.getS2SChars(name, "_", ".");
-            if (StringUtils.isEmpty(index)) index = "0";
-            if (StringUtils.isNumber(index)) {
-                int lastStringToInt = Integer.parseInt(index);
-                // 如果是创建的第2个文件的话,那么就命名为xxx2.log
-                // 因为第一个文件的命名为 xxx.log, 第二个的为 xxx1.log
-                if (lastStringToInt > endNumber) {
-                    endNumber = lastStringToInt;
+        // 当前file文件名
+        String current = getNoSuffixName();
+        current = current.substring(0, current.length() - 2);
+        for (String filename : names) {
+            if (filename.contains(current)) {
+                String index = StringUtils.getS2SChars(filename, "_", ".");
+                if (StringUtils.isEmpty(index)) index = "0";
+                if (StringUtils.isNumber(index)) {
+                    int lastStringToInt = Integer.parseInt(index);
+                    // 如果是创建的第2个文件的话,那么就命名为xxx2.log
+                    // 因为第一个文件的命名为 xxx.log, 第二个的为 xxx1.log
+                    if (lastStringToInt > endNumber) {
+                        endNumber = lastStringToInt;
+                    }
+                } else {
+                    continue;
                 }
-            } else {
-                continue;
             }
+            return endNumber;
         }
-        return endNumber;
+        return 0;
     }
 
     /**
@@ -186,14 +193,14 @@ public class SophonFile extends File {
         String classpath = "classpath:";
         // 如果是以classpath:开头的路劲,使用当前项目目录
         if (classpath.equals(pathname.substring(0, classpath.length()))) {
-            pathname = pathname.replaceAll(classpath,"");
+            pathname = pathname.replaceAll(classpath, "");
             pathname = System.getProperty("user.dir").concat(pathname);
-            pathname = pathname.replaceAll("/","\\\\");
+            pathname = pathname.replaceAll("/", "\\\\");
             SystemLogger.debug(pathname);
         }
         // 获取要操作的文件
         SophonFile file = new SophonFile(
-                pathname,false);
+                pathname, false);
         return new SophonFile(file.getParent()
                 .concat("/")
                 .concat(file.getNoSuffixName())

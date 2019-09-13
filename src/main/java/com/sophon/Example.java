@@ -21,8 +21,10 @@ public class Example {
 
     public static void main(String[] args) throws ParamException {
         Logger.debug("logger debug");
-        log1.debug("log1 debug");
-        log2.debug("log2 debug");
+        for(int i=0; i<100; i++){
+            log1.debug("log1 debug");
+            log2.debug("log2 debug");
+        }
     }
 
 }

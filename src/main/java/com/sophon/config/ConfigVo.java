@@ -92,6 +92,11 @@ public class ConfigVo {
     private static final String SLOG4j_SYSTEM_PROMPT_LANGUAGE = getValue("slog4j.system.prompt.language");
 
     /**
+     * 是否将日志输出到文件
+     */
+    private static final String LOGGER_PRINT_WRITE = getValue("logger.print.write");
+
+    /**
      * 获取日期格式化配置
      *
      * @return
@@ -146,6 +151,17 @@ public class ConfigVo {
         return System.getProperty("user.dir")
                 .concat("\\language\\")
                 .concat(SLOG4j_SYSTEM_PROMPT_LANGUAGE);
+    }
+
+    public static boolean getLoggerPrintWrite() {
+        switch (LOGGER_PRINT_WRITE) {
+            case "true":
+                return true;
+            case "false":
+                return false;
+            default:
+                return true;
+        }
     }
 
     public static String getLoggerProhibitLevelConsole() {

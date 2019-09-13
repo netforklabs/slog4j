@@ -154,9 +154,11 @@ public class SophonLoggerImpl implements SophonLogger {
         if(!printIgnore.contains(level)) {
             System.out.println(v);
             ConfigVo.printPlus();
-            if(!writeIgnore.contains(level)){
-                // 输出到日志文件
-                write.write(v);
+            if(ConfigVo.getLoggerPrintWrite()){
+                if(!writeIgnore.contains(level)){
+                    // 输出到日志文件
+                    write.write(v);
+                }
             }
         }
     }
