@@ -26,7 +26,7 @@ public class SophonUtils {
      * @param target
      * @return
      */
-    public static ArrayList<Class<?>> getInterfaceImpl(Class<?> target) {
+    public static ArrayList<Class<?>> getInterfaceImpls(Class<?> target) {
         ArrayList<Class<?>> subclasses = Lists.newArrayList();
         try {
             // 判断class对象是否是一个接口
@@ -89,7 +89,7 @@ public class SophonUtils {
         //
         // 注意这个class对象是个接口,List中包含的是SophonInit接口的所有实现类
         //
-        ArrayList<Class<?>> classes = getInterfaceImpl(SophonInit.class);
+        ArrayList<Class<?>> classes = getInterfaceImpls(SophonInit.class);
     }
 
 }

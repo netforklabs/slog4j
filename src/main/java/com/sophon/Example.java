@@ -13,8 +13,10 @@ public class Example {
     // private static final Logger log = LoggerFactory.getLogger(Example.class);
 
     public static void main(String[] args) {
+        SystemLogger.info("system start...");
         String s = null;
         s.toLowerCase();
+        SystemLogger.info("system exit...");
     }
 
 }

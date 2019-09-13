@@ -32,7 +32,7 @@ public class SophonFile extends File {
 
     public SophonFile(@NotNull String pathname) {
         super(pathname);
-        if (!exists() && ConfigVo.getLoggerPrintWrite()) {
+        if (!exists() && ConfigVo.getInstance().getLoggerPrintWrite()) {
             create();
         }
     }
@@ -193,7 +193,6 @@ public class SophonFile extends File {
             pathname = pathname.replaceAll(classpath, "");
             pathname = System.getProperty("user.dir").concat(pathname);
             pathname = pathname.replaceAll("/", "\\\\");
-            SystemLogger.debug(pathname);
         }
         // 获取要操作的文件
         SophonFile file = new SophonFile(

@@ -19,7 +19,7 @@ public class Prompt {
 
     static {
         try {
-            InputStream is = new FileInputStream(ConfigVo.getSlog4jSystemPromptLanguage().concat(".JSON"));
+            InputStream is = new FileInputStream(ConfigVo.getInstance().getSlog4jSystemPromptLanguage().concat(".JSON"));
             String json = IOUtils.toString(is,"utf8");
             ali = JSONObject.parseObject(json);
         } catch (Exception e) {

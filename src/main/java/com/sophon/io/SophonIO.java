@@ -15,9 +15,9 @@ public class SophonIO {
         // 数据写出接口
         SophonWrite write;
         // 获取要操作的文件
-        SophonFile file = SophonFile.getFile(ConfigVo.getLoggerPrintPath());
+        SophonFile file = SophonFile.getFile(ConfigVo.getInstance().getLoggerPrintPath());
         // 获取数据写出接口实例
-        String[] rule = ConfigVo.getLoggerGenerateRule();
+        String[] rule = ConfigVo.getInstance().getLoggerGenerateRule();
         switch (rule[0]){
             case SophonWrite.BYSIZE:
                 write = new SophonWriteBySize(Integer.parseInt(rule[1]),file);

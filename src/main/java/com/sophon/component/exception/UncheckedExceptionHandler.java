@@ -19,12 +19,10 @@ public class UncheckedExceptionHandler implements Thread.UncaughtExceptionHandle
         currentGroup = Thread.currentThread().getThreadGroup();
         // 当前活动线程
         int activeCount = currentGroup.activeCount();
-        SystemLogger.info("当前活动的线程总计:{}",activeCount);
         Thread[] group = new Thread[activeCount];
         currentGroup.enumerate(group);
         for(Thread thread : group){
             thread.setUncaughtExceptionHandler(new UncheckedExceptionHandler());
-            SystemLogger.info("Thread name:{}",thread.getName());
         }
     }
 
@@ -35,6 +33,6 @@ public class UncheckedExceptionHandler implements Thread.UncaughtExceptionHandle
 
     @Override
     public void init() {
-
+        // 不做任何操作,存在的目的只是为了调用static静态块
     }
 }

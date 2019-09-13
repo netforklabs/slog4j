@@ -48,10 +48,10 @@ public class SophonLoggerImpl implements SophonLogger {
     protected final Set<Level> writeIgnore = new HashSet<>(4); // 忽略写出
 
     // 日期格式化工具
-    protected final DateFormat sdf = ConfigVo.getSimpleDateFormat();
+    protected final DateFormat sdf = ConfigVo.getInstance().getSimpleDateFormat();
 
     // 日期打印模板
-    protected final String printTemplate = ConfigVo.getLoggerPrintTemplate();
+    protected final String printTemplate = ConfigVo.getInstance().getLoggerPrintTemplate();
 
     protected final SophonWrite write = SophonIO.getWrite();
 
@@ -153,8 +153,8 @@ public class SophonLoggerImpl implements SophonLogger {
         // 没有被忽略的级别才进入输出
         if(!printIgnore.contains(level)) {
             System.out.println(v);
-            ConfigVo.printPlus();
-            if(ConfigVo.getLoggerPrintWrite()){
+            ConfigVo.getInstance().printPlus();
+            if(ConfigVo.getInstance().getLoggerPrintWrite()){
                 if(!writeIgnore.contains(level)){
                     // 输出到日志文件
                     write.write(v);

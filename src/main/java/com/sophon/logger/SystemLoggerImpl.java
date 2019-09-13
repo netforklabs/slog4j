@@ -28,7 +28,7 @@ public class SystemLoggerImpl implements SophonLogger {
     protected final DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     // 日期打印模板
-    protected final String printTemplate = ConfigVo.getLoggerPrintTemplate();
+    protected final String printTemplate = ConfigVo.getInstance().getLoggerPrintTemplate();
 
     public SystemLoggerImpl() {
     }

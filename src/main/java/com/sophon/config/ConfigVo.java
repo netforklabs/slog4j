@@ -13,16 +13,32 @@ import java.util.regex.Pattern;
 /**
  * @Author tiansheng
  * @Date 2019/8/25 13:03
- * @Description 加载配置
+ * @Description 加载配置(单例模式 - 懒汉式)
  */
 public class ConfigVo {
 
+    private static ConfigVo cv;
+
     private static ResourceBundle bundle;
 
-    static {
-        bundle = ResourceBundle.getBundle("slog4j");
-        // configvo类做初始化工作
-        new Entrance();
+    private ConfigVo() {
+    }
+
+    /**
+     * 获取对象实例
+     * @return
+     */
+    public static ConfigVo getInstance() {
+        if (cv == null) {
+            bundle = ResourceBundle.getBundle("slog4j");
+            cv = new ConfigVo();
+            //
+            // configvo类做初始化工作
+            // 因为通常来说,配置类是最先加载的,所以在ConfigVo中做初始化操作
+            //
+            Entrance.frameworkInit();
+        }
+        return cv;
     }
 
     /**
@@ -31,7 +47,7 @@ public class ConfigVo {
      * @param key
      * @return
      */
-    private static String getValue(String key) {
+    private String getValue(String key) {
         String v = null;
         try {
             v = new String(bundle.getString(key).getBytes("ISO-8859-1"), "GBK");
@@ -42,69 +58,69 @@ public class ConfigVo {
     }
 
     // 统计写出了多少条数据
-    private static long writeCount = 0L;
+    private long writeCount = 0L;
     // 统计打印了多少条数据
-    private static long printCount = 0L;
+    private long printCount = 0L;
 
-    public static void writePlus() {
+    public void writePlus() {
         writeCount++;
     }
 
-    public static void printPlus() {
+    public void printPlus() {
         printCount++;
     }
 
-    public static long getWriteCount() {
+    public long getWriteCount() {
         return writeCount;
     }
 
-    public static long getPrintCount() {
+    public long getPrintCount() {
         return printCount;
     }
 
     /**
      * logger 文件输出路径
      */
-    private static final String LOGGER_PRINT_PATH = getValue("logger.print.path");
+    private final String LOGGER_PRINT_PATH = getValue("logger.print.path");
 
     /**
      * logger 输出模板
      */
-    private static final String LOGGER_PRINT_TEMPLATE = getValue("logger.print.template");
+    private final String LOGGER_PRINT_TEMPLATE = getValue("logger.print.template");
 
     /**
      * logger 文件生成规则,按天数还是按大小
      */
-    public static final String BY_DAYS = "days";
-    public static final String BY_SIZE = "size";
-    private static final String LOGGER_GENERATE_RULE = getValue("logger.generate.rule");
+    public final String BY_DAYS = "days";
+    public final String BY_SIZE = "size";
+    private final String LOGGER_GENERATE_RULE = getValue("logger.generate.rule");
 
     /**
      * 禁止某个级别的日志输出到控制台
      */
-    private static final String LOGGER_PROHIBIT_LEVEL_CONSOLE = getValue("logger.prohibit.level.console");
+    private final String LOGGER_PROHIBIT_LEVEL_CONSOLE = getValue("logger.prohibit.level.console");
 
     /**
      * 禁止某个级别的日志输出到文件
      */
-    private static final String LOGGER_PROHIBIT_LEVEL_FILE = getValue("logger.prohibit.level.file");
+    private final String LOGGER_PROHIBIT_LEVEL_FILE = getValue("logger.prohibit.level.file");
 
     /**
      * 国家语言
      */
-    private static final String SLOG4j_SYSTEM_PROMPT_LANGUAGE = getValue("slog4j.system.prompt.language");
+    private final String SLOG4j_SYSTEM_PROMPT_LANGUAGE = getValue("slog4j.system.prompt.language");
 
     /**
      * 是否将日志输出到文件
      */
-    private static final String LOGGER_PRINT_WRITE = getValue("logger.print.write");
+    private final String LOGGER_PRINT_WRITE = getValue("logger.print.write");
 
     /**
      * 获取日期格式化配置
      *
      * @return
      */
-    public static SimpleDateFormat getSimpleDateFormat() {
+    public SimpleDateFormat getSimpleDateFormat() {
         String v = LOGGER_PRINT_TEMPLATE;
         // 判断有没有配置日期格式化规则
         if (StringUtils.isExist(v, "\\$\\{datetime:(.*?)\\}")) {
@@ -122,13 +138,13 @@ public class ConfigVo {
      *
      * @return
      */
-    public static String getLoggerPrintTemplate() {
+    public String getLoggerPrintTemplate() {
         String v = LOGGER_PRINT_TEMPLATE;
         v = v.replaceAll("\\$\\{datetime:(.*?)\\}", "\\$\\{datetime\\}");
         return v;
     }
 
-    public static String getLoggerPrintPath() {
+    public String getLoggerPrintPath() {
         return LOGGER_PRINT_PATH;
     }
 
@@ -137,7 +153,7 @@ public class ConfigVo {
      *
      * @return
      */
-    public static String[] getLoggerGenerateRule() {
+    public String[] getLoggerGenerateRule() {
         String[] v = new String[2];
         String rule = LOGGER_GENERATE_RULE;
         if (rule.contains(BY_DAYS) || rule.contains(BY_SIZE)) {
@@ -150,13 +166,13 @@ public class ConfigVo {
         }
     }
 
-    public static String getSlog4jSystemPromptLanguage() {
+    public String getSlog4jSystemPromptLanguage() {
         return System.getProperty("user.dir")
                 .concat("\\language\\")
                 .concat(SLOG4j_SYSTEM_PROMPT_LANGUAGE);
     }
 
-    public static boolean getLoggerPrintWrite() {
+    public boolean getLoggerPrintWrite() {
         switch (LOGGER_PRINT_WRITE) {
             case "true":
                 return true;
@@ -167,15 +183,15 @@ public class ConfigVo {
         }
     }
 
-    public static String getLoggerProhibitLevelConsole() {
+    public String getLoggerProhibitLevelConsole() {
         return LOGGER_PROHIBIT_LEVEL_CONSOLE;
     }
 
-    public static String getLoggerProhibitLevelFile() {
+    public String getLoggerProhibitLevelFile() {
         return LOGGER_PROHIBIT_LEVEL_FILE;
     }
 
-    public static void main(String[] args) {
+    public void main(String[] args) {
         System.out.println(getLoggerPrintTemplate());
     }
 
