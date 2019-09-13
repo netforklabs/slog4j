@@ -30,46 +30,23 @@ public class LoggerFactory {
                         field.setAccessible(true);
                         // 创建 SeparationLogger 对象实例
                         String pathname = separation.value();
-                        SophonLogger sophonLogger = new SeparationLogger(pathname,3);
+                        SophonLogger sophonLogger = new SeparationLogger(pathname, 3);
                         field.set(instance, sophonLogger);
-                    }else{
+                    } else {
                         String classname = target.getName();
-                        String pathname = "/loggers/"
+                        String pathname = "classpath:/loggers/"
                                 .concat(classname)
                                 .concat("/")
                                 .concat(classname)
                                 .concat(".log");
+                        SophonLogger sophonLogger = new SeparationLogger(pathname, 3);
+                        field.set(instance, sophonLogger);
                     }
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static final SophonLogger getLogger(String fieldname) {
-        String pathname = "";
-        try {
-            // 加载类信息
-            Class<?> target = Class.forName(Thread.currentThread().getStackTrace()[2].getClassName());
-            String classname = target.getName();
-            classname = classname.substring(classname.lastIndexOf(".") + 1);
-            pathname = "/loggers/".concat(classname).concat("/").concat(classname).concat(".log");
-            Field field = target.getDeclaredField(fieldname);
-            // 判断注解是否存在
-            if (field.isAnnotationPresent(Separation.class)) {
-                // 获取注解信息
-                Separation alone = field.getDeclaredAnnotation(Separation.class);
-                if (!StringUtils.isEmpty(alone.value())) {
-                    pathname = alone.value();
-                }
-            } else {
-                throw new NullPointerException(fieldname.concat("对象不存在Alone注解"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new SeparationLogger(pathname, 3);
     }
 
 }

@@ -1,13 +1,5 @@
 package com.sophon.component.security;
 
-import com.sophon.component.Prompt;
-import com.sophon.component.io.SophonFile;
-import com.sophon.exception.PathInvalidException;
-import com.sophon.logger.Logger;
-import com.sophon.logger.SystemLogger;
-
-import java.io.File;
-
 /**
  * @Author tiansheng
  * @Date 2019/9/12 23:37

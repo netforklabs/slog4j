@@ -1,5 +1,8 @@
 package com.sophon;
 
+import com.sophon.component.exception.UncheckedExceptionHandler;
+import com.sophon.logger.SystemLogger;
+
 /**
  * @Author tiansheng
  * @Date 2019/9/12 3:40
@@ -10,7 +13,8 @@ public class Example {
     // private static final Logger log = LoggerFactory.getLogger(Example.class);
 
     public static void main(String[] args) {
-
+        String s = null;
+        s.toLowerCase();
     }
 
 }

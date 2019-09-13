@@ -1,6 +1,7 @@
 package com.sophon.config;
 
 
+import com.sophon.component.Entrance;
 import com.sophon.util.StringUtils;
 
 import java.io.UnsupportedEncodingException;
@@ -16,10 +17,12 @@ import java.util.regex.Pattern;
  */
 public class ConfigVo {
 
-    private static ResourceBundle bundle = null;
+    private static ResourceBundle bundle;
 
     static {
         bundle = ResourceBundle.getBundle("slog4j");
+        // configvo类做初始化工作
+        new Entrance();
     }
 
     /**

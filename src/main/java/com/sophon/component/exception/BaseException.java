@@ -1,4 +1,4 @@
-package com.sophon.exception;
+package com.sophon.component.exception;
 
 /**
  * @Author tiansheng
