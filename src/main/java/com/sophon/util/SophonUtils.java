@@ -3,15 +3,11 @@ package com.sophon.util;
 import com.google.common.collect.Lists;
 import com.sophon.component.SophonInit;
 import com.sophon.component.exception.ParamException;
-import com.sophon.logger.SystemLogger;
 import com.sun.istack.internal.NotNull;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @Author tiansheng
@@ -45,9 +41,9 @@ public class SophonUtils {
                 // 获取所有类,然后判断是否是 target 接口的实现类
                 for (String classpath : classpaths) {
                     Class<?> classObject = Class.forName(classpath);
-                    if(classObject.getSuperclass() == null) continue; // 判断该对象的父类是否为null
+                    if (classObject.getSuperclass() == null) continue; // 判断该对象的父类是否为null
                     Set<Class<?>> interfaces = new HashSet<>(Arrays.asList(classObject.getInterfaces()));
-                    if(interfaces.contains(target)){
+                    if (interfaces.contains(target)) {
                         subclasses.add(Class.forName(classObject.getName()));
                     }
                 }
@@ -61,13 +57,14 @@ public class SophonUtils {
     }
 
     /**
-     * 获取编译后的所有类路径
+     * 获取项目编译后的所有的.class的字节码文件
+     * 这么做的目的是为了让 Class.forName() 可以加载类
      *
-     * @param basePackage
-     * @param classes
+     * @param basePackage 默认包名
+     * @param classes     存放字节码文件路径的集合
      * @return
      */
-    public static void listPackages(String basePackage, ArrayList<String> classes) {
+    public static void listPackages(String basePackage, List<String> classes) {
         URL url = SophonUtils.class.getClassLoader()
                 .getResource("./" + basePackage.replaceAll("\\.", "/"));
         File directory = new File(url.getFile());

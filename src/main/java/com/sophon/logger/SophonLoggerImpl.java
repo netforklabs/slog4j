@@ -134,9 +134,14 @@ public class SophonLoggerImpl implements SophonLogger {
      * @return
      */
     public String prefixGenerate(String level) {
-        String className = Thread.currentThread().getStackTrace()[trace].getClassName();
-        String methodName = Thread.currentThread().getStackTrace()[trace].getMethodName();
-        String lineNumber = String.valueOf(Thread.currentThread().getStackTrace()[trace].getLineNumber());
+        return prefixGenerate(level,Thread.currentThread());
+    }
+
+    @Override
+    public String prefixGenerate(String level, Thread t) {
+        String className = t.getStackTrace()[trace].getClassName();
+        String methodName = t.getStackTrace()[trace].getMethodName();
+        String lineNumber = String.valueOf(t.getStackTrace()[trace].getLineNumber());
         String v = printTemplate;
         return v.replaceAll("\\$\\{line\\}", lineNumber)
                 .replaceAll("\\$\\{class\\}", className)

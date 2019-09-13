@@ -1,7 +1,7 @@
 package com.sophon.component.exception;
 
 import com.sophon.component.SophonInit;
-import com.sophon.logger.SystemLogger;
+import com.sophon.logger.source.ExceptionLogger;
 
 /**
  * @Author tiansheng
@@ -13,9 +13,17 @@ public class UncheckedExceptionHandler implements Thread.UncaughtExceptionHandle
     /**
      * 线程对象
      */
-    private static ThreadGroup currentGroup;
+    private ThreadGroup currentGroup;
 
-    static {
+    @Override
+    public void uncaughtException(Thread t, Throwable e) {
+
+        ExceptionLogger.error("捕获到线程{}抛出的异常:,异常信息为:",t.getName(),e.getMessage());
+
+    }
+
+    @Override
+    public void init() {
         currentGroup = Thread.currentThread().getThreadGroup();
         // 当前活动线程
         int activeCount = currentGroup.activeCount();
@@ -24,15 +32,5 @@ public class UncheckedExceptionHandler implements Thread.UncaughtExceptionHandle
         for(Thread thread : group){
             thread.setUncaughtExceptionHandler(new UncheckedExceptionHandler());
         }
-    }
-
-    @Override
-    public void uncaughtException(Thread t, Throwable e) {
-        System.out.println(t.getName()+" : "+e.getMessage());
-    }
-
-    @Override
-    public void init() {
-        // 不做任何操作,存在的目的只是为了调用static静态块
     }
 }

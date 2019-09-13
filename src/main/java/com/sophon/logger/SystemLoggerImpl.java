@@ -1,8 +1,11 @@
 package com.sophon.logger;
 
+import com.sophon.component.io.SophonFile;
 import com.sophon.config.ConfigVo;
 import com.sophon.io.SophonIO;
 import com.sophon.io.SophonWrite;
+import com.sophon.io.SophonWriteByDays;
+import com.sophon.io.SophonWriteBySize;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,14 +30,20 @@ public class SystemLoggerImpl implements SophonLogger {
     // 日期格式化工具
     protected final DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    // 日期打印模板
-    protected final String printTemplate = ConfigVo.getInstance().getLoggerPrintTemplate();
+    protected SophonWrite write;
 
     public SystemLoggerImpl() {
     }
 
     public SystemLoggerImpl(int trace) {
         this.trace = trace;
+        write = new SophonWriteBySize(2048,
+                SophonFile.getFile(ConfigVo.getInstance().getLoggerSystemPrintPath()));
+    }
+
+    public SystemLoggerImpl(int trace,SophonFile file) {
+        this.trace = trace;
+        write = new SophonWriteBySize(2048, file);
     }
 
     @Override
@@ -105,9 +114,14 @@ public class SystemLoggerImpl implements SophonLogger {
      * @return
      */
     public String prefixGenerate(String level) {
-        String className = Thread.currentThread().getStackTrace()[trace].getClassName();
-        String methodName = Thread.currentThread().getStackTrace()[trace].getMethodName();
-        String lineNumber = String.valueOf(Thread.currentThread().getStackTrace()[trace].getLineNumber());
+        return prefixGenerate(level,Thread.currentThread());
+    }
+
+    @Override
+    public String prefixGenerate(String level, Thread t) {
+        String className = t.getStackTrace()[trace].getClassName();
+        String methodName = t.getStackTrace()[trace].getMethodName();
+        String lineNumber = String.valueOf(t.getStackTrace()[trace].getLineNumber());
         String v = "${datetime} | ${class} ${method}:${line} | [slog4j:${level}] - ";
         return v.replaceAll("\\$\\{line\\}", lineNumber)
                 .replaceAll("\\$\\{class\\}", className)
@@ -127,7 +141,7 @@ public class SystemLoggerImpl implements SophonLogger {
         } else {
             System.out.println(v);
         }
-
+        write.write(v);
     }
 
     /**

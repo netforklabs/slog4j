@@ -44,5 +44,5 @@ public interface SophonLogger {
      * @return
      */
     String prefixGenerate(String level);
-
+    String prefixGenerate(String level,Thread t);
 }

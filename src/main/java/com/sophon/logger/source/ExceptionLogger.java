@@ -1,14 +1,20 @@
-package com.sophon.logger;
+package com.sophon.logger.source;
+
+import com.sophon.component.io.SophonFile;
+import com.sophon.config.ConfigVo;
+import com.sophon.logger.ExceptionLoggerImpl;
+import com.sophon.logger.SophonLogger;
+import com.sophon.logger.SystemLoggerImpl;
 
 /**
  * @Author tiansheng
- * @Date 2019/9/11 15:05
+ * @Date 2019/9/14 7:08
  * @Description TODO
  */
-public class Logger {
+public class ExceptionLogger {
 
-    private static final String formatString = "\\{\\}";
-    private static final SophonLogger logger = new SophonLoggerImpl(4);
+    private static final SophonLogger logger = new ExceptionLoggerImpl(4,
+            SophonFile.getFile(ConfigVo.getInstance().getLoggerSystemPrintCaptureExceptionPath()));
 
     public static void info(String v){
         logger.info(v);

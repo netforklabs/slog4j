@@ -1,14 +1,17 @@
-package com.sophon.logger;
+package com.sophon.logger.source;
+
+import com.sophon.logger.SophonLogger;
+import com.sophon.logger.SophonLoggerImpl;
 
 /**
  * @Author tiansheng
- * @Date 2019/9/13 3:49
+ * @Date 2019/9/11 15:05
  * @Description TODO
  */
-public class SystemLogger {
+public final class Logger {
 
     private static final String formatString = "\\{\\}";
-    private static final SophonLogger logger = new SystemLoggerImpl(4);
+    private static final SophonLogger logger = new SophonLoggerImpl(4);
 
     public static void info(String v){
         logger.info(v);

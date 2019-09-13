@@ -1,7 +1,6 @@
 package com.sophon;
 
-import com.sophon.component.exception.UncheckedExceptionHandler;
-import com.sophon.logger.SystemLogger;
+import com.sophon.logger.source.SystemLogger;
 
 /**
  * @Author tiansheng

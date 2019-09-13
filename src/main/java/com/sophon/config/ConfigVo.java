@@ -84,6 +84,17 @@ public class ConfigVo {
     private final String LOGGER_PRINT_PATH = getValue("logger.print.path");
 
     /**
+     * 框架级别的日志输出路径
+     */
+    private final String LOGGER_SYSTEM_PRINT_PATH = getValue("logger.system.print.path");
+
+    /**
+     * 框架捕获到的异常输出路径
+     */
+    private final String LOGGER_SYSTEM_PRINT_CAPTURE_EXCEPTION_PATH
+            = getValue("logger.system.print.capture.exception.path");
+
+    /**
      * logger 输出模板
      */
     private final String LOGGER_PRINT_TEMPLATE = getValue("logger.print.template");
@@ -181,6 +192,14 @@ public class ConfigVo {
             default:
                 return true;
         }
+    }
+
+    public String getLoggerSystemPrintCaptureExceptionPath(){
+        return LOGGER_SYSTEM_PRINT_CAPTURE_EXCEPTION_PATH;
+    }
+
+    public String getLoggerSystemPrintPath(){
+        return LOGGER_SYSTEM_PRINT_PATH;
     }
 
     public String getLoggerProhibitLevelConsole() {
