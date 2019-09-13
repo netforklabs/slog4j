@@ -6,7 +6,7 @@
 
     <groupId>com.sophon</groupId>
     <artifactId>slog4j</artifactId>
-    <version>1.0</version>
+    <version>1.0.0</version>
 
     <properties>
         <guava.version>21.0</guava.version>
