@@ -69,49 +69,105 @@ public class SophonLoggerImpl implements SophonLogger {
 
     @Override
     public void info(String v) {
-        v = prefixGenerate("INFO").concat(v);
-        console(v,Level.INFO);
+        console(prefixGenerate(Level.INFO).concat(v), Level.INFO);
     }
 
     @Override
     public void info(String v, Object... args) {
-        info(format(v,args));
+        console(prefixGenerate(Level.INFO).concat(format(v, args)), Level.INFO);
+    }
+
+    @Override
+    public void info(Object v) {
+        console(prefixGenerate(Level.INFO).concat(String.valueOf(v)), Level.INFO);
+    }
+
+    @Override
+    public void info(String v, Thread t) {
+        console(prefixGenerate(Level.INFO, t).concat(v), Level.INFO);
+    }
+
+    @Override
+    public void info(String v, Thread t, Object... args) {
+        console(prefixGenerate(Level.INFO, t).concat(format(v, args)), Level.INFO);
+    }
+
+    @Override
+    public void debug(Object v) {
+        console(prefixGenerate(Level.DEBUG).concat(String.valueOf(v)), Level.DEBUG);
     }
 
     @Override
     public void debug(String v) {
-        v = prefixGenerate("DEBUG").concat(v);
-        console(v,Level.DEBUG);
+        console(prefixGenerate(Level.DEBUG).concat(v), Level.DEBUG);
     }
 
     @Override
     public void debug(String v, Object... args) {
-        debug(format(v,args));
+        console(prefixGenerate(Level.DEBUG).concat(format(v, args)), Level.DEBUG);
+    }
+
+    @Override
+    public void debug(String v, Thread t) {
+        console(prefixGenerate(Level.DEBUG, t).concat(v), Level.DEBUG);
+    }
+
+    @Override
+    public void debug(String v, Thread t, Object... args) {
+        console(prefixGenerate(Level.DEBUG, t).concat(format(v, args)), Level.DEBUG);
+    }
+
+    @Override
+    public void error(Object v) {
+        console(prefixGenerate(Level.ERROR).concat(String.valueOf(v)), Level.ERROR);
     }
 
     @Override
     public void error(String v) {
-        v = prefixGenerate("ERROR").concat(v);
-        console(v,Level.ERROR);
+        console(prefixGenerate(Level.ERROR).concat(v), Level.ERROR);
     }
 
     @Override
     public void error(String v, Object... args) {
-        error(format(v,args));
+        console(prefixGenerate(Level.ERROR).concat(format(v, args)), Level.ERROR);
+    }
+
+    @Override
+    public void error(String v, Thread t) {
+        console(prefixGenerate(Level.ERROR, t).concat(v), Level.ERROR);
+    }
+
+    @Override
+    public void error(String v, Thread t, Object... args) {
+        console(prefixGenerate(Level.ERROR, t).concat(format(v, args)), Level.ERROR);
+    }
+
+    @Override
+    public void warn(Object v) {
+        console(prefixGenerate(Level.WARN).concat(String.valueOf(v)), Level.WARN);
     }
 
     @Override
     public void warn(String v) {
-        v = prefixGenerate("WARN").concat(v);
-        console(v,Level.WARN);
+        console(prefixGenerate(Level.WARN).concat(v), Level.WARN);
     }
 
     @Override
     public void warn(String v, Object... args) {
-        warn(format(v,args));
+        console(prefixGenerate(Level.WARN).concat(format(v, args)), Level.WARN);
     }
 
     @Override
+    public void warn(String v, Thread t) {
+        console(prefixGenerate(Level.WARN, t).concat(v), Level.WARN);
+    }
+
+    @Override
+    public void warn(String v, Thread t, Object... args) {
+        console(prefixGenerate(Level.WARN, t).concat(format(v, args)), Level.WARN);
+    }
+
+    /*@Override
     public void exception(String s,Throwable e) {
         StringWriter stringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stringWriter);
@@ -126,41 +182,43 @@ public class SophonLoggerImpl implements SophonLogger {
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-    }
+    }*/
 
     /**
      * 前缀生成
+     *
      * @param level 级别名称,例如:INFO DEBUG ERROR
      * @return
      */
-    public String prefixGenerate(String level) {
-        return prefixGenerate(level,Thread.currentThread());
+    public String prefixGenerate(Level level) {
+        return prefixGenerate(level, Thread.currentThread());
     }
 
     @Override
-    public String prefixGenerate(String level, Thread t) {
+    public String prefixGenerate(Level level, Thread t) {
         String className = t.getStackTrace()[trace].getClassName();
         String methodName = t.getStackTrace()[trace].getMethodName();
         String lineNumber = String.valueOf(t.getStackTrace()[trace].getLineNumber());
         String v = printTemplate;
         return v.replaceAll("\\$\\{line\\}", lineNumber)
                 .replaceAll("\\$\\{class\\}", className)
-                .replaceAll("\\$\\{level\\}", level)
+                .replaceAll("\\$\\{level\\}", String.valueOf(level))
                 .replaceAll("\\$\\{method\\}", methodName)
                 .replaceAll("\\$\\{datetime\\}", sdf.format(new Date()));
     }
 
     /**
      * 打印
+     *
      * @param v
      */
-    protected synchronized void console(String v,Level level){
+    protected synchronized void console(String v, Level level) {
         // 没有被忽略的级别才进入输出
-        if(!printIgnore.contains(level)) {
+        if (!printIgnore.contains(level)) {
             System.out.println(v);
             ConfigVo.getInstance().printPlus();
-            if(ConfigVo.getInstance().getLoggerPrintWrite()){
-                if(!writeIgnore.contains(level)){
+            if (ConfigVo.getInstance().getLoggerPrintWrite()) {
+                if (!writeIgnore.contains(level)) {
                     // 输出到日志文件
                     write.write(v);
                 }
@@ -170,13 +228,14 @@ public class SophonLoggerImpl implements SophonLogger {
 
     /**
      * 将字符串格式化
+     *
      * @param v
      * @param args
      * @return
      */
-    private static String format(String v,Object... args) {
-        v = v.replaceAll(formatString,"%s");
-        v = String.format(v,args);
+    private static String format(String v, Object... args) {
+        v = v.replaceAll(formatString, "%s");
+        v = String.format(v, args);
         return v;
     }
 

@@ -143,11 +143,12 @@ public class SophonFile extends File {
         String name = this.getName();
         String var1 = name.substring(0, name.lastIndexOf("_") + 1);
         String var2 = name.substring(name.lastIndexOf("."));
-        return var1 + (getNewestFileIndex() + 1) + var2;
+        return var1 + getNewestFileIndex() + var2;
     }
 
     /**
      * 获取当前文件的最新索引
+     *
      * @return
      */
     public int getNewestFileIndex() {
@@ -156,12 +157,12 @@ public class SophonFile extends File {
         // 当前文件的索引列表
         ArrayList<Integer> indexs = Lists.newArrayList();
         // 当前文件名
-        String currentName = getNoSuffixName();
+        String currentName = getNoSuffixName().substring(0, getNoSuffixName().lastIndexOf("_"));
         for (String filename : getFileNamesByFolderNoSuffix()) {
             // 获取没有索引的文件名
-            String filenameNoIndex = filename.substring(0, filename.length() - 2);
+            String filenameNoIndex = filename.substring(0, filename.lastIndexOf("_"));
             if (filenameNoIndex.equals(currentName)) {
-                String indexstr = StringUtils.getLastString(filename);
+                String indexstr = filename.substring(filename.lastIndexOf("_") + 1);
                 if (StringUtils.isNumber(indexstr)) {
                     indexs.add(Integer.parseInt(indexstr));
                 }
