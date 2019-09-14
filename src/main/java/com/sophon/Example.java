@@ -6,7 +6,7 @@ import com.sophon.logger.source.Logger;
 import com.sophon.logger.source.SystemLogger;
 import com.sophon.util.TimeCalc;
 
-import java.sql.Time;
+import java.util.ArrayList;
 
 /**
  * @Author tiansheng
@@ -19,7 +19,19 @@ public class Example {
 
     public static void main(String[] args) {
         // TimeCalc.invoke(Example.class,"string");
-        TimeCalc.invoke(Example.class, "logger");
+        // TimeCalc.invoke(Example.class, "logger");
+        // TimeCalc.invoke(Example.class, "et");
+        Logger.info("system start...");
+        ArrayList<String> list = null;
+        list.add("string");
+        Logger.info("system end...");
+    }
+
+    public void et(){
+        Logger.info("system start...");
+        ArrayList<String> list = null;
+        list.add("string");
+        Logger.info("system end...");
     }
 
     public void string() {
@@ -58,6 +70,7 @@ public class Example {
     //      27335ms
     //      ‭‪27秒
     //      0.3分钟
+    //
     public void logger() {
         for (int i = 0; i < 10000; i++) {
             String var = "test";

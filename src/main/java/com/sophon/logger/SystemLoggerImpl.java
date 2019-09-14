@@ -44,7 +44,7 @@ public class SystemLoggerImpl extends SophonLoggerImpl {
         String className = t.getStackTrace()[trace].getClassName();
         String methodName = t.getStackTrace()[trace].getMethodName();
         String lineNumber = String.valueOf(t.getStackTrace()[trace].getLineNumber());
-        String v = "${datetime} | ${class} ${method}:${line} | [slog4j:${level}] - ";
+        String v = "${datetime} | ${class} ${method}:${line} | [FRAMEWORK][${level}] - ";
         return v.replaceAll("\\$\\{line\\}", lineNumber)
                 .replaceAll("\\$\\{class\\}", className)
                 .replaceAll("\\$\\{level\\}", String.valueOf(level))

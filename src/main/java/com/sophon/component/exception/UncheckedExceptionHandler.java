@@ -3,6 +3,11 @@ package com.sophon.component.exception;
 import com.sophon.component.SophonInit;
 import com.sophon.logger.source.ExceptionLogger;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * @Author tiansheng
  * @Date 2019/9/14 3:58
@@ -15,11 +20,27 @@ public class UncheckedExceptionHandler implements Thread.UncaughtExceptionHandle
      */
     private ThreadGroup currentGroup;
 
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     @Override
     public void uncaughtException(Thread t, Throwable e) {
-
-        ExceptionLogger.error("捕获到线程{}抛出的异常:,异常信息为:",t.getName(),e.getMessage());
-
+        String className = "--- ".concat(e.getStackTrace()[0].getClassName())
+                .concat(": ")
+                .concat(e.getStackTrace()[0].getMethodName())
+                .concat(" ---");
+        String datetime = "--- ".concat(sdf.format(new Date())).concat(" ---");
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        e.printStackTrace(pw);
+        String exceptionInfo = sw.toString();
+        StringBuffer buffer = new StringBuffer();
+        buffer.append(className)
+                .append("\n")
+                .append(datetime)
+                .append("\n\n     ")
+                .append(exceptionInfo);
+        String endExceptionInfo = "\n\n".concat(buffer.toString());
+        ExceptionLogger.error(endExceptionInfo);
     }
 
     @Override
@@ -29,7 +50,7 @@ public class UncheckedExceptionHandler implements Thread.UncaughtExceptionHandle
         int activeCount = currentGroup.activeCount();
         Thread[] group = new Thread[activeCount];
         currentGroup.enumerate(group);
-        for(Thread thread : group){
+        for (Thread thread : group) {
             thread.setUncaughtExceptionHandler(new UncheckedExceptionHandler());
         }
     }
