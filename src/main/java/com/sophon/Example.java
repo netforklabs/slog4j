@@ -24,7 +24,7 @@ public class Example {
         // Logger.info("system start...");
         // ArrayList<String> list = null;
         // list.add("string");
-        // Logger.info("system end...");
+        Logger.info("system end...");
     }
 
     public void stream(){
@@ -41,7 +41,7 @@ public class Example {
     public void string() {
 
         String var = "leval:";
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 1000; i++) {
             // enum: 234ms
             // String: 229ms
             // String concat: 3ms
