@@ -1,9 +1,5 @@
-package com.sophon;
-
 import com.sophon.logger.SophonLogger;
-import com.sophon.logger.source.ExceptionLogger;
 import com.sophon.logger.source.Logger;
-import com.sophon.logger.source.SystemLogger;
 import com.sophon.util.TimeCalc;
 
 import java.util.ArrayList;

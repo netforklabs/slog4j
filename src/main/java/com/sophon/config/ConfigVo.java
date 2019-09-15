@@ -2,14 +2,12 @@ package com.sophon.config;
 
 
 import com.sophon.component.Entrance;
+import com.sophon.logger.SophonLogger;
 import com.sophon.util.StringUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -206,12 +204,38 @@ public class ConfigVo {
         return LOGGER_SYSTEM_PRINT_PATH;
     }
 
-    public String getLoggerProhibitLevelConsole() {
-        return LOGGER_PROHIBIT_LEVEL_CONSOLE;
+    /**
+     * 被禁止输出到控制台的级别
+     * @return
+     */
+    public Set<SophonLogger.Level> getLoggerProhibitLevelConsole() {
+        Set<SophonLogger.Level> set = new HashSet<>();
+        if("no".equals(LOGGER_PROHIBIT_LEVEL_FILE)) return set;
+        String[] levels = LOGGER_PROHIBIT_LEVEL_CONSOLE.split(",");
+        for(String level : levels){
+            if(level.equals(SophonLogger.Level.INFO.toString())) set.add(SophonLogger.Level.INFO);
+            if(level.equals(SophonLogger.Level.DEBUG.toString())) set.add(SophonLogger.Level.DEBUG);
+            if(level.equals(SophonLogger.Level.ERROR.toString())) set.add(SophonLogger.Level.ERROR);
+            if(level.equals(SophonLogger.Level.WARN.toString())) set.add(SophonLogger.Level.WARN);
+        }
+        return set;
     }
 
-    public String getLoggerProhibitLevelFile() {
-        return LOGGER_PROHIBIT_LEVEL_FILE;
+    /**
+     * 被禁止输出到文件的级别
+     * @return
+     */
+    public Set<SophonLogger.Level> getLoggerProhibitLevelFile() {
+        Set<SophonLogger.Level> set = new HashSet<>();
+        if("no".equals(LOGGER_PROHIBIT_LEVEL_FILE)) return set;
+        String[] levels = LOGGER_PROHIBIT_LEVEL_FILE.split(",");
+        for(String level : levels){
+            if(level.equals(SophonLogger.Level.INFO.toString())) set.add(SophonLogger.Level.INFO);
+            if(level.equals(SophonLogger.Level.DEBUG.toString())) set.add(SophonLogger.Level.DEBUG);
+            if(level.equals(SophonLogger.Level.ERROR.toString())) set.add(SophonLogger.Level.ERROR);
+            if(level.equals(SophonLogger.Level.WARN.toString())) set.add(SophonLogger.Level.WARN);
+        }
+        return set;
     }
 
     public void main(String[] args) {

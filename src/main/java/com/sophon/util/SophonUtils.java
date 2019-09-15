@@ -93,11 +93,4 @@ public class SophonUtils {
         return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
     }
 
-    public static void main(String[] args) {
-        //
-        // 注意这个class对象是个接口,List中包含的是SophonInit接口的所有实现类
-        //
-        ArrayList<Class<?>> classes = getInterfaceImpls(SophonInit.class);
-    }
-
 }

@@ -1,5 +1,3 @@
-package com.sophon;
-
 import com.sophon.util.TimeCalc;
 
 import java.io.FileNotFoundException;
