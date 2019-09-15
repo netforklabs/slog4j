@@ -22,12 +22,9 @@ public class TimeCalc implements InvocationHandler {
     }
 
     public static void invoke(Class<?> proxy, String name) {
-        Method method = null;
         try {
-
-            method = proxy.getMethod(name);
+            Method method = proxy.getMethod(name);
             new TimeCalc().invoke(proxy.newInstance(), method, null);
-
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         } catch (Throwable throwable) {

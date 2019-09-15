@@ -4,6 +4,7 @@ import com.sophon.Example;
 import com.sophon.config.ConfigVo;
 import com.sophon.io.SophonIO;
 import com.sophon.io.SophonWrite;
+import com.sophon.util.StringUtils;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -44,16 +45,28 @@ public class SophonLoggerImpl implements SophonLogger {
 
     private static final String formatString = "\\{\\}";
 
-    // 已被忽略的级别
-    protected final Set<Level> printIgnore = new HashSet<>(4); // 忽略打印
-    protected final Set<Level> writeIgnore = new HashSet<>(4); // 忽略写出
+    /**
+     * 忽略打印
+     */
+    protected final Set<Level> printIgnore = new HashSet<>(4);
+    /**
+     * 忽略写出
+     */
+    protected final Set<Level> writeIgnore = new HashSet<>(4);
 
-    // 日期格式化工具
+    /**
+     * 日期格式化工具
+     */
     protected final DateFormat sdf = ConfigVo.getInstance().getSimpleDateFormat();
 
-    // 日期打印模板
+    /**
+     * 日志打印模板
+     */
     protected final String printTemplate = ConfigVo.getInstance().getLoggerPrintTemplate();
 
+    /**
+     * 数据写出接口
+     */
     protected final SophonWrite write = SophonIO.getWrite();
 
     public SophonLoggerImpl() {

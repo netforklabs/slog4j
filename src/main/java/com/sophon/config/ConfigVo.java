@@ -6,6 +6,9 @@ import com.sophon.util.StringUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,6 +29,7 @@ public class ConfigVo {
 
     /**
      * 获取对象实例
+     *
      * @return
      */
     public static ConfigVo getInstance() {
@@ -194,11 +198,11 @@ public class ConfigVo {
         }
     }
 
-    public String getLoggerSystemPrintCaptureExceptionPath(){
+    public String getLoggerSystemPrintCaptureExceptionPath() {
         return LOGGER_SYSTEM_PRINT_CAPTURE_EXCEPTION_PATH;
     }
 
-    public String getLoggerSystemPrintPath(){
+    public String getLoggerSystemPrintPath() {
         return LOGGER_SYSTEM_PRINT_PATH;
     }
 
