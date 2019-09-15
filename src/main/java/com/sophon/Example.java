@@ -19,12 +19,16 @@ public class Example {
 
     public static void main(String[] args) {
         // TimeCalc.invoke(Example.class,"string");
-        // TimeCalc.invoke(Example.class, "logger");
+        TimeCalc.invoke(Example.class, "logger");
         // TimeCalc.invoke(Example.class, "et");
-        Logger.info("system start...");
-        ArrayList<String> list = null;
-        list.add("string");
-        Logger.info("system end...");
+        // Logger.info("system start...");
+        // ArrayList<String> list = null;
+        // list.add("string");
+        // Logger.info("system end...");
+    }
+
+    public void stream(){
+
     }
 
     public void et(){
@@ -71,33 +75,33 @@ public class Example {
     //      ‭‪27秒
     //      0.3分钟
     //
+    // -- 将日志输出到文件,并且不使用固定格式,流不关闭,设置缓冲区大小 --
+    //      25088ms
+    //      ‭‪25秒
+    //      0.3分钟
+    //
     public void logger() {
+        String var = "test";
         for (int i = 0; i < 10000; i++) {
-            String var = "test";
+
+            // 优化一次后: 平均7秒
             Logger.info(var);
-            Logger.info("count:{}", i);
             Logger.info(1 == 1);
             Logger.info(SophonLogger.Level.INFO);
             Logger.info("======================================== LOGGER INFO END.....");
             Logger.debug(var);
-            Logger.debug("count:{}", i);
             Logger.debug(1 == 1);
             Logger.debug(SophonLogger.Level.DEBUG);
             Logger.debug("======================================== LOGGER DEBUG END.....");
             Logger.error(var);
-            Logger.error("count:{}", i);
             Logger.error(1 == 1);
             Logger.error(SophonLogger.Level.ERROR);
             Logger.error("======================================== LOGGER ERROR END.....");
             Logger.warn(var);
-            Logger.warn("count:{}", i);
             Logger.warn(1 == 1);
             Logger.warn(SophonLogger.Level.WARN);
             Logger.warn("======================================== LOGGER WARN END.....");
 
-            System.err.println("===================================================================================================");
-            System.err.println("===================================================================================================");
-            System.err.println("===================================================================================================");
 
             SystemLogger.info(var);
             SystemLogger.info("count:{}", i);
@@ -119,10 +123,6 @@ public class Example {
             SystemLogger.warn(1 == 1);
             SystemLogger.warn(SophonLogger.Level.WARN);
             SystemLogger.warn("======================================== SYSTEM LOGGER WARN END.....");
-
-            System.err.println("===================================================================================================");
-            System.err.println("===================================================================================================");
-            System.err.println("===================================================================================================");
 
             ExceptionLogger.info(var);
             ExceptionLogger.info("count:{}", i);

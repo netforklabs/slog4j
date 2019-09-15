@@ -30,31 +30,10 @@ public class SophonWriteBySize implements SophonWrite {
         this.file = file;
     }
 
-    // @Override
-    public void write2(String v) {
-        try (BufferedWriter bw = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(file, true)))) {
-            if (file.getSizeByKB() <= size) {
-                // 当前文件大小小于size
-                bw.write(v.concat("\n"));
-                bw.flush();
-            } else {
-                // 当前文件大小大于size
-                setFile(file.getNewFileObject());
-                BufferedWriter bw1 =
-                        new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
-                bw1.write(v.concat("\n"));
-                bw1.flush();
-                bw1.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+    @Override
     public void write(String v) {
         try {
-            if(bw == null){
+            if (bw == null) {
                 bw = new BufferedWriter(
                         new OutputStreamWriter(new FileOutputStream(file, true)));
             }
@@ -73,7 +52,7 @@ public class SophonWriteBySize implements SophonWrite {
                 bw.close();
                 bw = null;
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

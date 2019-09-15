@@ -184,6 +184,13 @@ public class SophonFile extends File {
         return new SophonFile(getParent().concat("/").concat(getNewFileName()));
     }
 
+    /**
+     * 获取一个  SophoFile 对象
+     * 该方法的主要作用就是对 pathname 进行操作。
+     * 例如 classpath: 关键字就是在这个方法中做解析的。
+     * @param pathname
+     * @return
+     */
     public static SophonFile getFile(@NotNull String pathname) {
         String classpath = "classpath:";
         // 如果是以classpath:开头的路劲,使用当前项目目录

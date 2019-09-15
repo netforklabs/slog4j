@@ -15,7 +15,8 @@ import java.lang.reflect.Field;
 public class LoggerFactory {
 
     /**
-     * 对类中的 SophonLogger 对象实现注入
+     * 对类中的 SophonLogger 对象实现注入。
+     * 需要注意的是，对象必须是static的，否则注入不了。
      */
     public static void injection() {
         try {
