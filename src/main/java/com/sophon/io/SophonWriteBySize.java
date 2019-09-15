@@ -1,6 +1,8 @@
 package com.sophon.io;
 
+import com.sophon.Example;
 import com.sophon.component.io.SophonFile;
+import com.sophon.util.SophonUtils;
 import com.sun.istack.internal.NotNull;
 
 import java.io.*;
@@ -32,10 +34,10 @@ public class SophonWriteBySize implements SophonWrite {
 
     @Override
     public void write(String v) {
+        long startTime = System.currentTimeMillis();
         try {
             if (bw == null) {
-                bw = new BufferedWriter(
-                        new OutputStreamWriter(new FileOutputStream(file, true)));
+                bw = SophonUtils.newBufferedWriter(file);
             }
             if (file.getSizeByKB() <= size) {
                 // 当前文件大小小于size
@@ -44,8 +46,7 @@ public class SophonWriteBySize implements SophonWrite {
             } else {
                 // 当前文件大小大于size
                 setFile(file.getNewFileObject());
-                BufferedWriter bw1 =
-                        new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
+                BufferedWriter bw1 = SophonUtils.newBufferedWriter(file);
                 bw1.write(v.concat("\n"));
                 bw1.flush();
                 bw1.close();
@@ -55,6 +56,8 @@ public class SophonWriteBySize implements SophonWrite {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        long endTime = System.currentTimeMillis();
+        Example.ioWriteTime += (endTime - startTime);
     }
 
     public void setFile(SophonFile file) {

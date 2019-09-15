@@ -58,37 +58,65 @@ public class StringUtils {
      * @return
      */
     public static String removeLastString(String v) {
-        return v.substring(0,v.length() - 1);
+        return v.substring(0, v.length() - 1);
     }
 
     /**
      * 判断当前字符串是不是数字
+     *
      * @param v
      * @return
      */
-    public static boolean isNumber(String v){
+    public static boolean isNumber(String v) {
         return v.matches("^[0-9]*$");
     }
 
     /**
      * 删除所有非数字的字符
+     *
      * @param v
      * @return
      */
-    public static String removeNotNumber(String v){
-        return v.replaceAll("[^\\d]","");
+    public static String removeNotNumber(String v) {
+        return v.replaceAll("[^\\d]", "");
     }
 
     /**
-     * 获取两个字符之前的数字
-     * 从右到左截取。
-     * @param v 原字符串
-     * @param var1 第一个字符
-     * @param var2 第二个字符
-     * @return
+     * 获取一个字符串的开始位置和结束位置
+     *
+     * @param v    源字符串
+     * @param find 需要查找的字符串
+     * @return 数组 0=开始位置 1=结束位置
      */
-    public static String getS2SChars(String v,String var1,String var2){
-        return v.substring(v.lastIndexOf(var1)+1,v.lastIndexOf(var2));
+    public static int[] getStringStartAndEndIndex(String v, String find) {
+        int start = -1; // 开始下标
+        int end = -1; // 结束下标
+        int currentIndex = 0; // 当前下标 -1等于当前源字符串长度已遍历完
+        char[] source = v.toCharArray(); // 源字符串char数组
+        char[] target = find.toCharArray();
+        while (source.length >= currentIndex) {
+            boolean result = true;
+            for (int i = 0; i < target.length; i++) {
+                if (source[currentIndex] == target[i]) {
+                    result = true;
+                }else{
+                    result = false;
+                    currentIndex++;
+                    break;
+                }
+                currentIndex++;
+            }
+            if (result) {
+                start = currentIndex - target.length;
+                end = currentIndex;
+                break;
+            }
+        }
+        return new int[]{start, end};
+    }
+
+    public static void main(String[] args) {
+
     }
 
 }

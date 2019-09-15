@@ -1,5 +1,6 @@
 package com.sophon.logger;
 
+import com.sophon.Example;
 import com.sophon.config.ConfigVo;
 import com.sophon.io.SophonIO;
 import com.sophon.io.SophonWrite;
@@ -196,15 +197,18 @@ public class SophonLoggerImpl implements SophonLogger {
 
     @Override
     public String prefixGenerate(Level level, Thread t) {
+        long startTime = System.currentTimeMillis();
         String className = t.getStackTrace()[trace].getClassName();
         String methodName = t.getStackTrace()[trace].getMethodName();
         String lineNumber = String.valueOf(t.getStackTrace()[trace].getLineNumber());
-        String v = printTemplate;
-        return v.replaceAll("\\$\\{line\\}", lineNumber)
-                .replaceAll("\\$\\{class\\}", className)
-                .replaceAll("\\$\\{level\\}", String.valueOf(level))
-                .replaceAll("\\$\\{method\\}", methodName)
-                .replaceAll("\\$\\{datetime\\}", sdf.format(new Date()));
+        String v = printTemplate.replace("${line}", lineNumber)
+                .replace("${class}", className)
+                .replace("${level}", String.valueOf(level))
+                .replace("${method}", methodName)
+                .replace("${datetime}", sdf.format(new Date()));
+        long endTime = System.currentTimeMillis();
+        Example.prefixGeneratorTime += (endTime - startTime);
+        return v;
     }
 
     /**
@@ -213,17 +217,13 @@ public class SophonLoggerImpl implements SophonLogger {
      * @param v
      */
     protected synchronized void console(String v, Level level) {
+        long startTime = System.currentTimeMillis();
         // 没有被忽略的级别才进入输出
-        if (!printIgnore.contains(level)) {
-            System.out.println(v);
-            ConfigVo.getInstance().printPlus();
-            if (ConfigVo.getInstance().getLoggerPrintWrite()) {
-                if (!writeIgnore.contains(level)) {
-                    // 输出到日志文件
-                    write.write(v);
-                }
-            }
-        }
+        System.out.println(v);
+        // 输出到日志文件
+        write.write(v);
+        long endTime = System.currentTimeMillis();
+        Example.consoleTime += (endTime - startTime);
     }
 
     /**

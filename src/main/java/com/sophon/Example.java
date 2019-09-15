@@ -15,6 +15,10 @@ import java.util.ArrayList;
  */
 public class Example {
 
+    public static long consoleTime = 0L;
+    public static long ioWriteTime = 0L;
+    public static long prefixGeneratorTime = 0L;
+
     // private static final Logger log = LoggerFactory.getLogger(Example.class);
 
     public static void main(String[] args) {
@@ -24,14 +28,17 @@ public class Example {
         // Logger.info("system start...");
         // ArrayList<String> list = null;
         // list.add("string");
+        Logger.info("console run time:{}", consoleTime);
+        Logger.info("io write run time:{}", ioWriteTime);
+        Logger.info("prefixGenerator run time:{}", prefixGeneratorTime);
         Logger.info("system end...");
     }
 
-    public void stream(){
+    public void stream() {
 
     }
 
-    public void et(){
+    public void et() {
         Logger.info("system start...");
         ArrayList<String> list = null;
         list.add("string");
@@ -83,67 +90,55 @@ public class Example {
     public void logger() {
         String var = "test";
         for (int i = 0; i < 10000; i++) {
-
             // 优化一次后: 平均7秒
             Logger.info(var);
             Logger.info(1 == 1);
             Logger.info(SophonLogger.Level.INFO);
-            Logger.info("======================================== LOGGER INFO END.....");
+            Logger.info("======================================== LOGGER INFO END --- ",i);
             Logger.debug(var);
             Logger.debug(1 == 1);
             Logger.debug(SophonLogger.Level.DEBUG);
-            Logger.debug("======================================== LOGGER DEBUG END.....");
+            Logger.debug("======================================== LOGGER DEBUG END --- ",i);
             Logger.error(var);
             Logger.error(1 == 1);
             Logger.error(SophonLogger.Level.ERROR);
-            Logger.error("======================================== LOGGER ERROR END.....");
+            Logger.error("======================================== LOGGER WARN END --- {} --- ",i);
             Logger.warn(var);
             Logger.warn(1 == 1);
             Logger.warn(SophonLogger.Level.WARN);
             Logger.warn("======================================== LOGGER WARN END.....");
-
-
-            SystemLogger.info(var);
-            SystemLogger.info("count:{}", i);
-            SystemLogger.info(1 == 1);
-            SystemLogger.info(SophonLogger.Level.INFO);
-            SystemLogger.info("======================================== SYSTEM LOGGER INFO END.....");
-            SystemLogger.debug(var);
-            SystemLogger.debug("count:{}", i);
-            SystemLogger.debug(1 == 1);
-            SystemLogger.debug(SophonLogger.Level.DEBUG);
-            SystemLogger.debug("======================================== SYSTEM LOGGER DEBUG END.....");
-            SystemLogger.error(var);
-            SystemLogger.error("count:{}", i);
-            SystemLogger.error(1 == 1);
-            SystemLogger.error(SophonLogger.Level.ERROR);
-            SystemLogger.error("======================================== SYSTEM LOGGER ERROR END.....");
-            SystemLogger.warn(var);
-            SystemLogger.warn("count:{}", i);
-            SystemLogger.warn(1 == 1);
-            SystemLogger.warn(SophonLogger.Level.WARN);
-            SystemLogger.warn("======================================== SYSTEM LOGGER WARN END.....");
-
-            ExceptionLogger.info(var);
-            ExceptionLogger.info("count:{}", i);
-            ExceptionLogger.info(1 == 1);
-            ExceptionLogger.info(SophonLogger.Level.INFO);
-            ExceptionLogger.info("======================================== EXCEPTION LOGGER INFO END.....");
-            ExceptionLogger.debug(var);
-            ExceptionLogger.debug("count:{}", i);
-            ExceptionLogger.debug(1 == 1);
-            ExceptionLogger.debug(SophonLogger.Level.DEBUG);
-            ExceptionLogger.debug("======================================== EXCEPTION LOGGER DEBUG END.....");
-            ExceptionLogger.error(var);
-            ExceptionLogger.error("count:{}", i);
-            ExceptionLogger.error(1 == 1);
-            ExceptionLogger.error(SophonLogger.Level.ERROR);
-            ExceptionLogger.error("======================================== EXCEPTION LOGGER ERROR END.....");
-            ExceptionLogger.warn(var);
-            ExceptionLogger.warn("count:{}", i);
-            ExceptionLogger.warn(1 == 1);
-            ExceptionLogger.warn(SophonLogger.Level.WARN);
-            ExceptionLogger.warn("======================================== EXCEPTION LOGGER WARN END.....");
+            Logger.info(var);
+            Logger.info(1 == 1);
+            Logger.info(SophonLogger.Level.INFO);
+            Logger.info("======================================== LOGGER INFO END --- ",i);
+            Logger.debug(var);
+            Logger.debug(1 == 1);
+            Logger.debug(SophonLogger.Level.DEBUG);
+            Logger.debug("======================================== LOGGER DEBUG END --- ",i);
+            Logger.error(var);
+            Logger.error(1 == 1);
+            Logger.error(SophonLogger.Level.ERROR);
+            Logger.error("======================================== LOGGER WARN END --- {} --- ",i);
+            Logger.warn(var);
+            Logger.warn(1 == 1);
+            Logger.warn(SophonLogger.Level.WARN);
+            Logger.warn("======================================== LOGGER WARN END.....");
+            Logger.info(var);
+            Logger.info(1 == 1);
+            Logger.info(SophonLogger.Level.INFO);
+            Logger.info("======================================== LOGGER INFO END --- ",i);
+            Logger.debug(var);
+            Logger.debug(1 == 1);
+            Logger.debug(SophonLogger.Level.DEBUG);
+            Logger.debug("======================================== LOGGER DEBUG END --- ",i);
+            Logger.error(var);
+            Logger.error(1 == 1);
+            Logger.error(SophonLogger.Level.ERROR);
+            Logger.error("======================================== LOGGER WARN END --- {} --- ",i);
+            Logger.warn(var);
+            Logger.warn(1 == 1);
+            Logger.warn(SophonLogger.Level.WARN);
+            Logger.warn("======================================== LOGGER WARN END.....");
         }
     }
 

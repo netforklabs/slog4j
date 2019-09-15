@@ -3,9 +3,10 @@ package com.sophon.util;
 import com.google.common.collect.Lists;
 import com.sophon.component.SophonInit;
 import com.sophon.component.exception.ParamException;
+import com.sophon.component.io.SophonFile;
 import com.sun.istack.internal.NotNull;
 
-import java.io.File;
+import java.io.*;
 import java.net.URL;
 import java.util.*;
 
@@ -80,6 +81,16 @@ public class SophonUtils {
                 }
             }
         }
+    }
+
+    /**
+     * 创建新的BufferedWriter IO流
+     * @param file
+     * @return
+     * @throws FileNotFoundException
+     */
+    public static BufferedWriter newBufferedWriter(SophonFile file) throws FileNotFoundException {
+        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
     }
 
     public static void main(String[] args) {
