@@ -17,11 +17,6 @@ public interface SophonWrite {
     String BYSIZE = "size";
 
     /**
-     * 根据天数生成文件
-     */
-    String BYDAYS = "days";
-
-    /**
      * 写出数据
      * @param v
      */

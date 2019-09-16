@@ -104,7 +104,6 @@ public class ConfigVo {
     /**
      * logger 文件生成规则,按天数还是按大小
      */
-    public final String BY_DAYS = "days";
     public final String BY_SIZE = "size";
     private final String LOGGER_GENERATE_RULE = getValue("logger.generate.rule");
 
@@ -169,14 +168,7 @@ public class ConfigVo {
     public String[] getLoggerGenerateRule() {
         String[] v = new String[2];
         String rule = LOGGER_GENERATE_RULE;
-        if (rule.contains(BY_DAYS) || rule.contains(BY_SIZE)) {
-            return rule.split(":");
-        } else {
-            // 默认一天是生成一个文件
-            v[0] = BY_DAYS;
-            v[1] = "1";
-            return v;
-        }
+        return rule.split(":");
     }
 
     public String getSlog4jSystemPromptLanguage() {
@@ -206,34 +198,36 @@ public class ConfigVo {
 
     /**
      * 被禁止输出到控制台的级别
+     *
      * @return
      */
     public Set<SophonLogger.Level> getLoggerProhibitLevelConsole() {
         Set<SophonLogger.Level> set = new HashSet<>();
-        if("no".equals(LOGGER_PROHIBIT_LEVEL_FILE)) return set;
+        if ("no".equals(LOGGER_PROHIBIT_LEVEL_FILE)) return set;
         String[] levels = LOGGER_PROHIBIT_LEVEL_CONSOLE.split(",");
-        for(String level : levels){
-            if(level.equals(SophonLogger.Level.INFO.toString())) set.add(SophonLogger.Level.INFO);
-            if(level.equals(SophonLogger.Level.DEBUG.toString())) set.add(SophonLogger.Level.DEBUG);
-            if(level.equals(SophonLogger.Level.ERROR.toString())) set.add(SophonLogger.Level.ERROR);
-            if(level.equals(SophonLogger.Level.WARN.toString())) set.add(SophonLogger.Level.WARN);
+        for (String level : levels) {
+            if (level.equals(SophonLogger.Level.INFO.toString())) set.add(SophonLogger.Level.INFO);
+            if (level.equals(SophonLogger.Level.DEBUG.toString())) set.add(SophonLogger.Level.DEBUG);
+            if (level.equals(SophonLogger.Level.ERROR.toString())) set.add(SophonLogger.Level.ERROR);
+            if (level.equals(SophonLogger.Level.WARN.toString())) set.add(SophonLogger.Level.WARN);
         }
         return set;
     }
 
     /**
      * 被禁止输出到文件的级别
+     *
      * @return
      */
     public Set<SophonLogger.Level> getLoggerProhibitLevelFile() {
         Set<SophonLogger.Level> set = new HashSet<>();
-        if("no".equals(LOGGER_PROHIBIT_LEVEL_FILE)) return set;
+        if ("no".equals(LOGGER_PROHIBIT_LEVEL_FILE)) return set;
         String[] levels = LOGGER_PROHIBIT_LEVEL_FILE.split(",");
-        for(String level : levels){
-            if(level.equals(SophonLogger.Level.INFO.toString())) set.add(SophonLogger.Level.INFO);
-            if(level.equals(SophonLogger.Level.DEBUG.toString())) set.add(SophonLogger.Level.DEBUG);
-            if(level.equals(SophonLogger.Level.ERROR.toString())) set.add(SophonLogger.Level.ERROR);
-            if(level.equals(SophonLogger.Level.WARN.toString())) set.add(SophonLogger.Level.WARN);
+        for (String level : levels) {
+            if (level.equals(SophonLogger.Level.INFO.toString())) set.add(SophonLogger.Level.INFO);
+            if (level.equals(SophonLogger.Level.DEBUG.toString())) set.add(SophonLogger.Level.DEBUG);
+            if (level.equals(SophonLogger.Level.ERROR.toString())) set.add(SophonLogger.Level.ERROR);
+            if (level.equals(SophonLogger.Level.WARN.toString())) set.add(SophonLogger.Level.WARN);
         }
         return set;
     }
