@@ -26,13 +26,23 @@ public class ConfigVo {
     }
 
     /**
+     * 选择手动加载配置文件
+     * @param propertiesPath
+     */
+    public static void loadProperties(String propertiesPath){
+        bundle = ResourceBundle.getBundle(propertiesPath);
+    }
+
+    /**
      * 获取对象实例
      *
      * @return
      */
     public static ConfigVo getInstance() {
         if (cv == null) {
-            bundle = ResourceBundle.getBundle("slog4j");
+            if(bundle != null) {
+                bundle = ResourceBundle.getBundle("slog4j");
+            }
             cv = new ConfigVo();
             //
             // configvo类做初始化工作
