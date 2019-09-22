@@ -10,7 +10,7 @@ public interface SophonLogger {
     /**
      * 枚举 日志级别
      */
-    enum Level {INFO, DEBUG, ERROR, WARN}
+    enum Level {INFO, DEBUG, ERROR, WARN,EXCEPTION}
 
     /**
      * info: 传入一个Object对象

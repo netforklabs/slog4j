@@ -2,7 +2,7 @@ package com.sophon.io;
 
 import com.sophon.component.io.SophonFile;
 import com.sophon.util.SophonUtils;
-import com.sun.istack.internal.NotNull;
+
 
 import java.io.BufferedWriter;
 
@@ -26,7 +26,7 @@ public class SophonWriteBySize implements SophonWrite {
 
     private BufferedWriter bw;
 
-    public SophonWriteBySize(@NotNull Integer size, SophonFile file) {
+    public SophonWriteBySize(Integer size, SophonFile file) {
         this.size = size;
         this.file = file;
     }

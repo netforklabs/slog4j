@@ -1,5 +1,6 @@
 package com.sophon.component;
 
+import com.sophon.component.exception.UncheckedExceptionHandler;
 import com.sophon.config.ConfigVo;
 import com.sophon.util.SophonUtils;
 
@@ -17,7 +18,8 @@ public class Entrance {
      * 对所有实现了SophonInit接口的类进行初始化
      */
     public static void frameworkInit(){
-        ConfigVo.getInstance();
+        new UncheckedExceptionHandler().init();
+        /*ConfigVo.getInstance();
         ArrayList<Class<?>> clesses = SophonUtils.getInterfaceImpls(SophonInit.class);
         try{
             for(Class<?> v : clesses){
@@ -26,7 +28,7 @@ public class Entrance {
             }
         }catch (Throwable e){
             e.printStackTrace();
-        }
+        }*/
     }
 
 }

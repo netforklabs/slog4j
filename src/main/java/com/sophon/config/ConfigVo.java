@@ -5,6 +5,9 @@ import com.sophon.component.Entrance;
 import com.sophon.logger.SophonLogger;
 import com.sophon.util.StringUtils;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -18,19 +21,36 @@ import java.util.regex.Pattern;
  */
 public class ConfigVo {
 
+    public static final String pathPrefix = "classpath:";
+
     private static ConfigVo cv;
 
-    private static ResourceBundle bundle;
+    private static Properties config;
 
     private ConfigVo() {
     }
 
     /**
      * 选择手动加载配置文件
-     * @param propertiesPath
+     *
+     * @param pathname
      */
-    public static void loadProperties(String propertiesPath){
-        bundle = ResourceBundle.getBundle(propertiesPath);
+    public static void loadProperties(String pathname) {
+        try {
+            String classpath = ConfigVo.pathPrefix;
+            if (classpath.equals(pathname.substring(0, classpath.length()))) {
+                pathname = pathname.replaceAll(classpath, "");
+                pathname = System.getProperty("user.dir").concat(pathname);
+                pathname = pathname.replaceAll("/", "\\\\");
+            }
+            config = new Properties();
+            InputStream stream = new FileInputStream(pathname);
+            config.load(stream);
+            stream.close();
+            Entrance.frameworkInit();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -40,8 +60,16 @@ public class ConfigVo {
      */
     public static ConfigVo getInstance() {
         if (cv == null) {
-            if(bundle != null) {
-                bundle = ResourceBundle.getBundle("slog4j");
+            if (config == null) {
+                try {
+                    config = new Properties();
+                    String path = System.getProperty("user.dir") + "\\src" + "\\main" + "\\resources\\" + "slog4j.properties";
+                    InputStream is = new FileInputStream(path);
+                    config.load(is);
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             cv = new ConfigVo();
             //
@@ -62,7 +90,7 @@ public class ConfigVo {
     private String getValue(String key) {
         String v = null;
         try {
-            v = new String(bundle.getString(key).getBytes("ISO-8859-1"), "GBK");
+            v = new String(config.getProperty(key).getBytes("ISO-8859-1"), "GBK");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

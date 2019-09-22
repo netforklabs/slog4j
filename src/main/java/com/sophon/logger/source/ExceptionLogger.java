@@ -12,7 +12,7 @@ import com.sophon.logger.SystemLoggerImpl;
  */
 public final class ExceptionLogger {
 
-    private static final SophonLogger logger = new SystemLoggerImpl(5,
+    private static final SystemLoggerImpl logger = new SystemLoggerImpl(5,
             SophonFile.getFile(ConfigVo.getInstance().getLoggerSystemPrintCaptureExceptionPath()));
 
     public static void info(String v) {
@@ -93,6 +93,10 @@ public final class ExceptionLogger {
 
     public static void warn(String v, Thread t, Object... args) {
         logger.warn(v, t, args);
+    }
+
+    public static void exception(String v){
+        logger.exception(v);
     }
 
 }

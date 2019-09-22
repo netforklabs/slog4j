@@ -1,10 +1,8 @@
 package com.sophon.util;
 
-import com.google.common.collect.Lists;
-import com.sophon.component.SophonInit;
 import com.sophon.component.exception.ParamException;
 import com.sophon.component.io.SophonFile;
-import com.sun.istack.internal.NotNull;
+
 
 import java.io.*;
 import java.net.URL;
@@ -24,15 +22,14 @@ public class SophonUtils {
      * @return
      */
     public static ArrayList<Class<?>> getInterfaceImpls(Class<?> target) {
-        ArrayList<Class<?>> subclasses = Lists.newArrayList();
+        ArrayList<Class<?>> subclasses = new ArrayList();
         try {
             // 判断class对象是否是一个接口
             if (target.isInterface()) {
-                @NotNull
                 String basePackage = target.getClassLoader().getResource("").getPath();
                 File[] files = new File(basePackage).listFiles();
                 // 存放class路径的list
-                ArrayList<String> classpaths = Lists.newArrayList();
+                ArrayList<String> classpaths = new ArrayList();
                 for (File file : files) {
                     // 扫描项目编译后的所有类
                     if (file.isDirectory()) {

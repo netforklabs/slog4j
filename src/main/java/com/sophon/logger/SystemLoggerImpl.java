@@ -39,6 +39,14 @@ public class SystemLoggerImpl extends SophonLoggerImpl {
         write = new SophonWriteBySize(2048, file);
     }
 
+    /**
+     * 异常信息输出
+     * @param v
+     */
+    public void exception(String v){
+        console(v,Level.ERROR);
+    }
+
     @Override
     public String prefixGenerate(Level level, Thread t) {
         String className = t.getStackTrace()[trace].getClassName();

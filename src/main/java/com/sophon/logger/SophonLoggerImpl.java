@@ -176,23 +176,6 @@ public class SophonLoggerImpl implements SophonLogger {
         console(prefixGenerate(Level.WARN, t).concat(format(v, args)), Level.WARN);
     }
 
-    /*@Override
-    public void exception(String s,Throwable e) {
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
-        e.printStackTrace(printWriter);
-        String exceptionInfo = stringWriter.toString();
-        System.out.println(s);
-        System.out.println(exceptionInfo);
-        // 关闭流
-        try {
-            printWriter.close();
-            stringWriter.close();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-    }*/
-
     /**
      * 前缀生成
      *

@@ -39,8 +39,8 @@ public class UncheckedExceptionHandler implements Thread.UncaughtExceptionHandle
                 .append(datetime)
                 .append("\n\n     ")
                 .append(exceptionInfo);
-        String endExceptionInfo = "\n\n".concat(buffer.toString());
-        ExceptionLogger.error(endExceptionInfo);
+        String endExceptionInfo = "\n".concat(buffer.toString()).concat("\n");
+        ExceptionLogger.exception(endExceptionInfo);
     }
 
     @Override

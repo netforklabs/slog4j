@@ -1,10 +1,7 @@
 package com.sophon.component.io;
 
-import com.google.common.collect.Lists;
 import com.sophon.config.ConfigVo;
 import com.sophon.util.StringUtils;
-import com.sun.istack.internal.NotNull;
-
 import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
@@ -23,11 +20,11 @@ public class SophonFile extends File {
      * @param pathname
      * @param isCreate
      */
-    public SophonFile(@NotNull String pathname, boolean isCreate) {
+    public SophonFile(String pathname, boolean isCreate) {
         super(pathname);
     }
 
-    public SophonFile(@NotNull String pathname) {
+    public SophonFile(String pathname) {
         super(pathname);
         if (!exists() && ConfigVo.getInstance().getLoggerPrintWrite()) {
             create();
@@ -100,7 +97,7 @@ public class SophonFile extends File {
      * @return
      */
     public ArrayList<String> getFileNamesByFolderNoSuffix() {
-        ArrayList<String> names = Lists.newArrayList();
+        ArrayList<String> names = new ArrayList();
         File[] files = this.getParentFile().listFiles();
         for (File file : files) {
             String name = file.getName();
@@ -115,7 +112,7 @@ public class SophonFile extends File {
      * @return
      */
     public ArrayList<String> getFileNamesByFolder() {
-        ArrayList<String> names = Lists.newArrayList();
+        ArrayList<String> names = new ArrayList();
         File[] files = this.getParentFile().listFiles();
         for (File file : files) {
             String name = file.getName();
@@ -155,7 +152,7 @@ public class SophonFile extends File {
         // 索引
         int index = 0;
         // 当前文件的索引列表
-        ArrayList<Integer> indexs = Lists.newArrayList();
+        ArrayList<Integer> indexs = new ArrayList();
         // 当前文件名
         String currentName = getNoSuffixName().substring(0, getNoSuffixName().lastIndexOf("_"));
         for (String filename : getFileNamesByFolderNoSuffix()) {
@@ -191,8 +188,8 @@ public class SophonFile extends File {
      * @param pathname
      * @return
      */
-    public static SophonFile getFile(@NotNull String pathname) {
-        String classpath = "classpath:";
+    public static SophonFile getFile(String pathname) {
+        String classpath = ConfigVo.pathPrefix;
         // 如果是以classpath:开头的路劲,使用当前项目目录
         if (classpath.equals(pathname.substring(0, classpath.length()))) {
             pathname = pathname.replaceAll(classpath, "");
