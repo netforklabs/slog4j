@@ -1,10 +1,6 @@
 package com.sophon.logger;
 
 import com.sophon.component.io.SophonFile;
-import com.sophon.config.ConfigVo;
-import com.sophon.io.SophonIO;
-import com.sophon.logger.SophonLogger;
-import com.sophon.logger.SophonLoggerImpl;
 
 /**
  * @Author tiansheng

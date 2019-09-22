@@ -5,10 +5,7 @@ import com.sophon.component.Entrance;
 import com.sophon.logger.SophonLogger;
 import com.sophon.util.StringUtils;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -19,15 +16,15 @@ import java.util.regex.Pattern;
  * @Date 2019/8/25 13:03
  * @Description 加载配置(单例模式 - 懒汉式)
  */
-public class ConfigVo {
+public class Slog4jConfiguration {
 
     public static final String pathPrefix = "classpath:";
 
-    private static ConfigVo cv;
+    private static Slog4jConfiguration cv;
 
     private static Properties config;
 
-    private ConfigVo() {
+    private Slog4jConfiguration() {
     }
 
     /**
@@ -37,7 +34,7 @@ public class ConfigVo {
      */
     public static void loadProperties(String pathname) {
         try {
-            String classpath = ConfigVo.pathPrefix;
+            String classpath = Slog4jConfiguration.pathPrefix;
             if (classpath.equals(pathname.substring(0, classpath.length()))) {
                 pathname = pathname.replaceAll(classpath, "");
                 pathname = System.getProperty("user.dir").concat(pathname);
@@ -58,12 +55,21 @@ public class ConfigVo {
      *
      * @return
      */
-    public static ConfigVo getInstance() {
+    public static Slog4jConfiguration getInstance() {
         if (cv == null) {
             if (config == null) {
                 try {
                     config = new Properties();
-                    String path = System.getProperty("user.dir") + "\\src" + "\\main" + "\\resources\\" + "slog4j.properties";
+                    String path = System.getProperty("user.dir") + "\\src\\main\\resources\\slog4j.properties";
+                    // 当前目录文件不存在就到其他目录下去寻找
+                    if(!new File(path).exists()){
+                        if(!new File(path).exists()){
+                            path = System.getProperty("user.dir") + "\\resources\\slog4j.properties";
+                            if(!new File(path).exists()){
+                                throw new NullPointerException("如果要使用自动扫描配置文件功能,请将文件放在resources目录下");
+                            }
+                        }
+                    }
                     InputStream is = new FileInputStream(path);
                     config.load(is);
                     is.close();
@@ -71,7 +77,7 @@ public class ConfigVo {
                     e.printStackTrace();
                 }
             }
-            cv = new ConfigVo();
+            cv = new Slog4jConfiguration();
             //
             // configvo类做初始化工作
             // 因为通常来说,配置类是最先加载的,所以在ConfigVo中做初始化操作

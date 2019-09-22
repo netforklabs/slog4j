@@ -1,6 +1,6 @@
 package com.sophon.component.io;
 
-import com.sophon.config.ConfigVo;
+import com.sophon.config.Slog4jConfiguration;
 import com.sophon.util.StringUtils;
 import java.io.File;
 import java.net.URI;
@@ -26,7 +26,7 @@ public class SophonFile extends File {
 
     public SophonFile(String pathname) {
         super(pathname);
-        if (!exists() && ConfigVo.getInstance().getLoggerPrintWrite()) {
+        if (!exists() && Slog4jConfiguration.getInstance().getLoggerPrintWrite()) {
             create();
         }
     }
@@ -189,7 +189,7 @@ public class SophonFile extends File {
      * @return
      */
     public static SophonFile getFile(String pathname) {
-        String classpath = ConfigVo.pathPrefix;
+        String classpath = Slog4jConfiguration.pathPrefix;
         // 如果是以classpath:开头的路劲,使用当前项目目录
         if (classpath.equals(pathname.substring(0, classpath.length()))) {
             pathname = pathname.replaceAll(classpath, "");

@@ -1,12 +1,11 @@
 package com.sophon.logger;
 
-import com.sophon.config.ConfigVo;
+import com.sophon.config.Slog4jConfiguration;
 import com.sophon.io.SophonIO;
 import com.sophon.io.SophonWrite;
 
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -43,21 +42,21 @@ public class SophonLoggerImpl implements SophonLogger {
     /**
      * 忽略打印
      */
-    protected final Set<Level> printIgnore = ConfigVo.getInstance().getLoggerProhibitLevelConsole();
+    protected final Set<Level> printIgnore = Slog4jConfiguration.getInstance().getLoggerProhibitLevelConsole();
     /**
      * 忽略写出
      */
-    protected final Set<Level> writeIgnore = ConfigVo.getInstance().getLoggerProhibitLevelFile();
+    protected final Set<Level> writeIgnore = Slog4jConfiguration.getInstance().getLoggerProhibitLevelFile();
 
     /**
      * 日期格式化工具
      */
-    protected final DateFormat sdf = ConfigVo.getInstance().getSimpleDateFormat();
+    protected final DateFormat sdf = Slog4jConfiguration.getInstance().getSimpleDateFormat();
 
     /**
      * 日志打印模板
      */
-    protected final String printTemplate = ConfigVo.getInstance().getLoggerPrintTemplate();
+    protected final String printTemplate = Slog4jConfiguration.getInstance().getLoggerPrintTemplate();
 
     /**
      * 数据写出接口
@@ -208,8 +207,8 @@ public class SophonLoggerImpl implements SophonLogger {
         // 没有被忽略的级别才进入输出
         if (!printIgnore.contains(level)) {
             System.out.println(v);
-            ConfigVo.getInstance().printPlus();
-            if (ConfigVo.getInstance().getLoggerPrintWrite()) {
+            Slog4jConfiguration.getInstance().printPlus();
+            if (Slog4jConfiguration.getInstance().getLoggerPrintWrite()) {
                 if (!writeIgnore.contains(level)) {
                     // 输出到日志文件
                     write.write(v);

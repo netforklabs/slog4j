@@ -1,11 +1,10 @@
 package com.sophon.component;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sophon.config.ConfigVo;
+import com.sophon.config.Slog4jConfiguration;
 import org.apache.commons.io.IOUtils;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 /**
@@ -19,7 +18,7 @@ public class Prompt {
 
     static {
         try {
-            InputStream is = new FileInputStream(ConfigVo.getInstance().getSlog4jSystemPromptLanguage().concat(".JSON"));
+            InputStream is = new FileInputStream(Slog4jConfiguration.getInstance().getSlog4jSystemPromptLanguage().concat(".JSON"));
             String json = IOUtils.toString(is,"utf8");
             ali = JSONObject.parseObject(json);
         } catch (Exception e) {

@@ -1,7 +1,7 @@
 package com.sophon.logger;
 
 import com.sophon.component.io.SophonFile;
-import com.sophon.config.ConfigVo;
+import com.sophon.config.Slog4jConfiguration;
 import com.sophon.io.SophonWrite;
 import com.sophon.io.SophonWriteBySize;
 
@@ -31,7 +31,7 @@ public class SystemLoggerImpl extends SophonLoggerImpl {
     public SystemLoggerImpl(int trace) {
         this.trace = trace;
         write = new SophonWriteBySize(2048,
-                SophonFile.getFile(ConfigVo.getInstance().getLoggerSystemPrintPath()));
+                SophonFile.getFile(Slog4jConfiguration.getInstance().getLoggerSystemPrintPath()));
     }
 
     public SystemLoggerImpl(int trace,SophonFile file) {
@@ -72,7 +72,7 @@ public class SystemLoggerImpl extends SophonLoggerImpl {
         } else {
             System.out.println(v);
         }
-        if(ConfigVo.getInstance().getLoggerPrintWrite()){
+        if(Slog4jConfiguration.getInstance().getLoggerPrintWrite()){
             write.write(v);
         }
     }

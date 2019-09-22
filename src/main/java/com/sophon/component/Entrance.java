@@ -1,11 +1,6 @@
 package com.sophon.component;
 
 import com.sophon.component.exception.UncheckedExceptionHandler;
-import com.sophon.config.ConfigVo;
-import com.sophon.util.SophonUtils;
-
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 
 /**
  * @Author tiansheng
@@ -19,7 +14,7 @@ public class Entrance {
      */
     public static void frameworkInit(){
         new UncheckedExceptionHandler().init();
-        /*ConfigVo.getInstance();
+        /*Slog4jConfiguration.getInstance();
         ArrayList<Class<?>> clesses = SophonUtils.getInterfaceImpls(SophonInit.class);
         try{
             for(Class<?> v : clesses){

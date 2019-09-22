@@ -1,8 +1,7 @@
 package com.sophon.logger.source;
 
 import com.sophon.component.io.SophonFile;
-import com.sophon.config.ConfigVo;
-import com.sophon.logger.SophonLogger;
+import com.sophon.config.Slog4jConfiguration;
 import com.sophon.logger.SystemLoggerImpl;
 
 /**
@@ -13,7 +12,7 @@ import com.sophon.logger.SystemLoggerImpl;
 public final class ExceptionLogger {
 
     private static final SystemLoggerImpl logger = new SystemLoggerImpl(5,
-            SophonFile.getFile(ConfigVo.getInstance().getLoggerSystemPrintCaptureExceptionPath()));
+            SophonFile.getFile(Slog4jConfiguration.getInstance().getLoggerSystemPrintCaptureExceptionPath()));
 
     public static void info(String v) {
         logger.info(v);
