@@ -5,7 +5,7 @@ import com.sophon.config.Slog4jConfiguration;
 import com.sophon.logger.SystemLoggerImpl;
 
 /**
- * @Author tiansheng
+ * @author tiansheng
  * @Date 2019/9/14 7:08
  * @Description TODO
  */

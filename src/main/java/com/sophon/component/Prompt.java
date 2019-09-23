@@ -8,7 +8,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 /**
- * @Author tiansheng
+ * @author tiansheng
  * @Date 2019/9/13 2:24
  * @Description 语言
  */

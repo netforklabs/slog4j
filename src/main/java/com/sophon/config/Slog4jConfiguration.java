@@ -12,7 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @Author tiansheng
+ * @author tiansheng
  * @Date 2019/8/25 13:03
  * @Description 加载配置(单例模式 - 懒汉式)
  */

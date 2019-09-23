@@ -8,7 +8,7 @@ import com.sophon.util.StringUtils;
 import java.lang.reflect.Field;
 
 /**
- * @Author tiansheng
+ * @author tiansheng
  * @Date 2019/9/10 15:54
  * @Description 独立日志生成
  */

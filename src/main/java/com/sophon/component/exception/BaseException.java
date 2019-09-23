@@ -1,7 +1,7 @@
 package com.sophon.component.exception;
 
 /**
- * @Author tiansheng
+ * @author tiansheng
  * @Date 2019/9/12 23:32
  * @Description TODO
  */

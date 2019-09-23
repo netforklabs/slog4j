@@ -9,7 +9,7 @@ import java.net.URL;
 import java.util.*;
 
 /**
- * @Author tiansheng
+ * @author tiansheng
  * @Date 2019/9/14 4:17
  * @Description Sophon Logger for Java 日志框架工具类
  */

@@ -3,7 +3,7 @@ package com.sophon.logger;
 import com.sophon.component.io.SophonFile;
 
 /**
- * @Author tiansheng
+ * @author tiansheng
  * @Date 2019/9/11 13:40
  * @Description 独立的日志文件
  */

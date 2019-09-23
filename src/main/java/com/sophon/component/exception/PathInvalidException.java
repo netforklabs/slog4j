@@ -1,7 +1,7 @@
 package com.sophon.component.exception;
 
 /**
- * @Author tiansheng
+ * @author tiansheng
  * @Date 2019/9/13 2:56
  * @Description 标识文件路径无效
  */

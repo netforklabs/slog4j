@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @Author tiansheng
+ * @author tiansheng
  * @Date 2019/8/23 23:52
  * @Description String工具类
  */

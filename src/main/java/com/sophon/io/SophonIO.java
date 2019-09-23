@@ -4,7 +4,7 @@ import com.sophon.component.io.SophonFile;
 import com.sophon.config.Slog4jConfiguration;
 
 /**
- * @Author tiansheng
+ * @author tiansheng
  * @Date 2019/9/11 2:13
  * @Description TODO
  */

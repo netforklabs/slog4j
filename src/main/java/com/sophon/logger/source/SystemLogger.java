@@ -4,7 +4,7 @@ import com.sophon.logger.SophonLogger;
 import com.sophon.logger.SystemLoggerImpl;
 
 /**
- * @Author tiansheng
+ * @author tiansheng
  * @Date 2019/9/13 3:49
  * @Description TODO
  */

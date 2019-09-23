@@ -1,7 +1,7 @@
 package com.sophon.component;
 
 /**
- * @Author tiansheng
+ * @author tiansheng
  * @Date 2019/9/14 4:12
  * @Description 类的初始化接口
  */

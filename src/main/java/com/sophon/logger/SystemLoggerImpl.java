@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @Author tiansheng
+ * @author tiansheng
  * @Date 2019/9/13 3:43
  * @Description 系统日志
  */

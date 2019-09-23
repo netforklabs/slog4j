@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * 添加此注解在类上，那么那个类的所有日志将会单独输出到一个文件中。
- * @Author tiansheng
+ * @author tiansheng
  * @Date 2019/9/10 15:46
  */
 @Target(ElementType.FIELD)

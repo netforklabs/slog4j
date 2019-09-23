@@ -3,7 +3,7 @@ package com.sophon.component;
 import com.sophon.component.exception.UncheckedExceptionHandler;
 
 /**
- * @Author tiansheng
+ * @author tiansheng
  * @Date 2019/9/14 4:10
  * @Description 框架初始化操作
  */
