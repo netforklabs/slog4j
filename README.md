@@ -1,5 +1,11 @@
 # slog4j
+
 slog4j 全称为Java智子日志记录框架,英文为 sophon logger for java
+
+![image](https://github.com/torocket/slog4j/blob/master/label/java.svg)
+![image](https://github.com/torocket/slog4j/blob/master/label/codesize.svg)
+![image](https://github.com/torocket/slog4j/blob/master/label/codeline.svg)
+![image](https://github.com/torocket/slog4j/blob/master/label/version.svg)
 
 # slog4j的优点
 
