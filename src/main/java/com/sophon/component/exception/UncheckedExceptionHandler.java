@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * @author tiansheng
  * @Date 2019/9/14 3:58
- * @Description 全局异常捕获器
+ * @Description 全局异常捕获器/处理器
  */
 public class UncheckedExceptionHandler implements Thread.UncaughtExceptionHandler, SophonInit {
 

@@ -3,7 +3,7 @@ package com.sophon.component.exception;
 /**
  * @author tiansheng
  * @Date 2019/9/12 23:32
- * @Description TODO
+ * @Description 自定义异常父类
  */
 public class BaseException extends Throwable {
 

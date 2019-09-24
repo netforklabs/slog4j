@@ -10,7 +10,7 @@ import java.io.InputStream;
 /**
  * @author tiansheng
  * @Date 2019/9/13 2:24
- * @Description 语言
+ * @Description todo 语言，到后面提示准备走国际化
  */
 public class Prompt {
 
@@ -26,10 +26,6 @@ public class Prompt {
         }
     }
 
-    /**
-     * 获取 SecurityManager 类中第46行提示
-     * @return
-     */
     public static String securityManagerCheckSophonFileUnknownError(){
         return ali.getString("SecurityManager.checkSophonFile.UnknownError");
     }

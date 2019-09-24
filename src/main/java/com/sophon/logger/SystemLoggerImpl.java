@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * @author tiansheng
  * @Date 2019/9/13 3:43
- * @Description 系统日志
+ * @Description 系统日志打印的实现类
  */
 public class SystemLoggerImpl extends SophonLoggerImpl {
 

@@ -7,7 +7,7 @@ import com.sophon.logger.SystemLoggerImpl;
 /**
  * @author tiansheng
  * @Date 2019/9/14 7:08
- * @Description TODO
+ * @Description 异常Logger打印
  */
 public final class ExceptionLogger {
 

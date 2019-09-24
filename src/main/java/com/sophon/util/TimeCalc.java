@@ -21,6 +21,11 @@ public class TimeCalc implements InvocationHandler {
         return null;
     }
 
+    /**
+     * 调用方法
+     * @param proxy 传入一个类的类对象
+     * @param name 传入当前proxy中的某个方法名
+     */
     public static void invoke(Class<?> proxy, String name) {
         try {
             Method method = proxy.getMethod(name);

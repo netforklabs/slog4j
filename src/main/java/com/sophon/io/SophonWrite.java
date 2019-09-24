@@ -18,13 +18,13 @@ public interface SophonWrite {
 
     /**
      * 写出数据
-     * @param v
+     * @param v 传入需要写出的数据
      */
     void write(String v);
 
     /**
-     * 传入file对象
-     * @param file
+     * 更换日志文件
+     * @param file 传入最新的文件对象
      */
     void setFile(SophonFile file);
 

@@ -6,7 +6,7 @@ import com.sophon.logger.SophonLoggerImpl;
 /**
  * @author tiansheng
  * @Date 2019/9/11 15:05
- * @Description TODO
+ * @Description 普通Logger打印
  */
 public final class Logger {
 

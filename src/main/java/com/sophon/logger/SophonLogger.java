@@ -3,7 +3,7 @@ package com.sophon.logger;
 /**
  * @author tiansheng
  * @Date 2019/8/25 0:08
- * @Description sophon-logger
+ * @Description sophon logger接口，所有的日志对象都根据这个接口标准
  */
 public interface SophonLogger {
 

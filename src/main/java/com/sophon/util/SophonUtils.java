@@ -18,8 +18,8 @@ public class SophonUtils {
     /**
      * 获取一个接口的所有实现类
      *
-     * @param target
-     * @return
+     * @param target 传入目标接口的class对象
+     * @return 返回该接口的所有实现类的类对象
      */
     public static ArrayList<Class<?>> getInterfaceImpls(Class<?> target) {
         ArrayList<Class<?>> subclasses = new ArrayList();
@@ -60,7 +60,6 @@ public class SophonUtils {
      *
      * @param basePackage 默认包名
      * @param classes     存放字节码文件路径的集合
-     * @return
      */
     public static void listPackages(String basePackage, List<String> classes) {
         URL url = SophonUtils.class.getClassLoader()
@@ -82,9 +81,10 @@ public class SophonUtils {
 
     /**
      * 创建新的BufferedWriter IO流
-     * @param file
-     * @return
-     * @throws FileNotFoundException
+     *
+     * @param file SophonFile文件对象
+     * @return 返回一个BUfferedWriter输出流
+     * @throws FileNotFoundException 文件找不到
      */
     public static BufferedWriter newBufferedWriter(SophonFile file) throws FileNotFoundException {
         return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));

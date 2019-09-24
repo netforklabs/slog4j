@@ -11,6 +11,7 @@ import java.util.Set;
 /**
  * @author tiansheng
  * @Date 2019/8/24 23:56
+ * @Description 普通日志打印的实现类
  */
 public class SophonLoggerImpl implements SophonLogger {
 

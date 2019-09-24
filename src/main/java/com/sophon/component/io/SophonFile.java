@@ -2,6 +2,7 @@ package com.sophon.component.io;
 
 import com.sophon.config.Slog4jConfiguration;
 import com.sophon.util.StringUtils;
+
 import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
@@ -17,13 +18,18 @@ public class SophonFile extends File {
     /**
      * 调用该构造函数不会在初始化的时候创建文件
      *
-     * @param pathname
-     * @param isCreate
+     * @param pathname 文件路径
+     * @param isCreate 是否在创建对象时创建文件
      */
     public SophonFile(String pathname, boolean isCreate) {
         super(pathname);
     }
 
+    /**
+     * 调用此构造函数会在对象初始化时创建文件
+     *
+     * @param pathname 文件路径
+     */
     public SophonFile(String pathname) {
         super(pathname);
         if (!exists() && Slog4jConfiguration.getInstance().getLoggerPrintWrite()) {
@@ -47,7 +53,7 @@ public class SophonFile extends File {
     /**
      * 获取文件后缀
      *
-     * @return
+     * @return 文件后缀
      */
     public String getSuffix() {
         String suffix = this.getName();
@@ -57,7 +63,7 @@ public class SophonFile extends File {
     /**
      * 获取当前文件有多少kb
      *
-     * @return
+     * @return 返回大小，以kb为单位
      */
     public long getSizeByKB() {
         return this.length() / 1024;
@@ -66,7 +72,7 @@ public class SophonFile extends File {
     /**
      * 创建当前文件
      *
-     * @return
+     * @return 返回boolean，表示是否创建成功
      */
     public boolean create() {
         return create(this.getName());
@@ -75,8 +81,8 @@ public class SophonFile extends File {
     /**
      * 单独开启一个线程创建文件
      *
-     * @param filename
-     * @return
+     * @param filename 文件名
+     * @return 返回boolean，表示是否创建成功
      */
     public boolean create(String filename) {
         File file = new File(this.getParent(), filename);
@@ -94,7 +100,7 @@ public class SophonFile extends File {
     /**
      * 获取当前文件夹下所有文件名(不带后缀)
      *
-     * @return
+     * @return 返回文件夹下的所有文件名List(文件名不带后缀)
      */
     public ArrayList<String> getFileNamesByFolderNoSuffix() {
         ArrayList<String> names = new ArrayList();
@@ -109,7 +115,7 @@ public class SophonFile extends File {
     /**
      * 获取当前文件夹下所有文件名(带后缀)
      *
-     * @return
+     * @return 返回文件夹下的所有文件名List(文件名带后缀)
      */
     public ArrayList<String> getFileNamesByFolder() {
         ArrayList<String> names = new ArrayList();
@@ -124,7 +130,7 @@ public class SophonFile extends File {
     /**
      * 获取没有后缀的文件名
      *
-     * @return
+     * @return 返回文件名，除去后缀
      */
     public String getNoSuffixName() {
         String name = this.getName();
@@ -134,7 +140,7 @@ public class SophonFile extends File {
     /**
      * 创建新的文件名
      *
-     * @return
+     * @return 返回新的文件名
      */
     public String getNewFileName() {
         String name = this.getName();
@@ -146,7 +152,7 @@ public class SophonFile extends File {
     /**
      * 获取当前文件的最新索引
      *
-     * @return
+     * @return 返回日志文件当前最新索引
      */
     public int getNewestFileIndex() {
         // 索引
@@ -175,7 +181,7 @@ public class SophonFile extends File {
     /**
      * 获取最新的文件对象
      *
-     * @return
+     * @return 返回一个最新索引的文件对象
      */
     public SophonFile getNewFileObject() {
         return new SophonFile(getParent().concat("/").concat(getNewFileName()));
@@ -185,8 +191,9 @@ public class SophonFile extends File {
      * 获取一个  SophoFile 对象
      * 该方法的主要作用就是对 pathname 进行操作。
      * 例如 classpath: 关键字就是在这个方法中做解析的。
-     * @param pathname
-     * @return
+     *
+     * @param pathname 文件路径
+     * @return 返回文件对象
      */
     public static SophonFile getFile(String pathname) {
         String classpath = Slog4jConfiguration.pathPrefix;

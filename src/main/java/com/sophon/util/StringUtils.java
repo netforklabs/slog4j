@@ -13,8 +13,8 @@ public class StringUtils {
     /**
      * 字符串是否为空
      *
-     * @param s
-     * @return
+     * @param s 目标字符串
+     * @return 返回boolean
      */
     public static boolean isEmpty(String s) {
         if (s == null) {
@@ -32,7 +32,7 @@ public class StringUtils {
      *
      * @param s     字符串
      * @param regex 需要查找的字符串(支持正则)
-     * @return
+     * @return 返回boolean
      */
     public static boolean isExist(String s, String regex) {
         if (s.contains(regex)) return true;
@@ -44,8 +44,8 @@ public class StringUtils {
     /**
      * 获取最后一个字符
      *
-     * @param v
-     * @return
+     * @param v 目标字符串
+     * @return 返回该字符串的最后一个字符
      */
     public static String getLastString(String v) {
         return v.substring(v.length() - 1);
@@ -54,8 +54,8 @@ public class StringUtils {
     /**
      * 删除最后一个字符
      *
-     * @param v
-     * @return
+     * @param v 目标字符串
+     * @return 返回处理后的字符串
      */
     public static String removeLastString(String v) {
         return v.substring(0, v.length() - 1);
@@ -64,8 +64,8 @@ public class StringUtils {
     /**
      * 判断当前字符串是不是数字
      *
-     * @param v
-     * @return
+     * @param v 目标字符串
+     * @return 返回boolean
      */
     public static boolean isNumber(String v) {
         return v.matches("^[0-9]*$");
@@ -74,8 +74,8 @@ public class StringUtils {
     /**
      * 删除所有非数字的字符
      *
-     * @param v
-     * @return
+     * @param v 目标字符串
+     * @return 返回处理后的字符串
      */
     public static String removeNotNumber(String v) {
         return v.replaceAll("[^\\d]", "");
@@ -113,10 +113,6 @@ public class StringUtils {
             }
         }
         return new int[]{start, end};
-    }
-
-    public static void main(String[] args) {
-
     }
 
 }

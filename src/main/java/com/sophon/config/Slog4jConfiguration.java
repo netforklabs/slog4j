@@ -30,7 +30,7 @@ public class Slog4jConfiguration {
     /**
      * 选择手动加载配置文件
      *
-     * @param pathname
+     * @param pathname 文件路径
      */
     public static void loadProperties(String pathname) {
         try {
@@ -53,7 +53,7 @@ public class Slog4jConfiguration {
     /**
      * 获取对象实例
      *
-     * @return
+     * @return 返回静态对象
      */
     public static Slog4jConfiguration getInstance() {
         if (cv == null) {
@@ -90,8 +90,8 @@ public class Slog4jConfiguration {
     /**
      * 防止中文乱码
      *
-     * @param key
-     * @return
+     * @param key 配置文件中的key
+     * @return 返回对应的value
      */
     private String getValue(String key) {
         String v = null;
@@ -103,9 +103,13 @@ public class Slog4jConfiguration {
         return v;
     }
 
-    // 统计写出了多少条数据
+    /**
+     * 统计写出了多少条数据
+     */
     private long writeCount = 0L;
-    // 统计打印了多少条数据
+    /**
+     * 统计打印了多少条数据
+     */
     private long printCount = 0L;
 
     public void writePlus() {
@@ -192,7 +196,7 @@ public class Slog4jConfiguration {
     /**
      * 获取日志打印模板
      *
-     * @return
+     * @return 返回一个处理后的模板
      */
     public String getLoggerPrintTemplate() {
         String v = LOGGER_PRINT_TEMPLATE;
@@ -207,7 +211,7 @@ public class Slog4jConfiguration {
     /**
      * 文件生成规则
      *
-     * @return
+     * @return 返回文件规则以及规则内容
      */
     public String[] getLoggerGenerateRule() {
         String[] v = new String[2];
@@ -243,7 +247,7 @@ public class Slog4jConfiguration {
     /**
      * 被禁止输出到控制台的级别
      *
-     * @return
+     * @return 返回Set集合
      */
     public Set<SophonLogger.Level> getLoggerProhibitLevelConsole() {
         Set<SophonLogger.Level> set = new HashSet<>();
@@ -261,7 +265,7 @@ public class Slog4jConfiguration {
     /**
      * 被禁止输出到文件的级别
      *
-     * @return
+     * @return 返回Set集合
      */
     public Set<SophonLogger.Level> getLoggerProhibitLevelFile() {
         Set<SophonLogger.Level> set = new HashSet<>();
