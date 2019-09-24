@@ -28,7 +28,15 @@ slog4j(sophon logger for java)，这是一款轻量级的日志记录框架，�
 
 ## 2.通过maven的方式引入slog4j
 
-在maven的中央仓库搜索slog4j，找到groupid为io.github.torocket去引入。
+maven引入，当前项目还不能在 https://mvnrepository.com 搜索到，只能在 https://search.maven.org 中所有。搜索slog4j即可。
+
+```xml
+<dependency>
+  <groupId>io.github.torocket</groupId>
+  <artifactId>slog4j</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
 
 # 使用教程
 
