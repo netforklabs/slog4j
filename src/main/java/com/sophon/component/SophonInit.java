@@ -1,9 +1,11 @@
 package com.sophon.component;
 
 /**
+ * 类的初始化接口
  * @author tiansheng
- * @Date 2019/9/14 4:12
- * @Description 类的初始化接口
+ * @date 2019/9/14 4:12
+ * @version 1.0
+ * @since 1.8
  */
 public interface SophonInit {
 

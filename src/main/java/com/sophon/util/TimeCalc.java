@@ -4,9 +4,11 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 /**
+ * 计算程序运行时间
  * @author keyboard
- * @time 2019/6/29 0:52
- * @descripting 计算程序运行时间
+ * @date 2019/6/29 0:52
+ * @version 1.0
+ * @since 1.8
  */
 public class TimeCalc implements InvocationHandler {
 

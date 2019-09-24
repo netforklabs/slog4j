@@ -7,11 +7,12 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 /**
+ * 全局异常捕获器/处理器
  * @author tiansheng
- * @Date 2019/9/14 3:58
- * @Description 全局异常捕获器/处理器
+ * @date 2019/9/14 3:58
+ * @version 1.0
+ * @since 1.8
  */
 public class UncheckedExceptionHandler implements Thread.UncaughtExceptionHandler, SophonInit {
 

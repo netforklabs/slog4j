@@ -9,9 +9,11 @@ import java.net.URL;
 import java.util.*;
 
 /**
+ * Sophon Logger 框架工具类
  * @author tiansheng
- * @Date 2019/9/14 4:17
- * @Description Sophon Logger for Java 日志框架工具类
+ * @date 2019/9/14 4:17
+ * @version 1.0
+ * @since 1.8
  */
 public class SophonUtils {
 

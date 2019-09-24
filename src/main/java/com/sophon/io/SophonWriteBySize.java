@@ -7,9 +7,11 @@ import com.sophon.util.SophonUtils;
 import java.io.BufferedWriter;
 
 /**
+ * 根据大小写出数据
  * @author tiansheng
- * @Date 2019/8/26 1:18
- * @Description 根据大小写出数据
+ * @date 2019/8/26 1:18
+ * @version 1.0
+ * @since 1.8
  */
 public class SophonWriteBySize implements SophonWrite {
 

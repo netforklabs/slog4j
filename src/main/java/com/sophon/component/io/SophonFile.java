@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
+ * Sophon Logger文件对象
  * @author tiansheng
- * @Date 2019/8/30 14:55
- * @Description file
+ * @date 2019/8/30 14:55
+ * @version 1.0
+ * @since 1.8
  */
 public class SophonFile extends File {
 

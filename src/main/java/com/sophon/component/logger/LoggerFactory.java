@@ -8,9 +8,11 @@ import com.sophon.util.StringUtils;
 import java.lang.reflect.Field;
 
 /**
+ * 独立Logger对象生成
  * @author tiansheng
- * @Date 2019/9/10 15:54
- * @Description 独立日志生成
+ * @date 2019/9/10 15:54
+ * @version 1.0
+ * @since 1.8
  */
 public class LoggerFactory {
 

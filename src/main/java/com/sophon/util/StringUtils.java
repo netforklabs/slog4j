@@ -4,9 +4,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * String工具类
  * @author tiansheng
- * @Date 2019/8/23 23:52
- * @Description String工具类
+ * @date 2019/8/23 23:52
+ * @version 1.0
+ * @since 1.8
  */
 public class StringUtils {
 

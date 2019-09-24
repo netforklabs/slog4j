@@ -4,9 +4,11 @@ import com.sophon.logger.SophonLogger;
 import com.sophon.logger.SystemLoggerImpl;
 
 /**
+ * 框架日志打印
  * @author tiansheng
- * @Date 2019/9/13 3:49
- * @Description 框架日志打印
+ * @date 2019/9/13 3:49
+ * @version 1.0
+ * @since 1.8
  */
 public final class SystemLogger {
 

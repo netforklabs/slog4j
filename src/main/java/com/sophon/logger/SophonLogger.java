@@ -1,9 +1,11 @@
 package com.sophon.logger;
 
 /**
+ * sophon logger接口，所有的日志对象都根据这个接口标准
  * @author tiansheng
- * @Date 2019/8/25 0:08
- * @Description sophon logger接口，所有的日志对象都根据这个接口标准
+ * @date 2019/8/25 0:08
+ * @version 1.0
+ * @since 1.8
  */
 public interface SophonLogger {
 

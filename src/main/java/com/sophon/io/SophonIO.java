@@ -4,9 +4,11 @@ import com.sophon.component.io.SophonFile;
 import com.sophon.config.Slog4jConfiguration;
 
 /**
+ * 对IO的初始化
  * @author tiansheng
- * @Date 2019/9/11 2:13
- * @Description 对IO的初始化
+ * @date 2019/9/11 2:13
+ * @version 1.0
+ * @since 1.8
  */
 public class SophonIO {
 

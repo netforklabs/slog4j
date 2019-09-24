@@ -5,9 +5,11 @@ import com.sophon.component.io.SophonFile;
 import java.io.FileNotFoundException;
 
 /**
+ * 数据写出接口
  * @author tiansheng
- * @Date 2019/8/26 1:15
- * @Description 数据写出接口
+ * @date 2019/8/26 1:15
+ * @version 1.0
+ * @since 1.8
  */
 public interface SophonWrite {
 

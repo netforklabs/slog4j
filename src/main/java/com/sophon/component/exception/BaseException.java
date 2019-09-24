@@ -1,9 +1,11 @@
 package com.sophon.component.exception;
 
 /**
+ * 自定义异常父类
  * @author tiansheng
- * @Date 2019/9/12 23:32
- * @Description 自定义异常父类
+ * @date 2019/9/12 23:32
+ * @version 1.0
+ * @since 1.8
  */
 public class BaseException extends Throwable {
 

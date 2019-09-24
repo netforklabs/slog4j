@@ -4,9 +4,11 @@ import com.sophon.logger.SophonLogger;
 import com.sophon.logger.SophonLoggerImpl;
 
 /**
+ * 普通Logger打印
  * @author tiansheng
- * @Date 2019/9/11 15:05
- * @Description 普通Logger打印
+ * @date 2019/9/11 15:05
+ * @version 1.0
+ * @since 1.8
  */
 public final class Logger {
 

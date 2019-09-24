@@ -3,9 +3,11 @@ package com.sophon.component;
 import com.sophon.component.exception.UncheckedExceptionHandler;
 
 /**
+ * slog4j框架初始化操作
  * @author tiansheng
- * @Date 2019/9/14 4:10
- * @Description 框架初始化操作
+ * @date 2019/9/14 4:10
+ * @version 1.0
+ * @since 1.8
  */
 public class Entrance {
 

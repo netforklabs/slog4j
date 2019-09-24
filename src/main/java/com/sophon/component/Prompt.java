@@ -8,9 +8,12 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 /**
+ * 语言，到后面提示出国际化。
+ * 1.0版本还没准备这么干，这个先保留着，后面再看。
  * @author tiansheng
- * @Date 2019/9/13 2:24
- * @Description todo 语言，到后面提示准备走国际化
+ * @date 2019/9/13 2:24
+ * @version 1.0
+ * @since 1.8
  */
 public class Prompt {
 

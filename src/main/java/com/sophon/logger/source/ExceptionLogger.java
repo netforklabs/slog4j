@@ -5,9 +5,11 @@ import com.sophon.config.Slog4jConfiguration;
 import com.sophon.logger.SystemLoggerImpl;
 
 /**
+ * 异常Logger打印
  * @author tiansheng
- * @Date 2019/9/14 7:08
- * @Description 异常Logger打印
+ * @date 2019/9/14 7:08
+ * @version 1.0
+ * @since 1.8
  */
 public final class ExceptionLogger {
 
