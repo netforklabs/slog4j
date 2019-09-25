@@ -62,11 +62,13 @@ public class Slog4jConfiguration {
             if (config == null) {
                 try {
                     config = new Properties();
-                    String path = System.getProperty("user.dir") + "\\src\\main\\resources\\slog4j.properties";
+                    String path = System.getProperty("user.dir") + "/src/main/resources/slog4j.properties";
+                    System.out.println(path);
+
                     // 当前目录文件不存在就到其他目录下去寻找
                     if(!new File(path).exists()){
                         if(!new File(path).exists()){
-                            path = System.getProperty("user.dir") + "\\resources\\slog4j.properties";
+                            path = System.getProperty("user.dir") + "/resources/slog4j.properties";
                             if(!new File(path).exists()){
                                 throw new NullPointerException("如果要使用自动扫描配置文件功能,请将文件放在resources目录下");
                             }
