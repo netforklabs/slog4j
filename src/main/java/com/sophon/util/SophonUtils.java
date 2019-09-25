@@ -2,6 +2,7 @@ package com.sophon.util;
 
 import com.sophon.component.exception.ParamException;
 import com.sophon.component.io.SophonFile;
+import future.anno.ListenerMethod;
 
 
 import java.io.*;
@@ -23,6 +24,7 @@ public class SophonUtils {
      * @param target 传入目标接口的class对象
      * @return 返回该接口的所有实现类的类对象
      */
+    @ListenerMethod
     public static ArrayList<Class<?>> getInterfaceImpls(Class<?> target) {
         ArrayList<Class<?>> subclasses = new ArrayList();
         try {
