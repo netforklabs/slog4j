@@ -7,7 +7,7 @@ import com.sophon.logger.SophonLoggerImpl;
  * 普通Logger打印
  * @author tiansheng
  * @date 2019/9/11 15:05
- * @version 1.0
+ * @version 1.0.0
  * @since 1.8
  */
 public final class Logger {

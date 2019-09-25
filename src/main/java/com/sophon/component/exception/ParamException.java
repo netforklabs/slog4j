@@ -4,7 +4,7 @@ package com.sophon.component.exception;
  * 参数/属性异常
  * @author tiansheng
  * @date 2019/9/12 23:31
- * @version 1.0
+ * @version 1.0.0
  * @since 1.8
  */
 public class ParamException extends BaseException{

@@ -12,7 +12,7 @@ import java.util.Set;
  * 普通日志打印的实现类
  * @author tiansheng
  * @date 2019/8/24 23:56
- * @version 1.0
+ * @version 1.0.0
  * @since 1.8
  */
 public class SophonLoggerImpl implements SophonLogger {

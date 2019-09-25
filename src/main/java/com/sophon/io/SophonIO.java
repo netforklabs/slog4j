@@ -7,7 +7,7 @@ import com.sophon.config.Slog4jConfiguration;
  * 对IO的初始化
  * @author tiansheng
  * @date 2019/9/11 2:13
- * @version 1.0
+ * @version 1.0.0
  * @since 1.8
  */
 public class SophonIO {

@@ -11,7 +11,7 @@ import java.lang.reflect.Field;
  * 独立Logger对象生成
  * @author tiansheng
  * @date 2019/9/10 15:54
- * @version 1.0
+ * @version 1.0.0
  * @since 1.8
  */
 public class LoggerFactory {

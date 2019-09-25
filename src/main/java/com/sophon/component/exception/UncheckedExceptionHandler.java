@@ -5,21 +5,19 @@ import com.sophon.logger.source.ExceptionLogger;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 /**
  * 全局异常捕获器/处理器
+ *
  * @author tiansheng
+ * @version 1.0.0
  * @date 2019/9/14 3:58
- * @version 1.0
  * @since 1.8
  */
 public class UncheckedExceptionHandler implements Thread.UncaughtExceptionHandler, SophonInit {
-
-    /**
-     * 线程对象
-     */
-    private ThreadGroup currentGroup;
 
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -46,12 +44,22 @@ public class UncheckedExceptionHandler implements Thread.UncaughtExceptionHandle
 
     @Override
     public void init() {
-        currentGroup = Thread.currentThread().getThreadGroup();
-        // 当前活动线程
-        int activeCount = currentGroup.activeCount();
-        Thread[] group = new Thread[activeCount];
-        currentGroup.enumerate(group);
-        for (Thread thread : group) {
+        ThreadGroup group = Thread.currentThread().getThreadGroup();
+        ThreadGroup topGroup = group;
+        // 遍历线程组树，获取根线程组
+        while (group != null) {
+            topGroup = group;
+            group = group.getParent();
+        }
+        // 激活的线程数加倍
+        int estimatedSize = topGroup.activeCount() * 2;
+        Thread[] slackList = new Thread[estimatedSize];
+        // 获取根线程组的所有线程
+        int actualSize = topGroup.enumerate(slackList);
+        // copy into a list that is the exact size
+        Thread[] list = new Thread[actualSize];
+        System.arraycopy(slackList, 0, list, 0, actualSize);
+        for (Thread thread : list) {
             thread.setUncaughtExceptionHandler(new UncheckedExceptionHandler());
         }
     }

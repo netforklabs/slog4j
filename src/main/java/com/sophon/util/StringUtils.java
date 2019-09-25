@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  * String工具类
  * @author tiansheng
  * @date 2019/8/23 23:52
- * @version 1.0
+ * @version 1.0.0
  * @since 1.8
  */
 public class StringUtils {

@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  * 加载配置(单例模式 - 懒汉式)
  * @author tiansheng
  * @date 2019/8/25 13:03
- * @version 1.0
+ * @version 1.0.0
  * @since 1.8
  */
 public class Slog4jConfiguration {

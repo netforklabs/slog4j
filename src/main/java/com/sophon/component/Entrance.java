@@ -6,7 +6,7 @@ import com.sophon.component.exception.UncheckedExceptionHandler;
  * slog4j框架初始化操作
  * @author tiansheng
  * @date 2019/9/14 4:10
- * @version 1.0
+ * @version 1.0.0
  * @since 1.8
  */
 public class Entrance {
