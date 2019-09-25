@@ -1,14 +1,16 @@
 package future;
 
-import com.sophon.logger.source.Logger;
-import future.event.MethodEvent;
+import com.sophon.component.anno.AnnotationScanner;
+import future.anno.ListenerMethod;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
-import javassist.NotFoundException;
-import net.sf.cglib.proxy.MethodProxy;
 
+import java.lang.annotation.ElementType;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author tiansheng
@@ -18,7 +20,21 @@ import java.lang.reflect.Method;
  */
 public class FutureEvent {
 
+    static Map<String, String> beans = new HashMap<>();
+
     public static void init() {
+
+        List<Class<?>> classes = AnnotationScanner.scanner(ListenerMethod.class, ElementType.METHOD);
+
+        for (Class<?> target : classes) {
+            Method[] methods = target.getDeclaredMethods();
+            for (Method method : methods) {
+                if (method.isAnnotationPresent(ListenerMethod.class)) {
+                    beans.put(target.getName(), method.getName());
+                }
+            }
+        }
+
         try {
             ClassPool pool = ClassPool.getDefault();
             pool.importPackage("future.Test");

@@ -1,6 +1,6 @@
 package future.anno;
 
-import future.event.MethodEvent;
+import future.event.MethodInterceptor;
 
 import java.lang.annotation.*;
 
@@ -39,6 +39,6 @@ public @interface ListenerMethod {
      *
      * @return 返回事件处理类
      */
-    Class<? extends MethodEvent> process() default MethodEvent.class;
+    Class<? extends MethodInterceptor> process() default MethodInterceptor.class;
 
 }

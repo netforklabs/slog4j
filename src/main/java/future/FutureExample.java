@@ -12,6 +12,7 @@ import future.anno.TriggerMethod;
 public class FutureExample {
 
     public static void  main(String[] args) {
+        FutureEvent.init();
         Test.test("this a",123,true);
         System.out.println("e...");
         System.out.println("a...");

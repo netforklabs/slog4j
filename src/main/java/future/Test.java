@@ -1,5 +1,7 @@
 package future;
 
+import future.anno.ListenerMethod;
+
 /**
  * @author tiansheng
  * @version 1.0.0
@@ -8,6 +10,7 @@ package future;
  */
 public class Test {
 
+    @ListenerMethod(process = MyInterceptor.class)
     public static void test(String a, int b, boolean c) {
         System.out.println(a + "," + b + "," + c);
     }
