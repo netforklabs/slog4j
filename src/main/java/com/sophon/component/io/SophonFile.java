@@ -1,6 +1,7 @@
 package com.sophon.component.io;
 
 import com.sophon.config.Slog4jConfiguration;
+import com.sophon.util.DateUtils;
 import com.sophon.util.StringUtils;
 
 import java.io.File;
@@ -213,6 +214,7 @@ public class SophonFile extends File {
                 .concat(file.getNoSuffixName())
                 .concat("_0")
                 .concat(file.getSuffix());
+        path = path.replaceAll("(\\$\\{date\\})", DateUtils.getTime());
         return new SophonFile(path);
     }
 
