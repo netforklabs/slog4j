@@ -33,7 +33,7 @@ public class SophonFile extends File {
      * @param pathname 文件路径
      */
     public SophonFile(String pathname) {
-        super(pathname);
+        super(pathname.replaceAll("\\\\", "/"));
         if (!exists() && Slog4jConfiguration.getInstance().getLoggerPrintWrite()) {
             create();
         }
@@ -203,16 +203,17 @@ public class SophonFile extends File {
         if (classpath.equals(pathname.substring(0, classpath.length()))) {
             pathname = pathname.replaceAll(classpath, "");
             pathname = System.getProperty("user.dir").concat(pathname);
-            pathname = pathname.replaceAll("/", "\\\\");
+            pathname = pathname.replaceAll("\\\\", "/");
         }
         // 获取要操作的文件
         SophonFile file = new SophonFile(
                 pathname, false);
-        return new SophonFile(file.getParent()
+        String path = file.getParent()
                 .concat("/")
                 .concat(file.getNoSuffixName())
                 .concat("_0")
-                .concat(file.getSuffix()));
+                .concat(file.getSuffix());
+        return new SophonFile(path);
     }
 
 }
