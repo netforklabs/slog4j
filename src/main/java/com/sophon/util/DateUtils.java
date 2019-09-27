@@ -12,7 +12,7 @@ import java.util.Date;
  * @date : 2019-09-27 09:58
  **/
 public class DateUtils {
-    public static String time = "";
+    volatile public static String time = "";
     private static Refresh refresh = new Refresh();
 
     private DateUtils() {}
@@ -37,9 +37,7 @@ class Refresh extends Thread {
     public void run() {
         while (true) {
             try {
-                int sleepTimeBySecond = 10;
-                sleepTimeBySecond = sleepTimeBySecond * 1000;
-                Thread.sleep(sleepTimeBySecond);
+                Thread.sleep(59 * 1000);
                 generate();
             } catch (InterruptedException IE) {
                 IE.printStackTrace();
