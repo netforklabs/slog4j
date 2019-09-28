@@ -1,5 +1,6 @@
 package example;
 
+import com.sophon.logger.source.Logger;
 import com.sophon.util.SophonUtils;
 import com.sun.tools.attach.VirtualMachine;
 
@@ -12,9 +13,10 @@ import com.sun.tools.attach.VirtualMachine;
 public class Example {
 
     public static void main(String[] args) throws Throwable {
-        VirtualMachine vm = VirtualMachine.attach(SophonUtils.getPID());
-        vm.loadAgent("lib/agent-1.0-SNAPSHOT.jar");
-        vm.detach();
+        Logger.info("你好");
+        // VirtualMachine vm = VirtualMachine.attach(SophonUtils.getPID());
+        // vm.loadAgent("lib/agent-1.0-SNAPSHOT.jar");
+        // vm.detach();
     }
 
 }
