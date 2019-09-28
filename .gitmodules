@@ -1,3 +1,0 @@
-[submodule "slog4j-scanner"]
-	path = slog4j-scanner
-	url = https://github.com/torocket/slog4j.git
