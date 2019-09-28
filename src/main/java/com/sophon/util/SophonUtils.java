@@ -10,7 +10,9 @@ import java.util.*;
 
 /**
  * Sophon Logger 框架工具类
- * @author tiansheng
+ * @author     private DateUtils() {
+    private DateUtils() {
+2BKeyboard
  * @date 2019/9/14 4:17
  * @version 1.0.0
  * @since 1.8

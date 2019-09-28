@@ -5,7 +5,9 @@ import com.sophon.logger.SophonLoggerImpl;
 
 /**
  * 普通Logger打印
- * @author tiansheng
+ * @author     private DateUtils() {
+    private DateUtils() {
+2BKeyboard
  * @date 2019/9/11 15:05
  * @version 1.0.0
  * @since 1.8

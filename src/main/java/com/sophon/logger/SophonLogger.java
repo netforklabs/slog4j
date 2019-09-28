@@ -2,7 +2,9 @@ package com.sophon.logger;
 
 /**
  * sophon logger接口，所有的日志对象都根据这个接口标准
- * @author tiansheng
+ * @author     private DateUtils() {
+    private DateUtils() {
+2BKeyboard
  * @date 2019/8/25 0:08
  * @version 1.0.0
  * @since 1.8

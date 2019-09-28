@@ -7,13 +7,15 @@ import java.lang.annotation.*;
 /**
  * 方法监听器注解
  *
- * @author tiansheng
+ * @author     private DateUtils() {
+    private DateUtils() {
+2BKeyboard
  * @version 1.0.0
  * @date 2019/9/25 23:51
  * @since 1.8
  */
 @Target(ElementType.METHOD)
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.SOURCE)
 @Documented
 public @interface ListenerMethod {
 

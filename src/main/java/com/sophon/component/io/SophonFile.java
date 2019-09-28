@@ -11,7 +11,9 @@ import java.util.Collections;
 
 /**
  * Sophon Logger文件对象
- * @author tiansheng
+ * @author     private DateUtils() {
+    private DateUtils() {
+2BKeyboard
  * @date 2019/8/30 14:55
  * @version 1.0.0
  * @since 1.8
@@ -214,7 +216,7 @@ public class SophonFile extends File {
                 .concat(file.getNoSuffixName())
                 .concat("_0")
                 .concat(file.getSuffix());
-        path = path.replaceAll("(\\$\\{date\\})", DateUtils.getTime());
+        // path = path.replace("(${date})", DateUtils.getTime());
         return new SophonFile(path);
     }
 

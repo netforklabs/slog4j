@@ -13,9 +13,12 @@ import java.util.regex.Pattern;
 
 /**
  * 加载配置(单例模式 - 懒汉式)
- * @author tiansheng
- * @date 2019/8/25 13:03
+ *
+ * @author     private DateUtils() {
+    private DateUtils() {
+2BKeyboard
  * @version 1.0.0
+ * @date 2019/8/25 13:03
  * @since 1.8
  */
 public class Slog4jConfiguration {
@@ -66,10 +69,10 @@ public class Slog4jConfiguration {
                     System.out.println("Config path: " + path);
 
                     // 当前目录文件不存在就到其他目录下去寻找
-                    if(!new File(path).exists()){
-                        if(!new File(path).exists()){
+                    if (!new File(path).exists()) {
+                        if (!new File(path).exists()) {
                             path = System.getProperty("user.dir") + "/resources/slog4j.properties";
-                            if(!new File(path).exists()){
+                            if (!new File(path).exists()) {
                                 throw new NullPointerException("如果要使用自动扫描配置文件功能,请将文件放在resources目录下");
                             }
                         }
@@ -182,7 +185,7 @@ public class Slog4jConfiguration {
     /**
      * 获取日期格式化配置
      *
-     * @return
+     * @return SimpleDateFormat对象
      */
     public SimpleDateFormat getSimpleDateFormat() {
         String v = LOGGER_PRINT_TEMPLATE;
