@@ -1,5 +1,7 @@
 # slog4j
 
+--------------
+
 ![image](https://github.com/torocket/slog4j/blob/master/label/java.svg)
 ![image](https://github.com/torocket/slog4j/blob/master/label/codesize.svg)
 ![image](https://github.com/torocket/slog4j/blob/master/label/codeline.svg)
