@@ -3,9 +3,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <modules>
-        <module>scanner</module>
-    </modules>
 
     <parent>
         <groupId>org.sonatype.oss</groupId>
@@ -16,7 +13,7 @@
     <groupId>io.github.torocket</groupId>
     <artifactId>slog4j</artifactId>
     <version>1.0.0</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <licenses>
         <license>
@@ -64,6 +61,7 @@
         <javadoc-plugin.version>2.10.4</javadoc-plugin.version>
         <compiler-plugin.version>3.6.2</compiler-plugin.version>
         <resources-plugin.version>3.0.2</resources-plugin.version>
+        <maven.shade.version>3.0.0</maven.shade.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -112,7 +110,11 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-shade-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>${maven.shade.version}</version>
+                    <!-- 打包禁止创建dependency-reduced-pom.xml文件 -->
+                    <configuration>
+                        <createDependencyReducedPom>false</createDependencyReducedPom>
+                    </configuration>
                     <executions>
                         <execution>
                             <phase>package</phase>
