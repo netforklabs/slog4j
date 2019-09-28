@@ -1,8 +1,0 @@
-# Created by .ignore support plugin (hsz.mobi)
-target
-.idea
-*.iml
-out
-/logs/
-/system/
-/src/test/
