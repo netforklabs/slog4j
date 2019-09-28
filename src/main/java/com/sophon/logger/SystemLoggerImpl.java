@@ -11,9 +11,7 @@ import java.util.Date;
 
 /**
  * 系统日志打印的实现类
- * @author     private DateUtils() {
-    private DateUtils() {
-2BKeyboard
+ * @author 2BKeyboard
  * @date 2019/9/13 3:43
  * @version 1.0.0
  * @since 1.8

@@ -1,6 +1,5 @@
 package com.sophon.util;
 
-import java.sql.Ref;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

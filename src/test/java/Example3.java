@@ -10,24 +10,24 @@ import com.sophon.logger.source.SystemLogger;
 import java.util.ArrayList;
 
 /**
- * @author tiansheng
+ * @author 2BKeyboard
  * @Date 2019/9/16 2:38
  * @Description TODO
  */
 public class Example3 {
 
     @Separation("classpath:/example/example.log")
-    private static SophonLogger log;
+    private static SeparationLogger log;
 
     static{
         LoggerFactory.injection();
     }
 
     public static void main(String[] args) {
-        log.info("aaaa");
-    }
-
-    public void test(){
+        Logger.info("are you ok?");
+        SystemLogger.info("are you ok?");
+        ExceptionLogger.info("are you ok?");
+        log.info("are you ok?");
     }
 
 }

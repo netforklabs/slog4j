@@ -12,9 +12,7 @@ import java.util.Date;
 /**
  * 全局异常捕获器/处理器
  *
- * @author     private DateUtils() {
-    private DateUtils() {
-2BKeyboard
+ * @author 2BKeyboard
  * @version 1.0.0
  * @date 2019/9/14 3:58
  * @since 1.8

@@ -1,9 +1,9 @@
 package future;
 
+import future.ctclass.FutureEvent;
+
 /**
- * @author     private DateUtils() {
-    private DateUtils() {
-2BKeyboard
+ * @author 2BKeyboard
  * @version 1.0.0
  * @date 2019/9/26 0:10
  * @since 1.8

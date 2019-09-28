@@ -10,9 +10,7 @@ import java.io.InputStream;
 /**
  * 语言，到后面提示出国际化。
  * 1.0版本还没准备这么干，这个先保留着，后面再看。
- * @author     private DateUtils() {
-    private DateUtils() {
-2BKeyboard
+ * @author 2BKeyboard
  * @date 2019/9/13 2:24
  * @version 1.0.0
  * @since 1.8

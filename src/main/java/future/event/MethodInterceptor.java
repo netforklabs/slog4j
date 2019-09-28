@@ -4,9 +4,7 @@ import java.lang.reflect.Method;
 
 /**
  *
- * @author     private DateUtils() {
-    private DateUtils() {
-2BKeyboard
+ * @author 2BKeyboard
  * @version 1.0.0
  * @date 2019/9/25 23:59
  * @since 1.8

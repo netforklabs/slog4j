@@ -9,9 +9,7 @@ import java.lang.reflect.Field;
 
 /**
  * 独立Logger对象生成
- * @author     private DateUtils() {
-    private DateUtils() {
-2BKeyboard
+ * @author 2BKeyboard
  * @date 2019/9/10 15:54
  * @version 1.0.0
  * @since 1.8

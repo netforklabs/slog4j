@@ -14,9 +14,7 @@ import java.util.regex.Pattern;
 /**
  * 加载配置(单例模式 - 懒汉式)
  *
- * @author     private DateUtils() {
-    private DateUtils() {
-2BKeyboard
+ * @author 2BKeyboard
  * @version 1.0.0
  * @date 2019/8/25 13:03
  * @since 1.8

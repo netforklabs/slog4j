@@ -8,9 +8,7 @@ import java.util.HashSet;
 /**
  * slog4j类加载器
  *
- * @author     private DateUtils() {
-    private DateUtils() {
-2BKeyboard
+ * @author 2BKeyboard
  * @version 1.0.0
  * @date 2019/9/26 16:00
  * @since 1.8

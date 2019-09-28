@@ -2,9 +2,7 @@ package com.sophon.component;
 
 /**
  * 类的初始化接口
- * @author     private DateUtils() {
-    private DateUtils() {
-2BKeyboard
+ * @author 2BKeyboard
  * @date 2019/9/14 4:12
  * @version 1.0.0
  * @since 1.8

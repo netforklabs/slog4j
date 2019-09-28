@@ -11,9 +11,7 @@ import java.io.File;
 
 /**
  * 解析XML配置
- * @author     private DateUtils() {
-    private DateUtils() {
-2BKeyboard
+ * @author 2BKeyboard
  * @version 1.0.0
  * @date 2019/9/28 15:44
  * @since 1.8

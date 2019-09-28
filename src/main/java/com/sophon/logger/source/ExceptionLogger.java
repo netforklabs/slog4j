@@ -6,9 +6,7 @@ import com.sophon.logger.SystemLoggerImpl;
 
 /**
  * 异常Logger打印
- * @author     private DateUtils() {
-    private DateUtils() {
-2BKeyboard
+ * @author 2BKeyboard
  * @date 2019/9/14 7:08
  * @version 1.0.0
  * @since 1.8

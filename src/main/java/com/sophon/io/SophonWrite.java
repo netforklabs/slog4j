@@ -6,9 +6,7 @@ import java.io.FileNotFoundException;
 
 /**
  * 数据写出接口
- * @author     private DateUtils() {
-    private DateUtils() {
-2BKeyboard
+ * @author 2BKeyboard
  * @date 2019/8/26 1:15
  * @version 1.0.0
  * @since 1.8

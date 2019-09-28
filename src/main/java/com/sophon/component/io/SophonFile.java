@@ -11,9 +11,7 @@ import java.util.Collections;
 
 /**
  * Sophon Logger文件对象
- * @author     private DateUtils() {
-    private DateUtils() {
-2BKeyboard
+ * @author 2BKeyboard
  * @date 2019/8/30 14:55
  * @version 1.0.0
  * @since 1.8

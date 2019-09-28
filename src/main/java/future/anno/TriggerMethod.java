@@ -2,9 +2,7 @@ package future.anno;
 
 /**
  * Event事件枚举类，表示在什么情况下触发事件
- * @author     private DateUtils() {
-    private DateUtils() {
-2BKeyboard
+ * @author 2BKeyboard
  * @version 1.0.0
  * @date 2019/9/26 0:05
  * @since 1.8

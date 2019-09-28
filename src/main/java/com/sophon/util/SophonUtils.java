@@ -5,14 +5,13 @@ import com.sophon.component.io.SophonFile;
 
 
 import java.io.*;
+import java.lang.management.ManagementFactory;
 import java.net.URL;
 import java.util.*;
 
 /**
  * Sophon Logger 框架工具类
- * @author     private DateUtils() {
-    private DateUtils() {
-2BKeyboard
+ * @author 2BKeyboard
  * @date 2019/9/14 4:17
  * @version 1.0.0
  * @since 1.8
@@ -92,6 +91,15 @@ public class SophonUtils {
      */
     public static BufferedWriter newBufferedWriter(SophonFile file) throws FileNotFoundException {
         return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
+    }
+
+    /**
+     * 获取当前项目运行pid
+     * @return pid
+     */
+    public static String getPID(){
+        String name = ManagementFactory.getRuntimeMXBean().getName();
+        return name.split("@")[0];
     }
 
 }
