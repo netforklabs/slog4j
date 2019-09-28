@@ -13,6 +13,7 @@
     <modules>
         <module>slog4j-logger</module>
         <module>slog4j-scanner</module>
+        <module>slog4j-scanner</module>
     </modules>
 
     <groupId>io.github.torocket</groupId>
