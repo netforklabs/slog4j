@@ -1,14 +1,7 @@
 package example;
 
 import com.sophon.util.SophonUtils;
-import com.sun.tools.attach.AttachNotSupportedException;
 import com.sun.tools.attach.VirtualMachine;
-import com.sun.tools.attach.VirtualMachineDescriptor;
-
-import java.io.IOException;
-import java.lang.instrument.Instrumentation;
-import java.lang.instrument.UnmodifiableClassException;
-import java.util.List;
 
 /**
  * @author tiansheng
