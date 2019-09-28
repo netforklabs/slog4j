@@ -91,6 +91,15 @@
             <artifactId>javassist</artifactId>
             <version>${javasiss.version}</version>
         </dependency>
+        <!-- jdk自带tools -->
+        <dependency>
+            <groupId>jdk.tools</groupId>
+            <artifactId>jdk.tools</artifactId>
+            <version>${java.version}</version>
+            <scope>system</scope>
+            <!-- D:/Program Files/Java/jdk1.8.0_05/lib/tools.jar -->
+            <systemPath>${env.JAVA_HOME}/lib/tools.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>
