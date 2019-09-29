@@ -1,5 +1,7 @@
 package com.keyboard.agent;
 
+import com.keyboard.register.InstrumentImpl;
+
 import java.lang.instrument.Instrumentation;
 
 /**
@@ -12,6 +14,7 @@ public class SophonAgentCLV {
 
     public static void agentmain(String agentArgs, Instrumentation inst){
         inst.addTransformer(new RestoreClassTransformer());
+        InstrumentImpl.setInstance(inst);
     }
 
 }

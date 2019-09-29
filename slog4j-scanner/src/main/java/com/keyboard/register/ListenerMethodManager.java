@@ -1,5 +1,6 @@
 package com.keyboard.register;
 
+import java.lang.instrument.Instrumentation;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -22,6 +23,7 @@ public class ListenerMethodManager {
      * 存放实例
      */
     private static Hashtable<String, ListenerMethodEntity> entityTable = new Hashtable<>();
+
 
     /**
      * 添加ListenerMethodEntity
