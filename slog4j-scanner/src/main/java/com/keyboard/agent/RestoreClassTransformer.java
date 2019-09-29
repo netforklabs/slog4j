@@ -1,17 +1,13 @@
 package com.keyboard.agent;
 
-import com.sophon.component.hot.ListenerMethodEntity;
-import javassist.*;
-import lombok.Setter;
+import com.keyboard.register.ListenerMethodManager;
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.CtMethod;
 
-import javax.tools.Tool;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
 import java.security.ProtectionDomain;
-import java.util.*;
 
 /**
  * @author tiansheng
@@ -23,7 +19,8 @@ public class RestoreClassTransformer implements ClassFileTransformer {
 
     @Override
     public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) throws IllegalClassFormatException {
-        if ("future/Test".equals(className)) {
+        String name = className.trim().replaceAll("/", ".");
+        if (ListenerMethodManager.get(name) != null) {
             try {
                 // 从ClassPool获得CtClass对象
                 final ClassPool pool = ClassPool.getDefault();

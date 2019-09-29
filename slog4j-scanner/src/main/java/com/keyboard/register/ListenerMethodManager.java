@@ -1,7 +1,5 @@
 package com.keyboard.register;
 
-import com.sophon.component.hot.ListenerMethodEntity;
-
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;

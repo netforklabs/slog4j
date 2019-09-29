@@ -1,5 +1,6 @@
 package com.sophon.component.hot;
 
+import com.keyboard.register.ListenerMethodEntity;
 import com.sophon.component.anno.AnnotationScanner;
 import com.sophon.component.anno.ListenerMethod;
 
@@ -38,7 +39,7 @@ public class ListenerMethodProcessor {
                         lme.setClasspath(target.getName());
                         lme.setImplpath(listenerMethod.process().getName());
                         lme.setMethodname(method.getName());
-                        lme.setTriggerMethod(listenerMethod.trigger());
+                        lme.setTriggerMethod(listenerMethod.trigger().toString());
                         lms.add(lme);
                     }
                 }

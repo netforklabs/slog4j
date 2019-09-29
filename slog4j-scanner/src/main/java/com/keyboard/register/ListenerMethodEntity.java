@@ -1,6 +1,5 @@
-package com.sophon.component.hot;
+package com.keyboard.register;
 
-import com.sophon.component.anno.TriggerMethod;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +22,7 @@ public class ListenerMethodEntity {
     /**
      * 在什么事件下触发
      */
-    private TriggerMethod triggerMethod;
+    private String triggerMethod;
 
     /**
      * 注解所在的类路径
