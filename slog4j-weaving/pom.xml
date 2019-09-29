@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>slog4j-scanner</artifactId>
+    <artifactId>slog4j-weaving</artifactId>
     <version>1.0.0.CLV</version>
     <packaging>jar</packaging>
 

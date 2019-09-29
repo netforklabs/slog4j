@@ -5,9 +5,11 @@ import com.keyboard.register.ListenerMethodEntity;
 import com.keyboard.register.ListenerMethodManager;
 import javassist.ClassPool;
 import javassist.CtClass;
+import javassist.CtField;
 import javassist.CtMethod;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 该类负责做各个功能的热部署
@@ -20,7 +22,7 @@ import java.util.List;
 public class ReDefineClass {
 
     /**
-     * 对ListenerMethod注解需要的功能做运行时替换
+     * 对ListenerMethod注解需要的功能做运行时的类做编织
      *
      * @param entities 注解进行处理后的对象集合（ListenerMethodEntity）
      */
@@ -32,16 +34,30 @@ public class ReDefineClass {
                 final ClassPool pool = ClassPool.getDefault();
                 final CtClass cbtCtClass = pool.get(entity.getClasspath());
                 CtMethod method = cbtCtClass.getDeclaredMethod("test");
+                // 创建属性：由于Java8不支持添加或删除成员，但说在后面可能会取消限制，这段代码就不删除了。
+                // String uuid = UUID.randomUUID().toString().replaceAll("-", ""); // uuid保证属性名不重复
+                // String fieldName = "sophon$" + uuid;
+                // String fieldStatement = "private static ".concat(entity.getImplpath())
+                //         .concat(" " + fieldName + " = new ")
+                //         .concat(entity.getImplpath() + "();");
+                // CtField field = CtField.make(fieldStatement, cbtCtClass);
+                // cbtCtClass.addField(field);
                 // 构建方法
-                String before = "new " + entity.getImplpath().concat("().before($class,\"test\",$args);");
-                String after = "new " + entity.getImplpath().concat("().after($class,\"test\",$args);");
+                String before = "new " + entity.getImplpath()
+                        .concat("().before($class,").concat("\"")
+                        .concat(entity.getMethodname()).concat("\"")
+                        .concat(",$args);");
+                String after = "new " + entity.getImplpath()
+                        .concat("().after($class,").concat("\"")
+                        .concat(entity.getMethodname()).concat("\"")
+                        .concat(",$args);");
                 method.insertBefore(before);
                 method.insertAfter(after);
                 // 返回字节码，并且detachCtClass对象
                 byte[] byteCode = cbtCtClass.toBytecode();
                 //detach的意思是将内存中曾经被javassist加载过的Date对象移除，如果下次有需要在内存中找不到会重新走javassist加载
                 cbtCtClass.detach();
-                modify.redefine(entity.getClasspath(),byteCode);
+                modify.redefine(entity.getClasspath(), byteCode);
             }
         } catch (Exception e) {
             e.printStackTrace();
