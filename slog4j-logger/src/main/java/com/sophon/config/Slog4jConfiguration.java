@@ -64,8 +64,6 @@ public class Slog4jConfiguration {
                 try {
                     config = new Properties();
                     String path = System.getProperty("user.dir") + "/src/main/resources/slog4j.properties";
-                    System.out.println("Config path: " + path);
-
                     // 当前目录文件不存在就到其他目录下去寻找
                     if (!new File(path).exists()) {
                         if (!new File(path).exists()) {

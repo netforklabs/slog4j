@@ -28,7 +28,6 @@ public class CtClassExample {
                 .append("com.sophon.logger.source.Logger.info(\"--开始打印\");")
                 .append("}");
         cbtCtClass.toClass();
-
     }
 
 }

@@ -11,7 +11,7 @@ import java.lang.instrument.Instrumentation;
 public class SophonAgentCLV {
 
     public static void agentmain(String agentArgs, Instrumentation inst){
-        System.out.println("sb");
+        inst.addTransformer(new RestoreClassTransformer());
     }
 
 }
