@@ -1,16 +1,9 @@
 package example;
 
-import com.keyboard.agent.ClassVo;
-import com.keyboard.agent.RestoreClassTransformer;
-import com.sophon.logger.source.Logger;
 import com.sophon.util.SophonUtils;
 import com.sun.tools.attach.VirtualMachine;
 import future.Test;
 import future.ctclass.FutureEvent;
-import javassist.ClassPool;
-import javassist.CtClass;
-import javassist.CtMethod;
-import javassist.CtNewMethod;
 
 /**
  * @author tiansheng
@@ -20,14 +13,19 @@ import javassist.CtNewMethod;
  */
 public class Example {
 
+    static {
+        try {
+            VirtualMachine vm = VirtualMachine.attach(SophonUtils.getPID());
+            vm.loadAgent("lib/slog4j-scanner-1.0.0.CLV.jar");
+            vm.detach();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) throws Throwable {
-        VirtualMachine vm = VirtualMachine.attach(SophonUtils.getPID());
-        vm.loadAgent("lib/slog4j-scanner-1.0.0.CLV.jar");
-        vm.detach();
-
         FutureEvent.init();
-
-        // Test.test("this is a",12,true);
+        Test.test("this is a",12,true);
     }
 
 }
