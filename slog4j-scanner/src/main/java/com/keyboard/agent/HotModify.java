@@ -1,6 +1,7 @@
 package com.keyboard.agent;
 
 import com.keyboard.register.InstrumentImpl;
+import javassist.ClassPool;
 
 import java.lang.instrument.ClassDefinition;
 import java.lang.instrument.Instrumentation;
