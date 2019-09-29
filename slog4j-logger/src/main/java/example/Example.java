@@ -1,5 +1,6 @@
 package example;
 
+import com.sophon.component.hot.ListenerMethodProcessor;
 import com.sophon.util.SophonUtils;
 import com.sun.tools.attach.VirtualMachine;
 import future.Test;
@@ -24,8 +25,8 @@ public class Example {
     }
 
     public static void main(String[] args) throws Throwable {
-        FutureEvent.init();
-        Test.test("this is a",12,true);
+        ListenerMethodProcessor.getLinstenerMethods();
+        // Test.test("this is a",12,true);
     }
 
 }

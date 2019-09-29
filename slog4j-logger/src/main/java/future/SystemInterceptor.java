@@ -1,6 +1,6 @@
 package future;
 
-import future.event.MethodInterceptor;
+import com.sophon.component.hot.SophonListener;
 
 import java.lang.reflect.Method;
 
@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
  * @date 2019/9/26 6:15
  * @since 1.8
  */
-public class SystemInterceptor implements MethodInterceptor {
+public class SystemInterceptor implements SophonListener {
 
     @Override
     public void before(Object target, Method method, Object[] args) {

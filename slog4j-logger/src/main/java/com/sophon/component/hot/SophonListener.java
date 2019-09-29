@@ -1,4 +1,4 @@
-package future.event;
+package com.sophon.component.hot;
 
 import java.lang.reflect.Method;
 
@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
  * @date 2019/9/25 23:59
  * @since 1.8
  */
-public interface MethodInterceptor {
+public interface SophonListener {
 
     /**
      * 当方法被调用时

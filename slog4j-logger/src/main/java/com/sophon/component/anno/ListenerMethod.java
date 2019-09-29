@@ -1,6 +1,7 @@
-package future.anno;
+package com.sophon.component.anno;
 
-import future.event.MethodInterceptor;
+import com.sophon.component.anno.TriggerMethod;
+import com.sophon.component.hot.SophonListener;
 
 import java.lang.annotation.*;
 
@@ -13,7 +14,7 @@ import java.lang.annotation.*;
  * @since 1.8
  */
 @Target(ElementType.METHOD)
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface ListenerMethod {
 
@@ -39,6 +40,6 @@ public @interface ListenerMethod {
      *
      * @return 返回事件处理类
      */
-    Class<? extends MethodInterceptor> process() default MethodInterceptor.class;
+    Class<? extends SophonListener> process() default SophonListener.class;
 
 }

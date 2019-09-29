@@ -1,6 +1,6 @@
 package future;
 
-import future.anno.ListenerMethod;
+import com.sophon.component.anno.ListenerMethod;
 
 /**
  * @author 2BKeyboard

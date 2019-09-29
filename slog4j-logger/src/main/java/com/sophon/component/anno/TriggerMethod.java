@@ -1,4 +1,4 @@
-package future.anno;
+package com.sophon.component.anno;
 
 /**
  * Event事件枚举类，表示在什么情况下触发事件

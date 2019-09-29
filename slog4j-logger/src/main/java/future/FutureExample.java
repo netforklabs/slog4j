@@ -11,7 +11,6 @@ import future.ctclass.FutureEvent;
 public class FutureExample {
 
     public static void  main(String[] args) throws Exception {
-        FutureEvent.init();
         Test.test("this a",123,true);
         System.out.println("e...");
         System.out.println("a...");
