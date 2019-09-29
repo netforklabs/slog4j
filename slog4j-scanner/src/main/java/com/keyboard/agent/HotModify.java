@@ -23,7 +23,7 @@ public class HotModify {
      * @param classpath 类路径，用于Class.forName()加载。
      * @param byteCode 字节码数组
      */
-    public static void redefine(String classpath, byte[] byteCode) {
+    public void redefine(String classpath, byte[] byteCode) {
         try {
             ClassDefinition redef = new ClassDefinition(Class.forName(classpath), byteCode);
             // 重新加载类

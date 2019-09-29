@@ -66,6 +66,7 @@
                                     <manifestEntries>
                                         <Created-By>2B键盘</Created-By>
                                         <Agent-Class>com.keyboard.agent.SophonAgentCLV</Agent-Class>
+                                        <Can-Redefine-Classes>true</Can-Redefine-Classes>
                                     </manifestEntries>
                                 </transformer>
                             </transformers>

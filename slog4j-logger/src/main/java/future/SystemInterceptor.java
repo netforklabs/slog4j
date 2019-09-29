@@ -13,12 +13,12 @@ import java.lang.reflect.Method;
 public class SystemInterceptor implements SophonListener {
 
     @Override
-    public void before(Object target, Method method, Object[] args) {
+    public void before(Class<?> target, String method, Object[] args) {
         System.out.println("方法开始");
     }
 
     @Override
-    public void after(Object target, Method method, Object[] args) {
+    public void after(Class<?> target, String method, Object[] args) {
         System.out.println("方法结束");
     }
 }

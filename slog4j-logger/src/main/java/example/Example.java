@@ -3,6 +3,7 @@ package example;
 import com.keyboard.register.ListenerMethodEntity;
 import com.keyboard.register.ListenerMethodManager;
 import com.sophon.component.hot.ListenerMethodProcessor;
+import com.sophon.component.hot.ReDefineClass;
 import com.sophon.util.SophonUtils;
 import com.sun.tools.attach.VirtualMachine;
 import future.Test;
@@ -29,13 +30,10 @@ public class Example {
     }
 
     public static void main(String[] args) throws Throwable {
-        System.out.println("---------------");
         List<ListenerMethodEntity> entitys = ListenerMethodProcessor.getLinstenerMethods();
-        for (ListenerMethodEntity entity : entitys) {
-            ListenerMethodManager.put(entity.getClasspath(),entity);
-        }
+        ReDefineClass rdc = new ReDefineClass();
+        rdc.listenerMethodHotReplacement(entitys);
         Test.test("this is a",12,true);
-        System.out.println();
     }
 
 }
