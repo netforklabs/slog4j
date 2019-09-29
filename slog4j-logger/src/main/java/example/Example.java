@@ -24,7 +24,10 @@ public class Example {
         VirtualMachine vm = VirtualMachine.attach(SophonUtils.getPID());
         vm.loadAgent("lib/slog4j-scanner-1.0.0.CLV.jar");
         vm.detach();
-        Test.test("this is a",12,true);
+
+        FutureEvent.init();
+
+        // Test.test("this is a",12,true);
     }
 
 }
