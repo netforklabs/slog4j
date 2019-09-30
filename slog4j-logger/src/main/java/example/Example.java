@@ -1,7 +1,6 @@
 package example;
 
 import com.sophon.config.Slog4jFastLoader;
-import future.Test;
 
 /**
  * @author tiansheng
@@ -11,11 +10,12 @@ import future.Test;
  */
 public class Example {
 
-    public static void main(String[] args) throws Throwable {
+    static {
         new Slog4jFastLoader().init();
-        Test.test("this is a",12,true);
-        System.out.println("=======================");
-        Test.test("this is b",21,false);
+    }
+
+    public static void main(String[] args) throws Throwable {
+
     }
 
 }

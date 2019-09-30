@@ -189,6 +189,7 @@ public class SophonLoggerImpl implements SophonLogger {
     }
 
     @Override
+
     public String prefixGenerate(Level level, Thread t) {
         String className = t.getStackTrace()[trace].getClassName();
         String methodName = t.getStackTrace()[trace].getMethodName();
@@ -203,8 +204,8 @@ public class SophonLoggerImpl implements SophonLogger {
 
     /**
      * 打印
-     *
-     * @param v
+     * @param v 日志
+     * @param level 日志级别
      */
     protected synchronized void console(String v, Level level) {
         // 没有被忽略的级别才进入输出
