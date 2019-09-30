@@ -32,37 +32,38 @@ public class UncheckedExceptionHandler implements Thread.UncaughtExceptionHandle
 
     @Override
     public void uncaughtException(Thread t, Throwable e) {
-        String classname = e.getStackTrace()[0].getClassName();
-        String methodname = e.getStackTrace()[0].getMethodName();
-        // 如果发生异常，先判断是否符合ERROR table中的key，如果符合则交给异常程序处理
-        SophonListener listener = ERROR.get(getKEY(classname, methodname));
-        if (listener != null) {
-            try {
+        try {
+            String classname = e.getStackTrace()[0].getClassName();
+            Class<?> targetClass = Class.forName(classname);
+            String methodname = e.getStackTrace()[0].getMethodName();
+            // 如果发生异常，先判断是否符合ERROR table中的key，如果符合则交给异常程序处理
+            SophonListener listener = ERROR.get(getKEY(targetClass, null));
+            if (listener != null) {
                 Class<?> target = Class.forName(classname);
                 Method method = target.getDeclaredMethod(methodname);
                 listener.error(target, method, e);
-            } catch (Exception e1) {
-                e1.printStackTrace();
+                return;
             }
-            return;
+            String className = "--- ".concat(classname)
+                    .concat(": ")
+                    .concat(methodname)
+                    .concat(" ---");
+            String datetime = "--- ".concat(sdf.format(new Date())).concat(" ---");
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String exceptionInfo = sw.toString();
+            StringBuffer buffer = new StringBuffer();
+            buffer.append(className)
+                    .append("\n")
+                    .append(datetime)
+                    .append("\n\n     ")
+                    .append(exceptionInfo);
+            String endExceptionInfo = "\n".concat(buffer.toString()).concat("\n");
+            ExceptionLogger.exception(endExceptionInfo);
+        } catch (Exception e1) {
+            e1.printStackTrace();
         }
-        String className = "--- ".concat(classname)
-                .concat(": ")
-                .concat(methodname)
-                .concat(" ---");
-        String datetime = "--- ".concat(sdf.format(new Date())).concat(" ---");
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-        e.printStackTrace(pw);
-        String exceptionInfo = sw.toString();
-        StringBuffer buffer = new StringBuffer();
-        buffer.append(className)
-                .append("\n")
-                .append(datetime)
-                .append("\n\n     ")
-                .append(exceptionInfo);
-        String endExceptionInfo = "\n".concat(buffer.toString()).concat("\n");
-        ExceptionLogger.exception(endExceptionInfo);
     }
 
     @Override
