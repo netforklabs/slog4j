@@ -30,7 +30,7 @@ public class Slog4jFastLoader implements SophonInit {
         try {
             // 加载AgentJAR
             VirtualMachine vm = VirtualMachine.attach(SophonUtils.getPID());
-            vm.loadAgent("lib/slog4j-scanner-1.0.0.CLV.jar");
+            vm.loadAgent("lib/slog4j-weaving-1.0.0.CLV.jar");
             vm.detach();
             // 扫描ListenerMethod注解并执行编织操作
             List<ListenerMethodEntity> entitys = ListenerMethodProcessor.getLinstenerMethods();
