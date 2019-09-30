@@ -33,7 +33,7 @@ public class ReDefineClass {
                 // 从ClassPool获得CtClass对象
                 final ClassPool pool = ClassPool.getDefault();
                 final CtClass cbtCtClass = pool.get(entity.getClasspath());
-                CtMethod method = cbtCtClass.getDeclaredMethod("test");
+                CtMethod method = cbtCtClass.getDeclaredMethod(entity.getMethodname());
                 // 创建属性：由于Java8不支持添加或删除成员，但说在后面可能会取消限制，这段代码就不删除了。
                 // String uuid = UUID.randomUUID().toString().replaceAll("-", ""); // uuid保证属性名不重复
                 // String fieldName = "sophon$" + uuid;

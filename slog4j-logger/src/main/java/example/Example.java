@@ -17,7 +17,9 @@ public class Example {
     }
 
     public static void main(String[] args) throws Throwable {
-        TimeCalc.invoke("test");
+        Experiment e = new Experiment();
+        e.debug();
+        e.error();
     }
 
     public void test(){

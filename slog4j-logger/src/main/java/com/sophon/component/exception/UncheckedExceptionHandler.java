@@ -1,5 +1,6 @@
 package com.sophon.component.exception;
 
+import com.keyboard.register.ListenerMethodEntity;
 import com.sophon.component.SophonInit;
 import com.sophon.component.hot.SophonListener;
 import com.sophon.logger.source.ExceptionLogger;
@@ -34,7 +35,7 @@ public class UncheckedExceptionHandler implements Thread.UncaughtExceptionHandle
         String classname = e.getStackTrace()[0].getClassName();
         String methodname = e.getStackTrace()[0].getMethodName();
         // 如果发生异常，先判断是否符合ERROR table中的key，如果符合则交给异常程序处理
-        SophonListener listener = ERROR.get(classname.concat(".").concat(methodname));
+        SophonListener listener = ERROR.get(getKEY(classname,methodname));
         if(listener != null){
             try {
                 Class<?> target = Class.forName(classname);
@@ -88,12 +89,26 @@ public class UncheckedExceptionHandler implements Thread.UncaughtExceptionHandle
 
     /**
      * 注册异常监听器
-     *
-     * @param classpath      类路径
-     * @param sophonListener 处理类
+     * @param entity 注解实体
      */
-    public static void registerListener(String classpath, SophonListener sophonListener) {
-        ERROR.put(classpath, sophonListener);
+    public static void registerListener(ListenerMethodEntity entity) {
+        try {
+            String classAndMethod = getKEY(entity.getClasspath(), entity.getMethodname());
+            SophonListener listenerImpl = (SophonListener) Class.forName(entity.getImplpath()).newInstance();
+            ERROR.put(classAndMethod, listenerImpl);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 生成KEY
+     * @param classpath 类路径
+     * @param methodName 方法名
+     * @return
+     */
+    private static String getKEY(String classpath,String methodName){
+        return classpath.concat(".").concat(methodName);
     }
 
 }
