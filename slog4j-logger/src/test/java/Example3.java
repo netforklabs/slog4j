@@ -24,10 +24,17 @@ public class Example3 {
     }
 
     public static void main(String[] args) {
-        Logger.info("are you ok?");
+        long start = System.nanoTime();
+        for (int i = 0; i < 100000; i++) {
+            Logger.info("are you ok?");
+        }
+        long stop = System.nanoTime();
+        System.out.println(start-stop);
+        /*
         SystemLogger.info("are you ok?");
         ExceptionLogger.info("are you ok?");
         log.info("are you ok?");
+        */
     }
 
 }

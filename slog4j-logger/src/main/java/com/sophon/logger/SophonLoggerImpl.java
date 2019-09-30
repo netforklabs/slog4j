@@ -10,13 +10,35 @@ import java.util.Set;
 
 /**
  * 普通日志打印的实现类
+ *
  * @author 2BKeyboard
- * @date 2019/8/24 23:56
  * @version 1.0.0
+ * @date 2019/8/24 23:56
  * @since 1.8
  */
 public class SophonLoggerImpl implements SophonLogger {
 
+    private static final String formatString = "\\{\\}";
+    /**
+     * 忽略打印
+     */
+    protected final Set<Level> printIgnore = Slog4jConfiguration.getInstance().getLoggerProhibitLevelConsole();
+    /**
+     * 忽略写出
+     */
+    protected final Set<Level> writeIgnore = Slog4jConfiguration.getInstance().getLoggerProhibitLevelFile();
+    /**
+     * 日期格式化工具
+     */
+    protected final DateFormat sdf = Slog4jConfiguration.getInstance().getSimpleDateFormat();
+    /**
+     * 日志打印模板
+     */
+    protected final String printTemplate = Slog4jConfiguration.getInstance().getLoggerPrintTemplate();
+    /**
+     * 数据写出接口
+     */
+    protected final SophonWrite write = SophonIO.getWrite();
     /**
      * 这是线程追踪数组的值
      * 为了方便理解,举个栗子:
@@ -40,32 +62,6 @@ public class SophonLoggerImpl implements SophonLogger {
      */
     protected int trace = 2;
 
-    private static final String formatString = "\\{\\}";
-
-    /**
-     * 忽略打印
-     */
-    protected final Set<Level> printIgnore = Slog4jConfiguration.getInstance().getLoggerProhibitLevelConsole();
-    /**
-     * 忽略写出
-     */
-    protected final Set<Level> writeIgnore = Slog4jConfiguration.getInstance().getLoggerProhibitLevelFile();
-
-    /**
-     * 日期格式化工具
-     */
-    protected final DateFormat sdf = Slog4jConfiguration.getInstance().getSimpleDateFormat();
-
-    /**
-     * 日志打印模板
-     */
-    protected final String printTemplate = Slog4jConfiguration.getInstance().getLoggerPrintTemplate();
-
-    /**
-     * 数据写出接口
-     */
-    protected final SophonWrite write = SophonIO.getWrite();
-
     public SophonLoggerImpl() {
     }
 
@@ -78,104 +74,297 @@ public class SophonLoggerImpl implements SophonLogger {
         this.trace = trace;
     }
 
-    @Override
-    public void info(String v) {
-        console(prefixGenerate(Level.INFO).concat(v), Level.INFO);
-    }
-
-    @Override
-    public void info(String v, Object... args) {
-        console(prefixGenerate(Level.INFO).concat(format(v, args)), Level.INFO);
+    /**
+     * 将字符串格式化
+     *
+     * @param v
+     * @param args
+     * @return
+     */
+    private static String format(String v, Object... args) {
+        v = v.replaceAll(formatString, "%s");
+        v = String.format(v, args);
+        return v;
     }
 
     @Override
     public void info(Object v) {
-        console(prefixGenerate(Level.INFO).concat(String.valueOf(v)), Level.INFO);
+        autoGenerator(new Object[]{
+                v,
+                null,
+                null,
+                null,
+                Level.INFO
+        });
+    }
+
+    @Override
+    public void info(String v) {
+        autoGenerator(new Object[]{
+                null,
+                v,
+                null,
+                null,
+                Level.INFO
+        });
+    }
+
+    @Override
+    public void info(String v, Object... args) {
+        autoGenerator(new Object[]{
+                null,
+                v,
+                null,
+                args,
+                Level.INFO
+        });
     }
 
     @Override
     public void info(String v, Thread t) {
-        console(prefixGenerate(Level.INFO, t).concat(v), Level.INFO);
+        autoGenerator(new Object[]{
+                null,
+                v,
+                t,
+                null,
+                Level.INFO
+        });
     }
 
     @Override
     public void info(String v, Thread t, Object... args) {
-        console(prefixGenerate(Level.INFO, t).concat(format(v, args)), Level.INFO);
+        autoGenerator(new Object[]{
+                null,
+                v,
+                t,
+                args,
+                Level.INFO
+        });
     }
 
     @Override
     public void debug(Object v) {
-        console(prefixGenerate(Level.DEBUG).concat(String.valueOf(v)), Level.DEBUG);
+        autoGenerator(new Object[]{
+                v,
+                null,
+                null,
+                null,
+                Level.DEBUG
+        });
     }
 
     @Override
     public void debug(String v) {
-        console(prefixGenerate(Level.DEBUG).concat(v), Level.DEBUG);
+        autoGenerator(new Object[]{
+                null,
+                v,
+                null,
+                null,
+                Level.DEBUG
+        });
     }
 
     @Override
     public void debug(String v, Object... args) {
-        console(prefixGenerate(Level.DEBUG).concat(format(v, args)), Level.DEBUG);
+        autoGenerator(new Object[]{
+                null,
+                v,
+                null,
+                args,
+                Level.DEBUG
+        });
     }
 
     @Override
     public void debug(String v, Thread t) {
-        console(prefixGenerate(Level.DEBUG, t).concat(v), Level.DEBUG);
+        autoGenerator(new Object[]{
+                null,
+                v,
+                t,
+                null,
+                Level.DEBUG
+        });
     }
 
     @Override
     public void debug(String v, Thread t, Object... args) {
-        console(prefixGenerate(Level.DEBUG, t).concat(format(v, args)), Level.DEBUG);
+        autoGenerator(new Object[]{
+                null,
+                v,
+                t,
+                args,
+                Level.DEBUG
+        });
     }
 
     @Override
     public void error(Object v) {
-        console(prefixGenerate(Level.ERROR).concat(String.valueOf(v)), Level.ERROR);
+        autoGenerator(new Object[]{
+                v,
+                null,
+                null,
+                null,
+                Level.ERROR
+        });
     }
 
     @Override
     public void error(String v) {
-        console(prefixGenerate(Level.ERROR).concat(v), Level.ERROR);
+        autoGenerator(new Object[]{
+                null,
+                v,
+                null,
+                null,
+                Level.ERROR
+        });
     }
 
     @Override
     public void error(String v, Object... args) {
-        console(prefixGenerate(Level.ERROR).concat(format(v, args)), Level.ERROR);
+        autoGenerator(new Object[]{
+                null,
+                v,
+                null,
+                args,
+                Level.ERROR
+        });
     }
 
     @Override
     public void error(String v, Thread t) {
-        console(prefixGenerate(Level.ERROR, t).concat(v), Level.ERROR);
+        autoGenerator(new Object[]{
+                null,
+                v,
+                t,
+                null,
+                Level.ERROR
+        });
     }
 
     @Override
     public void error(String v, Thread t, Object... args) {
-        console(prefixGenerate(Level.ERROR, t).concat(format(v, args)), Level.ERROR);
+        autoGenerator(new Object[]{
+                null,
+                v,
+                t,
+                args,
+                Level.ERROR
+        });
     }
 
     @Override
     public void warn(Object v) {
-        console(prefixGenerate(Level.WARN).concat(String.valueOf(v)), Level.WARN);
+        autoGenerator(new Object[]{
+                v,
+                null,
+                null,
+                null,
+                Level.WARN
+        });
     }
 
     @Override
     public void warn(String v) {
-        console(prefixGenerate(Level.WARN).concat(v), Level.WARN);
+        autoGenerator(new Object[]{
+                null,
+                v,
+                null,
+                null,
+                Level.WARN
+        });
     }
 
     @Override
     public void warn(String v, Object... args) {
-        console(prefixGenerate(Level.WARN).concat(format(v, args)), Level.WARN);
+        autoGenerator(new Object[]{
+                null,
+                v,
+                null,
+                args,
+                Level.WARN
+        });
     }
 
     @Override
     public void warn(String v, Thread t) {
-        console(prefixGenerate(Level.WARN, t).concat(v), Level.WARN);
+        autoGenerator(new Object[]{
+                null,
+                v,
+                t,
+                null,
+                Level.WARN
+        });
     }
+
+    /**
+     * <h2>Object v</h2>
+     * <p>传入一个未知类，转换为字符串，输出</p>
+     * <h2>String v</h2>
+     * <p>传入字符串，输出</p>
+     * <h2>String v, Object... args</h2>
+     * <p>传入字符串和自定义参数，输出</p>
+     * <h2>String v, Thread t</h2>
+     * <p>传入字符串和线程信息，输出</p>
+     * <h2>String v, Thread t, Object... args</h2>
+     * <p>传入字符串、线程信息和自定义参数，输出</p>
+     */
+
+    /**
+     * 每个参数对应一个下标：
+     * | --- | -------------- |
+     * | 下标 | 参数           |
+     * | 0   | Object v       |
+     * | 1   | String v       |
+     * | 2   | Thread t       |
+     * | 3   | Object... args |
+     * | 4   | Level          |
+     * | --- | -------------- |
+     */
 
     @Override
     public void warn(String v, Thread t, Object... args) {
-        console(prefixGenerate(Level.WARN, t).concat(format(v, args)), Level.WARN);
+        autoGenerator(new Object[]{
+                null,
+                v,
+                t,
+                args,
+                Level.WARN
+        });
+    }
+
+    /**
+     * 集合方法，根据参数执行不同的日志操作。
+     * 固定参数数组大小：5
+     *
+     * @param params 参数
+     */
+    public void autoGenerator(Object[] params) {
+        // !!! 顺序不得更改，死的很惨 !!!
+        if (params[1] != null && params[2] != null && params[3] != null) {
+            // 传入字符串、线程信息和自定义参数，输出
+            String v = (String) params[1];
+            Thread t = (Thread) params[2];
+            Object[] args = (Object[]) params[3];
+            console(prefixGenerate((Level) params[4], t).concat(format(v, args)), (Level) params[4]);
+        } else if (params[1] != null && params[3] != null) {
+            // 传入字符串和自定义参数，输出
+            String v = (String) params[1];
+            Object[] args = (Object[]) params[3];
+            console(prefixGenerate((Level) params[4]).concat(format(v, args)), (Level) params[4]);
+        } else if (params[1] != null && params[2] != null) {
+            // 传入字符串和线程信息，输出
+            String v = (String) params[1];
+            Thread t = (Thread) params[2];
+            console(prefixGenerate((Level) params[4], t).concat(v), (Level) params[4]);
+        } else if (params[1] != null) {
+            // 传入字符串，输出
+            String v = (String) params[1];
+            console(prefixGenerate((Level) params[4]).concat(v), (Level) params[4]);
+        } else if (params[0] != null) {
+            // 传入一个未知类，转换为字符串，输出
+            Object v = params[0];
+            console(prefixGenerate((Level) params[4]).concat(String.valueOf(v)), (Level) params[4]);
+        }
     }
 
     /**
@@ -204,7 +393,8 @@ public class SophonLoggerImpl implements SophonLogger {
 
     /**
      * 打印
-     * @param v 日志
+     *
+     * @param v     日志
      * @param level 日志级别
      */
     protected synchronized void console(String v, Level level) {
@@ -219,19 +409,6 @@ public class SophonLoggerImpl implements SophonLogger {
                 }
             }
         }
-    }
-
-    /**
-     * 将字符串格式化
-     *
-     * @param v
-     * @param args
-     * @return
-     */
-    private static String format(String v, Object... args) {
-        v = v.replaceAll(formatString, "%s");
-        v = String.format(v, args);
-        return v;
     }
 
 }
