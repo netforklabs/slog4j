@@ -30,4 +30,11 @@ public class Experiment {
         s.add("xxxx");
     }
 
+    @ListenerMethod(
+            trigger = TriggerMethod.ERROR,
+            process = ErrorProcess.class
+    )
+    public void error(String v){
+    }
+
 }

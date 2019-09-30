@@ -7,6 +7,7 @@ import com.sophon.component.anno.ListenerMethod;
 import java.lang.annotation.ElementType;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -40,6 +41,14 @@ public class ListenerMethodProcessor {
                         lme.setImplpath(listenerMethod.process().getName());
                         lme.setMethodname(method.getName());
                         lme.setTriggerMethod(listenerMethod.trigger().toString());
+                        // 设置方法参数
+                        Class<?>[] parameters1 = method.getParameterTypes();
+                        List<String> parameters2 = new ArrayList<>(parameters1.length);
+                        for(Class<?> param : parameters1){
+                            parameters2.add(param.getName());
+                        }
+                        String[] parameters3 = parameters2.toArray(new String[parameters1.length]);
+                        lme.setParameters(parameters3);
                         lms.add(lme);
                     }
                 }

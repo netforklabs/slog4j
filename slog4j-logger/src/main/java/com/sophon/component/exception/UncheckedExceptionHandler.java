@@ -35,12 +35,12 @@ public class UncheckedExceptionHandler implements Thread.UncaughtExceptionHandle
         String classname = e.getStackTrace()[0].getClassName();
         String methodname = e.getStackTrace()[0].getMethodName();
         // 如果发生异常，先判断是否符合ERROR table中的key，如果符合则交给异常程序处理
-        SophonListener listener = ERROR.get(getKEY(classname,methodname));
-        if(listener != null){
+        SophonListener listener = ERROR.get(getKEY(classname, methodname));
+        if (listener != null) {
             try {
                 Class<?> target = Class.forName(classname);
                 Method method = target.getDeclaredMethod(methodname);
-                listener.error(target,method,e);
+                listener.error(target, method, e);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
@@ -89,26 +89,43 @@ public class UncheckedExceptionHandler implements Thread.UncaughtExceptionHandle
 
     /**
      * 注册异常监听器
+     *
      * @param entity 注解实体
      */
     public static void registerListener(ListenerMethodEntity entity) {
         try {
-            String classAndMethod = getKEY(entity.getClasspath(), entity.getMethodname());
+            Class<?> target = Class.forName(entity.getClasspath());
+            // todo 需要将ListenerMethodEntity中的parameters参数改为Object[]
+            String classAndMethod = getKEY(target, null);
             SophonListener listenerImpl = (SophonListener) Class.forName(entity.getImplpath()).newInstance();
             ERROR.put(classAndMethod, listenerImpl);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     /**
      * 生成KEY
-     * @param classpath 类路径
-     * @param methodName 方法名
+     *
+     * @param target 目标类
+     * @param method 目标方法
      * @return
      */
-    private static String getKEY(String classpath,String methodName){
-        return classpath.concat(".").concat(methodName);
+    private static String getKEY(Class<?> target, Method method) {
+        String classpath = target.getName();
+        String methodname = method.getName();
+        methodname = methodname.concat("(");
+        Class<?>[] params = method.getParameterTypes();
+        boolean bool = false;
+        for (Class<?> param : params) {
+            bool = true;
+            methodname = methodname.concat(param.getName()).concat(",");
+        }
+        if (bool != false) {
+            methodname = methodname.substring(methodname.length() - 1);
+        }
+        methodname = methodname.concat(")");
+        return classpath + "." + methodname;
     }
 
 }

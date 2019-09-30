@@ -35,6 +35,11 @@ public class ListenerMethodEntity {
     private String methodname;
 
     /**
+     * 方法参数
+     */
+    private String[] parameters;
+
+    /**
      * 接口实现类所在的路径
      */
     private String implpath;

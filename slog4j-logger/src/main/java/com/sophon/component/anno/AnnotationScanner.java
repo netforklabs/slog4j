@@ -128,6 +128,7 @@ public class AnnotationScanner {
                     if (method.isAnnotationPresent(annoclass)) {
                         presences.add(target);
                     }
+                    break;
                 }
             }
         } catch (ClassNotFoundException e) {

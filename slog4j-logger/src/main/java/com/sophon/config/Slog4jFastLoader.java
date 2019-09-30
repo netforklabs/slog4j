@@ -6,17 +6,9 @@ import com.sophon.component.anno.TriggerMethod;
 import com.sophon.component.exception.UncheckedExceptionHandler;
 import com.sophon.component.hot.ListenerMethodProcessor;
 import com.sophon.component.hot.ReDefineClass;
-import com.sophon.component.hot.SophonListener;
 import com.sophon.util.SophonUtils;
 import com.sun.tools.attach.VirtualMachine;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 
@@ -43,8 +35,6 @@ public class Slog4jFastLoader implements SophonInit {
             while(iterator.hasNext()){
                 ListenerMethodEntity entity = iterator.next();
                 if(TriggerMethod.ERROR.toString().equals(entity.getTriggerMethod())){
-                    SophonListener sophonListenerImpl =
-                            (SophonListener) Class.forName(entity.getImplpath()).newInstance();
                     UncheckedExceptionHandler.registerListener(entity);
                     iterator.remove();
                 }
