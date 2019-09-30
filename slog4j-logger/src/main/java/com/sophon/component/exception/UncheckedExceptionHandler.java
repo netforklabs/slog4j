@@ -1,6 +1,7 @@
 package com.sophon.component.exception;
 
 import com.sophon.component.SophonInit;
+import com.sophon.component.hot.SophonListener;
 import com.sophon.logger.source.ExceptionLogger;
 
 import java.io.PrintWriter;
@@ -8,6 +9,8 @@ import java.io.StringWriter;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Hashtable;
+import java.util.Map;
 
 /**
  * 全局异常捕获器/处理器
@@ -21,11 +24,30 @@ public class UncheckedExceptionHandler implements Thread.UncaughtExceptionHandle
 
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+    /**
+     * 被监听的异常方法
+     */
+    private static Hashtable<String, SophonListener> ERROR = new Hashtable();
+
     @Override
     public void uncaughtException(Thread t, Throwable e) {
-        String className = "--- ".concat(e.getStackTrace()[0].getClassName())
+        String classname = e.getStackTrace()[0].getClassName();
+        String methodname = e.getStackTrace()[0].getMethodName();
+        // 如果发生异常，先判断是否符合ERROR table中的key，如果符合则交给异常程序处理
+        SophonListener listener = ERROR.get(classname.concat(".").concat(methodname));
+        if(listener != null){
+            try {
+                Class<?> target = Class.forName(classname);
+                Method method = target.getDeclaredMethod(methodname);
+                listener.error(target,method,e);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+            return;
+        }
+        String className = "--- ".concat(classname)
                 .concat(": ")
-                .concat(e.getStackTrace()[0].getMethodName())
+                .concat(methodname)
                 .concat(" ---");
         String datetime = "--- ".concat(sdf.format(new Date())).concat(" ---");
         StringWriter sw = new StringWriter();
@@ -63,4 +85,15 @@ public class UncheckedExceptionHandler implements Thread.UncaughtExceptionHandle
             thread.setUncaughtExceptionHandler(new UncheckedExceptionHandler());
         }
     }
+
+    /**
+     * 注册异常监听器
+     *
+     * @param classpath      类路径
+     * @param sophonListener 处理类
+     */
+    public static void registerListener(String classpath, SophonListener sophonListener) {
+        ERROR.put(classpath, sophonListener);
+    }
+
 }

@@ -27,4 +27,12 @@ public interface SophonListener {
      */
     void after(Class<?> target, String method, Object[] args);
 
+    /**
+     * 当发生异常时会调用这个方法，如果不做任何处理则不会影响什么。
+     * @param target 发生异常的类
+     * @param method 发生异常的方法
+     * @param e 异常类型
+     */
+    void error(Class<?> target,Method method,Throwable e);
+
 }
