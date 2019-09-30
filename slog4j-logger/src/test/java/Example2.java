@@ -12,7 +12,7 @@ public class Example2 {
     public static String template = "${datetime} ${class} | ${method}:${line} - [${level}]: ";
 
     public static void main(String[] args) throws FileNotFoundException {
-        TimeCalc.invoke(Example2.class,"test1");
+        TimeCalc.invoke("test1");
     }
 
     public void test1(){

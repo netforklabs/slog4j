@@ -19,7 +19,6 @@ public class Example {
 
     public static void main(String[] args) {
         // TimeCalc.invoke(Example.class,"string");
-        TimeCalc.invoke(Example.class, "logger");
         // TimeCalc.invoke(Example.class, "et");
         // Logger.info("system start...");
         // ArrayList<String> list = null;

@@ -1,6 +1,8 @@
 package example;
 
 import com.sophon.config.Slog4jFastLoader;
+import com.sophon.logger.source.Logger;
+import com.sophon.util.TimeCalc;
 
 /**
  * @author tiansheng
@@ -15,7 +17,13 @@ public class Example {
     }
 
     public static void main(String[] args) throws Throwable {
+        TimeCalc.invoke("test");
+    }
 
+    public void test(){
+        for(int i=0; i<500000; i++){
+            Logger.info("2019-09-29 14:29:57 example.Example | main:16 - [INFO]:Hello{}",i);
+        }
     }
 
 }

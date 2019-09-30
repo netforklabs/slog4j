@@ -25,13 +25,14 @@ public class TimeCalc implements InvocationHandler {
 
     /**
      * 调用方法
-     * @param proxy 传入一个类的类对象
      * @param name 传入当前proxy中的某个方法名
      */
-    public static void invoke(Class<?> proxy, String name) {
+    public static void invoke(String name) {
         try {
-            Method method = proxy.getMethod(name);
-            new TimeCalc().invoke(proxy.newInstance(), method, null);
+            String classpath = Thread.currentThread().getStackTrace()[2].getClassName();
+            Class<?> target = Class.forName(classpath);
+            Method method = target.getMethod(name);
+            new TimeCalc().invoke(target.newInstance(), method, null);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         } catch (Throwable throwable) {
