@@ -1,5 +1,6 @@
 package com.sophon.component.io;
 
+import com.sophon.component.security.SecurityManager;
 import com.sophon.config.Slog4jConfiguration;
 import com.sophon.util.DateUtils;
 import com.sophon.util.StringUtils;
@@ -166,6 +167,8 @@ public class SophonFile extends File {
         String currentName = getNoSuffixName().substring(0, getNoSuffixName().lastIndexOf("_"));
         for (String filename : getFileNamesByFolderNoSuffix()) {
             // 获取没有索引的文件名
+            SecurityManager security = SecurityManager.getSecurityManager();
+            if(!security.isLoggerFile(filename)) continue;
             String filenameNoIndex = filename.substring(0, filename.lastIndexOf("_"));
             if (filenameNoIndex.equals(currentName)) {
                 String indexstr = filename.substring(filename.lastIndexOf("_") + 1);
