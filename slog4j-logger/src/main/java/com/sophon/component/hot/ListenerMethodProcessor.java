@@ -42,13 +42,7 @@ public class ListenerMethodProcessor {
                         lme.setMethodname(method.getName());
                         lme.setTriggerMethod(listenerMethod.trigger().toString());
                         // 设置方法参数
-                        Class<?>[] parameters1 = method.getParameterTypes();
-                        List<String> parameters2 = new ArrayList<>(parameters1.length);
-                        for(Class<?> param : parameters1){
-                            parameters2.add(param.getName());
-                        }
-                        String[] parameters3 = parameters2.toArray(new String[parameters1.length]);
-                        lme.setParameters(parameters3);
+                        lme.setParameters(method.getParameterTypes());
                         lms.add(lme);
                     }
                 }

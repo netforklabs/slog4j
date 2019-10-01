@@ -33,7 +33,14 @@ public class ReDefineClass {
                 // 从ClassPool获得CtClass对象
                 final ClassPool pool = ClassPool.getDefault();
                 final CtClass cbtCtClass = pool.get(entity.getClasspath());
-                CtMethod method = cbtCtClass.getDeclaredMethod(entity.getMethodname());
+                // 将参数列表转换为CtClass
+                int len = entity.getParameters().length;
+                CtClass[] ctParameters = new CtClass[len];
+                Class<?>[] classParam = entity.getParameters();
+                for(int i=0; i<len; i++){
+                    ctParameters[i] = pool.get(classParam[i].getName());
+                }
+                CtMethod method = cbtCtClass.getDeclaredMethod(entity.getMethodname(),ctParameters);
                 // 创建属性：由于Java8不支持添加或删除成员，但说在后面可能会取消限制，这段代码就不删除了。
                 // String uuid = UUID.randomUUID().toString().replaceAll("-", ""); // uuid保证属性名不重复
                 // String fieldName = "sophon$" + uuid;
@@ -55,8 +62,8 @@ public class ReDefineClass {
                 method.insertAfter(after);
                 // 返回字节码，并且detachCtClass对象
                 byte[] byteCode = cbtCtClass.toBytecode();
-                //detach的意思是将内存中曾经被javassist加载过的Date对象移除，如果下次有需要在内存中找不到会重新走javassist加载
-                cbtCtClass.detach();
+                // 解冻
+                cbtCtClass.defrost();
                 modify.redefine(entity.getClasspath(), byteCode);
             }
         } catch (Exception e) {

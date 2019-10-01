@@ -37,7 +37,7 @@ public class ListenerMethodEntity {
     /**
      * 方法参数
      */
-    private String[] parameters;
+    private Class<?>[] parameters;
 
     /**
      * 接口实现类所在的路径
