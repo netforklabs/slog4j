@@ -1,4 +1,4 @@
-package com.sophon.io;
+package com.sophon.component.io;
 
 import com.sophon.component.io.SophonFile;
 

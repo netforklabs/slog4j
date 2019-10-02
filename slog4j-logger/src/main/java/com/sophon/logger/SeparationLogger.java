@@ -1,7 +1,7 @@
 package com.sophon.logger;
 
 import com.sophon.component.io.SophonFile;
-import com.sophon.logger.cache.statics.Store;
+import com.sophon.component.cache.statics.Store;
 
 /**
  * 独立的日志文件

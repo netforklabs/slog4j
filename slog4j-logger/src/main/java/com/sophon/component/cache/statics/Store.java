@@ -1,8 +1,8 @@
-package com.sophon.logger.cache.statics;
+package com.sophon.component.cache.statics;
 
 import com.sophon.config.Slog4jConfiguration;
-import com.sophon.io.SophonIO;
-import com.sophon.io.SophonWrite;
+import com.sophon.component.io.SophonIO;
+import com.sophon.component.io.SophonWrite;
 import com.sophon.logger.SophonLogger;
 
 import java.text.DateFormat;

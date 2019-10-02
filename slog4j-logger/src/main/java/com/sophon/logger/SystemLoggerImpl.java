@@ -2,8 +2,8 @@ package com.sophon.logger;
 
 import com.sophon.component.io.SophonFile;
 import com.sophon.config.Slog4jConfiguration;
-import com.sophon.io.SophonWrite;
-import com.sophon.io.SophonWriteBySize;
+import com.sophon.component.io.SophonWrite;
+import com.sophon.component.io.SophonWriteBySize;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

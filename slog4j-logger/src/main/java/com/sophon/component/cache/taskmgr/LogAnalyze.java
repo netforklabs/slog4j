@@ -1,8 +1,8 @@
-package com.sophon.logger.cache.taskmgr;
+package com.sophon.component.cache.taskmgr;
 
 import com.sophon.config.Slog4jConfiguration;
 import com.sophon.logger.SophonLogger;
-import com.sophon.logger.cache.statics.Store;
+import com.sophon.component.cache.statics.Store;
 
 import java.util.Date;
 

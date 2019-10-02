@@ -1,4 +1,4 @@
-package com.sophon.logger.cache;
+package com.sophon.component.cache;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
