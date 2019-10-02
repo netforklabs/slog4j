@@ -18,23 +18,23 @@ public class Experiment {
             process = DebugProcess.class
     )
     public void debug(){
-        System.out.println("debug........");
+        System.out.println("debug");
     }
 
     @ListenerMethod(
-            trigger = TriggerMethod.ERROR,
-            process = ErrorProcess.class
+            trigger = TriggerMethod.DEBUG,
+            process = DebugProcess.class
     )
     public void error(){
-        ArrayList s = null;
-        s.add("xxxx");
+        System.out.println("error");
     }
 
     @ListenerMethod(
-            trigger = TriggerMethod.ERROR,
-            process = ErrorProcess.class
+            trigger = TriggerMethod.DEBUG,
+            process = ExampleProcess.class
     )
-    public void error(String v){
+    public void error1(String v){
+        System.out.println("error1:"+v);
     }
 
 }

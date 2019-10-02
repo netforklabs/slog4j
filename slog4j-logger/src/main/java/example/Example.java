@@ -20,6 +20,7 @@ public class Example {
         Experiment e = new Experiment();
         e.debug();
         e.error();
+        e.error1("XXX");
     }
 
     public void test(){

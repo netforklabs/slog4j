@@ -7,26 +7,24 @@ import java.lang.reflect.Method;
 /**
  * @author tiansheng
  * @version 1.0.0
- * @date 2019/10/1 4:14
+ * @date 2019/10/2 2:05
  * @since 1.8
  */
-public class ErrorProcess implements SophonListener {
+public class ExampleProcess implements SophonListener {
 
     @Override
     public void before(Class<?> target, String method, Object[] args) {
-
+        System.err.println("example process before............");
     }
 
     @Override
     public void after(Class<?> target, String method, Object[] args) {
-
+        System.err.println("example process after............");
     }
 
     @Override
     public void error(Class<?> target, Method method, Throwable e) {
-        System.err.println("出现异常了");
-        System.err.println("当前类：" + target.getName());
-        System.err.println("当前方法：" + method.getName());
+
     }
 
 }

@@ -11,14 +11,15 @@ import java.lang.reflect.Method;
  * @since 1.8
  */
 public class DebugProcess implements SophonListener {
+
     @Override
     public void before(Class<?> target, String method, Object[] args) {
-        System.out.println("before");
+        System.err.println("before");
     }
 
     @Override
     public void after(Class<?> target, String method, Object[] args) {
-        System.out.println("after");
+        System.err.println("after");
     }
 
     @Override
