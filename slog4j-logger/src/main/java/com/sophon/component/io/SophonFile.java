@@ -165,9 +165,9 @@ public class SophonFile extends File {
         ArrayList<Integer> indexs = new ArrayList();
         // 当前文件名
         String currentName = getNoSuffixName().substring(0, getNoSuffixName().lastIndexOf("_"));
+        SecurityManager security = SecurityManager.getSecurityManager();
         for (String filename : getFileNamesByFolderNoSuffix()) {
             // 获取没有索引的文件名
-            SecurityManager security = SecurityManager.getSecurityManager();
             if(!security.isLoggerFile(filename)) continue;
             String filenameNoIndex = filename.substring(0, filename.lastIndexOf("_"));
             if (filenameNoIndex.equals(currentName)) {

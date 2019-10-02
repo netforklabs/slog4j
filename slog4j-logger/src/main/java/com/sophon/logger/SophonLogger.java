@@ -12,7 +12,7 @@ public interface SophonLogger {
     /**
      * 枚举 日志级别
      */
-    enum Level {INFO, DEBUG, ERROR, WARN,EXCEPTION}
+    enum Level {INFO, DEBUG, ERROR, WARN, EXCEPTION}
 
     /**
      * info: 传入一个Object对象
@@ -97,7 +97,7 @@ public interface SophonLogger {
      * @param level 级别名称,例如:INFO DEBUG ERROR
      * @return
      */
-    String prefixGenerate(Level level);
+    //String prefixGenerate(Level level);
 
     /**
      * 前缀生成,传入指定线程

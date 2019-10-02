@@ -39,6 +39,7 @@ public class SophonWriteBySize implements SophonWrite {
             if (bw == null) {
                 bw = SophonUtils.newBufferedWriter(file);
             }
+            //System.out.println("文件" + file.getName() + "大小：" + file.getSizeByKB());
             if (file.getSizeByKB() <= size) {
                 // 当前文件大小小于size
                 bw.write(v.concat("\n"));

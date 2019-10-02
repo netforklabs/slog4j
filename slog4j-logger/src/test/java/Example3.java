@@ -24,12 +24,12 @@ public class Example3 {
     }
 
     public static void main(String[] args) {
-        long start = System.nanoTime();
+        long start = System.currentTimeMillis();
         for (int i = 0; i < 100000; i++) {
             Logger.info("are you ok?");
         }
-        long stop = System.nanoTime();
-        System.out.println(start-stop);
+        long stop = System.currentTimeMillis();
+        System.out.println(stop - start);
         /*
         SystemLogger.info("are you ok?");
         ExceptionLogger.info("are you ok?");

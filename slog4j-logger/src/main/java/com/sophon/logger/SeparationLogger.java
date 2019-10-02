@@ -1,6 +1,7 @@
 package com.sophon.logger;
 
 import com.sophon.component.io.SophonFile;
+import com.sophon.logger.cache.statics.Store;
 
 /**
  * 独立的日志文件
@@ -12,12 +13,12 @@ import com.sophon.component.io.SophonFile;
 public class SeparationLogger extends SophonLoggerImpl implements SophonLogger {
 
     public SeparationLogger(String pathname){
-        this.trace = 4;
+        Store.trace = 4;
         write.setFile(SophonFile.getFile(pathname));
     }
 
     public SeparationLogger(String pathname, int trace){
-        this.trace = trace;
+        Store.trace = trace;
         write.setFile(SophonFile.getFile(pathname));
     }
 
