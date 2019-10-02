@@ -68,4 +68,7 @@ public class Store {
     public static int trace = 4;
 
     public static final Map<String, String[]> featureCache = new HashMap<>();
+
+    // 改为true，则禁用缓存功能，直接输出
+    public static final boolean disableCache = Slog4jConfiguration.getInstance().getStackCache();
 }

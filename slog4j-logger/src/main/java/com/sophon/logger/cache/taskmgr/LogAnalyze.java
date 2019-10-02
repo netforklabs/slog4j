@@ -94,12 +94,10 @@ public class LogAnalyze extends Thread {
      * @return
      */
     private String[] getThreadFeature(String threadName, ThreadGroup threadGroup, Thread t) {
-        // 改为true，则禁用缓存功能，直接输出
-        boolean disableCache = false;
         String feature = (threadName + "&" + threadGroup);
         String[] featureVal = Store.featureCache.get(feature);
         String[] params = null;
-        if (disableCache || featureVal == null || ((System.currentTimeMillis() - Long.valueOf(featureVal[3])) > 10000)) {
+        if (Store.disableCache || featureVal == null || ((System.currentTimeMillis() - Long.valueOf(featureVal[3])) > 10000)) {
             /**
              * 基于线程特征的过期缓存机制：
              * | --- | ----------------- |

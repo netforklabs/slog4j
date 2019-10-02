@@ -179,6 +179,11 @@ public class Slog4jConfiguration {
     private final String LOGGER_PRINT_WRITE = getValue("logger.print.write");
 
     /**
+     * 禁用栈追踪信息缓存
+     */
+    private final String STACK_TRACE_CACHE = getValue("logger.cache.disableStackCache");
+
+    /**
      * 获取日期格式化配置
      *
      * @return SimpleDateFormat对象
@@ -281,6 +286,20 @@ public class Slog4jConfiguration {
             if (level.equals(SophonLogger.Level.WARN.toString())) set.add(SophonLogger.Level.WARN);
         }
         return set;
+    }
+
+    /**
+     * 禁用栈缓存
+     */
+    public boolean getStackCache() {
+        switch (STACK_TRACE_CACHE) {
+            case "true":
+                return true;
+            case "false":
+                return false;
+            default:
+                return true;
+        }
     }
 
     public void main(String[] args) {
