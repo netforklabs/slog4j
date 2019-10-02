@@ -17,14 +17,11 @@ public class Example {
     }
 
     public static void main(String[] args) throws Throwable {
-        Experiment e = new Experiment();
-        e.debug();
-        e.error();
-        e.error1("XXX");
+        TimeCalc.invoke("test");
     }
 
     public void test(){
-        for(int i=0; i<500000; i++){
+        for(int i=0; i<100000; i++){
             Logger.info("2019-09-29 14:29:57 example.Example | main:16 - [INFO]:Hello{}",i);
         }
     }

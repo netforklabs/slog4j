@@ -10,8 +10,6 @@ import lombok.Setter;
  * @date 2019/9/29 17:14
  * @since 1.8
  */
-@Getter
-@Setter
 public class ListenerMethodEntity {
 
     /**
