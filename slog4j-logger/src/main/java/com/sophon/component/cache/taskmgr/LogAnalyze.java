@@ -129,6 +129,19 @@ public class LogAnalyze extends Thread {
         return prefixGenerate(level, t);
     }
 
+    /**
+     * 性能基准测试
+     * 测试十万条信息吞吐量
+     * 测试1：禁用栈缓存 && 使用replace && 无文件缓存
+     * 测试2：启用栈缓存 && 使用replace && 无文件缓存
+     * | 测试次数 | 测试1 | 测试2 |
+     * | 1       | 8202 | 5242 |
+     * | 2       | 7856 | 6103 |
+     * | 3       | 7479 | 5197 |
+     * @param level
+     * @param t
+     * @return
+     */
     public String prefixGenerate(SophonLogger.Level level, Thread t) {
         String[] feature = getThreadFeature(t.getName(), t.getThreadGroup(), t);
         String className = feature[0];
@@ -136,11 +149,11 @@ public class LogAnalyze extends Thread {
         String lineNumber = feature[2];
         feature = null;
 
-        String v = Store.printTemplate.replaceAll("\\$\\{line\\}", lineNumber)
-                .replaceAll("\\$\\{class\\}", className)
-                .replaceAll("\\$\\{level\\}", String.valueOf(level))
-                .replaceAll("\\$\\{method\\}", methodName)
-                .replaceAll("\\$\\{datetime\\}", Store.sdf.format(new Date()));
+        String v = Store.printTemplate.replace("${line}", lineNumber)
+                .replace("${class}", className)
+                .replace("${level}", String.valueOf(level))
+                .replace("${method}", methodName)
+                .replace("${datetime}", Store.sdf.format(new Date()));
         return v;
     }
 
@@ -152,7 +165,7 @@ public class LogAnalyze extends Thread {
             if (Slog4jConfiguration.getInstance().getLoggerPrintWrite()) {
                 if (!Store.writeIgnore.contains(level)) {
                     // 输出到日志文件
-                    Store.write.write(v);
+                    //Store.write.write(v);
                 }
             }
         }
