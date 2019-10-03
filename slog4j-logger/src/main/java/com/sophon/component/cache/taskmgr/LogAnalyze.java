@@ -4,7 +4,7 @@ import com.sophon.config.Slog4jConfiguration;
 import com.sophon.logger.SophonLogger;
 import com.sophon.component.cache.statics.Store;
 import com.sophon.util.AdvancedReplace;
-import org.apache.commons.lang3.StringUtils;
+import com.sophon.util.TimeUtils;
 
 import java.util.Date;
 
@@ -136,13 +136,14 @@ public class LogAnalyze extends Thread {
      * 测试1：禁用栈缓存 && 使用replace && 无日期缓存 && 无文件缓存
      * 测试2：启用栈缓存 && 使用replace && 无日期缓存 && 无文件缓存
      * 测试3：启用栈缓存 && 使用AdvancedReplace && 无日期缓存 && 无文件缓存
-     * | 测试次数 | 测试1 | 测试2 | 测试3 |
-     * | 1       | 5744 | 4388 | 4208 |
-     * | 2       | 6814 | 5635 | 3900 |
-     * | 3       | 5433 | 4295 | 4372 |
-     * | 4       | 5439 | 5010 | 4806 |
-     * | 5       | 7105 | 5745 | 3979 |
-     * | 6       | 8475 | 4074 | 4365 |
+     * 测试4：启用栈缓存 && 使用AdvancedReplace && 启用日期缓存 && 无文件缓存
+     * | 测试次数 | 测试1 | 测试2 | 测试3 | 测试4 |
+     * | 1       | 5744 | 4388 | 4208 | 3726 |
+     * | 2       | 6814 | 5635 | 3900 | 3758 |
+     * | 3       | 5433 | 4295 | 4372 | 3618 |
+     * | 4       | 5439 | 5010 | 4806 | 4687 |
+     * | 5       | 7105 | 5745 | 3979 | 4267 |
+     * | 6       | 8475 | 4074 | 4365 | 4333 |
      * @param level
      * @param t
      * @return
@@ -155,13 +156,8 @@ public class LogAnalyze extends Thread {
                 "${class}", feature[0],
                 "${level}", String.valueOf(level),
                 "${method}", feature[1],
-                "${datetime}", Store.sdf.format(new Date())
+                "${datetime}", TimeUtils.getTime()
         );
-        /* return Store.printTemplate.replace("${line}", feature[2])
-                .replace("${class}", feature[0])
-                .replace("${level}", String.valueOf(level))
-                .replace("${method}", feature[1])
-                .replace("${datetime}", Store.sdf.format(new Date())); */
     }
 
     protected synchronized void console(String v, SophonLogger.Level level) {

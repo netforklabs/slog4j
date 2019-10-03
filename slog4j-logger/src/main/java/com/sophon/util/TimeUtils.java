@@ -7,15 +7,15 @@ import java.util.Date;
 
 /**
  * <h3>slog4j</h3>
- * <p>带缓存的时间解析工具，减轻每次执行都要重新获取时间的性能损失</p>
+ * <p>带缓存的时间解析工具，用于精确输出，优化并发性能/p>
  *
  * 懒加载模式
  *
  * @author : https://github.com/AdlerED
  * @author : 2BKeyboard
- * @date : 2019-09-27 09:58
+ * @date : 2019-10-03 13:18
  **/
-public class DateUtils{
+public class TimeUtils{
 
     private static String time = "";
     private static Long timeStamp = 0l;
@@ -34,7 +34,7 @@ public class DateUtils{
 
     private static void generate() {
         Date date = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat(Slog4jConfiguration.getInstance().getDateFormat());
         time = dateFormat.format(date);
     }
 

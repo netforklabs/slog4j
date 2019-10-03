@@ -184,22 +184,22 @@ public class Slog4jConfiguration {
     private final String STACK_TRACE_CACHE = getValue("logger.cache.disableStackCache");
 
     /**
-     * 获取日期格式化配置
+     * 获取日期格式
      *
-     * @return SimpleDateFormat对象
+     * @return 日期格式
      */
-    public SimpleDateFormat getSimpleDateFormat() {
-        String v = LOGGER_PRINT_TEMPLATE;
-        // 判断有没有配置日期格式化规则
-        if (StringUtils.isExist(v, "\\$\\{datetime:(.*?)\\}")) {
-            Pattern pattern = Pattern.compile("\\$\\{(.*?)\\}");
-            Matcher matcher = pattern.matcher(v);
-            matcher.find();
-            String datetime = matcher.group(1).replaceAll("datetime:", "");
-            return new SimpleDateFormat(datetime);
-        }
-        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    }
+     public String getDateFormat() {
+         String v = LOGGER_PRINT_TEMPLATE;
+         // 判断有没有配置日期格式化规则
+         if (StringUtils.isExist(v, "\\$\\{datetime:(.*?)\\}")) {
+             Pattern pattern = Pattern.compile("\\$\\{datetime:(.*?)\\}");
+             Matcher matcher = pattern.matcher(v);
+             matcher.find();
+             String datetime = matcher.group(1).replaceAll("datetime:", "");
+             return datetime;
+         }
+         return "yyyy-MM-dd HH:mm:ss";
+     }
 
     /**
      * 获取日志打印模板

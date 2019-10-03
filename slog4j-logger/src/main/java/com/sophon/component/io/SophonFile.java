@@ -217,7 +217,6 @@ public class SophonFile extends File {
                 .concat(file.getNoSuffixName())
                 .concat("_0")
                 .concat(file.getSuffix());
-        // path = path.replace("(${date})", DateUtils.getTime());
         return new SophonFile(path);
     }
 

@@ -22,7 +22,7 @@ public class Store {
     /**
      * 日期格式化工具
      */
-    public static final DateFormat sdf = Slog4jConfiguration.getInstance().getSimpleDateFormat();
+    //public static final DateFormat sdf = Slog4jConfiguration.getInstance().getSimpleDateFormat();
 
     /**
      * 日志打印模板
