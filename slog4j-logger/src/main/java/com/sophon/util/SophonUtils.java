@@ -2,11 +2,13 @@ package com.sophon.util;
 
 import com.sophon.component.exception.ParamException;
 import com.sophon.component.io.SophonFile;
+import com.sophon.config.Slog4jConfiguration;
 
 
 import java.io.*;
 import java.lang.management.ManagementFactory;
 import java.net.URL;
+import java.nio.Buffer;
 import java.util.*;
 
 /**
@@ -89,8 +91,8 @@ public class SophonUtils {
      * @return 返回一个BUfferedWriter输出流
      * @throws FileNotFoundException 文件找不到
      */
-    public static BufferedWriter newBufferedWriter(SophonFile file) throws FileNotFoundException {
-        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
+    public static BufferedOutputStream newBufferedWriter(SophonFile file) throws FileNotFoundException {
+        return new BufferedOutputStream(new FileOutputStream(file, true), Slog4jConfiguration.getInstance().getFileBuffSize());
     }
 
     /**

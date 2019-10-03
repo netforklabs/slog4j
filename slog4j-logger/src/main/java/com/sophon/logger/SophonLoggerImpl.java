@@ -1,5 +1,6 @@
 package com.sophon.logger;
 
+import com.sophon.component.cache.taskmgr.ShutdownFlush;
 import com.sophon.config.Slog4jConfiguration;
 import com.sophon.component.io.SophonIO;
 import com.sophon.component.io.SophonWrite;
@@ -32,6 +33,7 @@ public class SophonLoggerImpl implements SophonLogger {
     public static final SophonWrite write = SophonIO.getWrite();
 
     public SophonLoggerImpl() {
+        ShutdownFlush.build();
     }
 
     /**
@@ -40,6 +42,7 @@ public class SophonLoggerImpl implements SophonLogger {
      * @param trace
      */
     public SophonLoggerImpl(int trace) {
+        ShutdownFlush.build();
         Store.trace = trace;
     }
 

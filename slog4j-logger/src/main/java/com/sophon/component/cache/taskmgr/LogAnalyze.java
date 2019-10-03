@@ -6,6 +6,7 @@ import com.sophon.component.cache.statics.Store;
 import com.sophon.util.AdvancedReplace;
 import com.sophon.util.TimeUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -133,17 +134,28 @@ public class LogAnalyze extends Thread {
 
     /**
      * 性能基准测试
-     * 测试1：禁用栈缓存 && 使用replace && 无日期缓存 && 无文件缓存
-     * 测试2：启用栈缓存 && 使用replace && 无日期缓存 && 无文件缓存
-     * 测试3：启用栈缓存 && 使用AdvancedReplace && 无日期缓存 && 无文件缓存
-     * 测试4：启用栈缓存 && 使用AdvancedReplace && 启用日期缓存 && 无文件缓存
-     * | 测试次数 | 测试1 | 测试2 | 测试3 | 测试4 |
-     * | 1       | 5744 | 4388 | 4208 | 3726 |
-     * | 2       | 6814 | 5635 | 3900 | 3758 |
-     * | 3       | 5433 | 4295 | 4372 | 3618 |
-     * | 4       | 5439 | 5010 | 4806 | 4687 |
-     * | 5       | 7105 | 5745 | 3979 | 4267 |
-     * | 6       | 8475 | 4074 | 4365 | 4333 |
+     * 测试1：禁用栈缓存 && 使用replace && 无时间缓存 && 无文件缓存
+     * 测试2：启用栈缓存 && 使用replace && 无时间缓存 && 无文件缓存
+     * 测试3：启用栈缓存 && 使用AdvancedReplace && 无时间缓存 && 无文件缓存
+     * 测试4：启用栈缓存 && 使用AdvancedReplace && 启用时间缓存 && 无文件缓存
+     * 测试5：启用栈缓存 && 使用AdvancedReplace && 启用时间缓存 && 启用文件缓存，值为256
+     * 测试6：启用栈缓存 && 使用AdvancedReplace && 启用时间缓存 && 启用文件缓存，值为1024
+     * 测试7：启用栈缓存 && 使用AdvancedReplace && 启用时间缓存 && 启用文件缓存，值为8192
+     * | ------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+     * | 测试次数 | 测试1 | 测试2 | 测试3 | 测试4 | 测试5 | 测试6 | 测试7 |
+     * | ------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+     * | 1       | 5495 | 3644 | 3228 | 2815 | 2428 | 2236 | 2274 |
+     * | 2       | 5378 | 3470 | 3116 | 2744 | 2432 | 2371 | 2141 |
+     * | 3       | 5127 | 3380 | 3055 | 3148 | 2300 | 2487 | 2194 |
+     * | 4       | 5256 | 3432 | 3157 | 2794 | 2277 | 2333 | 2561 |
+     * | 5       | 5171 | 3459 | 3159 | 3220 | 2391 | 2364 | 2285 |
+     * | 6       | 4981 | 3438 | 3135 | 2845 | 2559 | 2204 | 2249 |
+     * | 7       | 4900 | 3428 | 3310 | 2875 | 2546 | 2268 | 2214 |
+     * | 8       | 5073 | 3464 | 3228 | 2724 | 2372 | 2299 | 2223 |
+     * | 9       | 4769 | 3372 | 3172 | 2819 | 2371 | 2302 | 2227 |
+     * | 10      | 4680 | 3574 | 3118 | 2821 | 2418 | 2288 | 2232 |
+     * | ------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+     * | 平均成绩 | 5083 | 3467 | 3168 | 2881 | 2410 | 2316 | 2260 |
      * @param level
      * @param t
      * @return
@@ -158,12 +170,19 @@ public class LogAnalyze extends Thread {
                 "${method}", feature[1],
                 "${datetime}", TimeUtils.getTime()
         );
+        /* return Store.printTemplate.replace("${line}", feature[2])
+                .replace("${class}", feature[0])
+                .replace("${level}", String.valueOf(level))
+                .replace("${method}", feature[1])
+                .replace("${datetime}", new SimpleDateFormat("yyyyMMdd").format(new Date())); */
     }
 
     protected synchronized void console(String v, SophonLogger.Level level) {
         // 没有被忽略的级别才进入输出
         if (!Store.printIgnore.contains(level)) {
-            System.out.println(v);
+            if (Slog4jConfiguration.getInstance().PERMIT_CONSOLE.isEmpty() || Slog4jConfiguration.getInstance().PERMIT_CONSOLE.equals("yes")) {
+                System.out.println(v);
+            }
             Slog4jConfiguration.getInstance().printPlus();
             if (Slog4jConfiguration.getInstance().getLoggerPrintWrite()) {
                 if (!Store.writeIgnore.contains(level)) {

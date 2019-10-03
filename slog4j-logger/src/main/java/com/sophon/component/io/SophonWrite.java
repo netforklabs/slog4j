@@ -30,4 +30,14 @@ public interface SophonWrite {
      */
     void setFile(SophonFile file);
 
+    /**
+     * 刷新缓存
+     */
+    void flush();
+
+    /**
+     * 重试写入
+     */
+    void retry(String v);
+
 }

@@ -1,9 +1,13 @@
 package com.sophon.component.io;
 
+import com.sophon.component.cache.statics.Store;
 import com.sophon.util.SophonUtils;
 
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * 根据大小写出数据
@@ -25,7 +29,7 @@ public class SophonWriteBySize implements SophonWrite {
      */
     private SophonFile file;
 
-    private BufferedWriter bw;
+    private BufferedOutputStream bufferedOutputStream;
 
     public SophonWriteBySize(Integer size, SophonFile file) {
         this.size = size;
@@ -34,31 +38,56 @@ public class SophonWriteBySize implements SophonWrite {
 
     @Override
     public void write(String v) {
+        v += "\n";
         try {
-            if (bw == null) {
-                bw = SophonUtils.newBufferedWriter(file);
+            if (bufferedOutputStream == null) {
+                bufferedOutputStream = SophonUtils.newBufferedWriter(file);
             }
-            //System.out.println("文件" + file.getName() + "大小：" + file.getSizeByKB());
             if (file.getSizeByKB() <= size) {
                 // 当前文件大小小于size
-                bw.write(v.concat("\n"));
-                bw.flush();
+                bufferedOutputStream.write(v.getBytes());
             } else {
                 // 当前文件大小大于size
+                flush();
                 setFile(file.getNewFileObject());
-                BufferedWriter bw1 = SophonUtils.newBufferedWriter(file);
-                bw1.write(v.concat("\n"));
-                bw1.flush();
-                bw1.close();
-                bw.close();
-                bw = null;
+                bufferedOutputStream = SophonUtils.newBufferedWriter(file);
+                bufferedOutputStream.write(v.getBytes());
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException FNFE) {
+            retry(v);
+        } catch (IOException IOE) {
+            retry(v);
         }
     }
 
+    @Override
     public void setFile(SophonFile file) {
         this.file = file;
+    }
+
+    @Override
+    public void flush() {
+        try {
+            bufferedOutputStream.flush();
+        } catch (IOException IOE) {}
+    }
+
+    @Override
+    public void retry(String v) {
+        System.out.println("slog4j :: IO :: File output failed! retrying...");
+        while (true) {
+            try {
+                flush();
+                setFile(file.getNewFileObject());
+                bufferedOutputStream = SophonUtils.newBufferedWriter(file);
+                bufferedOutputStream.write(v.getBytes());
+                break;
+            } catch (FileNotFoundException FNFE2) {
+                FNFE2.printStackTrace();
+            } catch (IOException IOE2) {
+                IOE2.printStackTrace();
+            }
+        }
+        System.out.println("slog4j :: IO :: File output retried successful.");
     }
 }

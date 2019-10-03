@@ -1,5 +1,6 @@
 package com.sophon.component.io;
 
+import com.sophon.component.cache.statics.Store;
 import com.sophon.config.Slog4jConfiguration;
 
 /**

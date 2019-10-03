@@ -184,6 +184,17 @@ public class Slog4jConfiguration {
     private final String STACK_TRACE_CACHE = getValue("logger.cache.disableStackCache");
 
     /**
+     * 是否输出至控制台
+     * 考虑到性能问题，直接提升至public供访问
+     */
+    public final String PERMIT_CONSOLE = getValue("logger.permit.console");
+
+    /**
+     * 获取文件输出缓存大小
+     */
+    public final String FILE_CACHE = getValue("logger.cache.file");
+
+    /**
      * 获取日期格式
      *
      * @return 日期格式
@@ -195,7 +206,7 @@ public class Slog4jConfiguration {
              Pattern pattern = Pattern.compile("\\$\\{datetime:(.*?)\\}");
              Matcher matcher = pattern.matcher(v);
              matcher.find();
-             String datetime = matcher.group(1).replaceAll("datetime:", "");
+             String datetime = matcher.group(1);
              return datetime;
          }
          return "yyyy-MM-dd HH:mm:ss";
@@ -300,6 +311,10 @@ public class Slog4jConfiguration {
             default:
                 return true;
         }
+    }
+
+    public int getFileBuffSize() {
+        return Integer.parseInt(FILE_CACHE);
     }
 
     public void main(String[] args) {
