@@ -76,6 +76,7 @@ public class SystemLoggerImpl extends SophonLoggerImpl {
         }
         if(Slog4jConfiguration.getInstance().getLoggerPrintWrite()){
             write.write(v);
+            write.flush();
         }
     }
 

@@ -6,9 +6,6 @@ import com.sophon.component.cache.statics.Store;
 import com.sophon.util.AdvancedReplace;
 import com.sophon.util.TimeUtils;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  * <h3>slog4j</h3>
  * <p>分析应该咋输出</p>
