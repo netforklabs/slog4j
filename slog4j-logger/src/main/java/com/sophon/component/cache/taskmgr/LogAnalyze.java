@@ -3,6 +3,8 @@ package com.sophon.component.cache.taskmgr;
 import com.sophon.config.Slog4jConfiguration;
 import com.sophon.logger.SophonLogger;
 import com.sophon.component.cache.statics.Store;
+import com.sophon.util.AdvancedReplace;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
 
@@ -131,30 +133,35 @@ public class LogAnalyze extends Thread {
 
     /**
      * 性能基准测试
-     * 测试十万条信息吞吐量
-     * 测试1：禁用栈缓存 && 使用replace && 无文件缓存
-     * 测试2：启用栈缓存 && 使用replace && 无文件缓存
-     * | 测试次数 | 测试1 | 测试2 |
-     * | 1       | 8202 | 5242 |
-     * | 2       | 7856 | 6103 |
-     * | 3       | 7479 | 5197 |
+     * 测试1：禁用栈缓存 && 使用replace && 无日期缓存 && 无文件缓存
+     * 测试2：启用栈缓存 && 使用replace && 无日期缓存 && 无文件缓存
+     * 测试3：启用栈缓存 && 使用AdvancedReplace && 无日期缓存 && 无文件缓存
+     * | 测试次数 | 测试1 | 测试2 | 测试3 |
+     * | 1       | 5744 | 4388 | 4208 |
+     * | 2       | 6814 | 5635 | 3900 |
+     * | 3       | 5433 | 4295 | 4372 |
+     * | 4       | 5439 | 5010 | 4806 |
+     * | 5       | 7105 | 5745 | 3979 |
+     * | 6       | 8475 | 4074 | 4365 |
      * @param level
      * @param t
      * @return
      */
     public String prefixGenerate(SophonLogger.Level level, Thread t) {
         String[] feature = getThreadFeature(t.getName(), t.getThreadGroup(), t);
-        String className = feature[0];
-        String methodName = feature[1];
-        String lineNumber = feature[2];
-        feature = null;
-
-        String v = Store.printTemplate.replace("${line}", lineNumber)
-                .replace("${class}", className)
+        return AdvancedReplace.replace(
+                Store.printTemplate,
+                "${line}", feature[2],
+                "${class}", feature[0],
+                "${level}", String.valueOf(level),
+                "${method}", feature[1],
+                "${datetime}", Store.sdf.format(new Date())
+        );
+        /* return Store.printTemplate.replace("${line}", feature[2])
+                .replace("${class}", feature[0])
                 .replace("${level}", String.valueOf(level))
-                .replace("${method}", methodName)
-                .replace("${datetime}", Store.sdf.format(new Date()));
-        return v;
+                .replace("${method}", feature[1])
+                .replace("${datetime}", Store.sdf.format(new Date())); */
     }
 
     protected synchronized void console(String v, SophonLogger.Level level) {
@@ -165,7 +172,7 @@ public class LogAnalyze extends Thread {
             if (Slog4jConfiguration.getInstance().getLoggerPrintWrite()) {
                 if (!Store.writeIgnore.contains(level)) {
                     // 输出到日志文件
-                    //Store.write.write(v);
+                    Store.write.write(v);
                 }
             }
         }
