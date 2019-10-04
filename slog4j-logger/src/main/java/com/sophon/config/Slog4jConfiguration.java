@@ -195,22 +195,27 @@ public class Slog4jConfiguration {
     public final String FILE_CACHE = getValue("logger.cache.file");
 
     /**
+     * 是否采用Agent模式启用
+     */
+    public final String LOGGER_AGENT_MODE = getValue("logger.agent.mode");
+
+    /**
      * 获取日期格式
      *
      * @return 日期格式
      */
-     public String getDateFormat() {
-         String v = LOGGER_PRINT_TEMPLATE;
-         // 判断有没有配置日期格式化规则
-         if (StringUtils.isExist(v, "\\$\\{datetime:(.*?)\\}")) {
-             Pattern pattern = Pattern.compile("\\$\\{datetime:(.*?)\\}");
-             Matcher matcher = pattern.matcher(v);
-             matcher.find();
-             String datetime = matcher.group(1);
-             return datetime;
-         }
-         return "yyyy-MM-dd HH:mm:ss";
-     }
+    public String getDateFormat() {
+        String v = LOGGER_PRINT_TEMPLATE;
+        // 判断有没有配置日期格式化规则
+        if (StringUtils.isExist(v, "\\$\\{datetime:(.*?)\\}")) {
+            Pattern pattern = Pattern.compile("\\$\\{datetime:(.*?)\\}");
+            Matcher matcher = pattern.matcher(v);
+            matcher.find();
+            String datetime = matcher.group(1);
+            return datetime;
+        }
+        return "yyyy-MM-dd HH:mm:ss";
+    }
 
     /**
      * 获取日志打印模板
@@ -253,6 +258,20 @@ public class Slog4jConfiguration {
             default:
                 return true;
         }
+    }
+
+    public boolean getLoggerAgentMode() {
+        if (!StringUtils.isEmpty(LOGGER_AGENT_MODE)) {
+            switch (LOGGER_AGENT_MODE) {
+                case "yes":
+                    return true;
+                case "no":
+                    return false;
+                default:
+                    return false;
+            }
+        }
+        return false;
     }
 
     public String getLoggerSystemPrintCaptureExceptionPath() {

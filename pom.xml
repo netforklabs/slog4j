@@ -12,7 +12,6 @@
 
     <modules>
         <module>slog4j-logger</module>
-        <module>slog4j-weaving</module>
     </modules>
 
     <groupId>io.github.torocket</groupId>

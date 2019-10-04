@@ -1,7 +1,6 @@
 package com.sophon.component.cache.taskmgr;
 
 import com.sophon.component.cache.statics.Store;
-import sun.nio.ch.sctp.Shutdown;
 
 /**
  * <h3>slog4j</h3>
