@@ -3,6 +3,7 @@ package com.sophon.config;
 
 import com.sophon.component.Entrance;
 import com.sophon.logger.SophonLogger;
+import com.sophon.util.SophonUtils;
 import com.sophon.util.StringUtils;
 
 import java.io.*;
@@ -39,7 +40,7 @@ public class Slog4jConfiguration {
             String classpath = Slog4jConfiguration.pathPrefix;
             if (classpath.equals(pathname.substring(0, classpath.length()))) {
                 pathname = pathname.replaceAll(classpath, "");
-                pathname = System.getProperty("user.dir").concat(pathname);
+                pathname = SophonUtils.getSystemPropertyByUserDir().concat(pathname);
                 pathname = pathname.replaceAll("/", "\\\\");
             }
             config = new Properties();
@@ -62,11 +63,11 @@ public class Slog4jConfiguration {
             if (config == null) {
                 try {
                     config = new Properties();
-                    String path = System.getProperty("user.dir") + "\\src\\main\\resources\\slog4j.properties";
+                    String path = SophonUtils.getSystemPropertyByUserDir() + "\\src\\main\\resources\\slog4j.properties";
                     // 当前目录文件不存在就到其他目录下去寻找
                     if(!new File(path).exists()){
                         if(!new File(path).exists()){
-                            path = System.getProperty("user.dir") + "\\resources\\slog4j.properties";
+                            path = SophonUtils.getSystemPropertyByUserDir() + "\\resources\\slog4j.properties";
                             if(!new File(path).exists()){
                                 throw new NullPointerException("如果要使用自动扫描配置文件功能,请将文件放在resources目录下");
                             }
@@ -222,7 +223,7 @@ public class Slog4jConfiguration {
     }
 
     public String getSlog4jSystemPromptLanguage() {
-        return System.getProperty("user.dir")
+        return SophonUtils.getSystemPropertyByUserDir()
                 .concat("\\language\\")
                 .concat(SLOG4j_SYSTEM_PROMPT_LANGUAGE);
     }

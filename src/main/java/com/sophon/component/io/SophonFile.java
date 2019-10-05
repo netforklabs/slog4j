@@ -1,6 +1,7 @@
 package com.sophon.component.io;
 
 import com.sophon.config.Slog4jConfiguration;
+import com.sophon.util.SophonUtils;
 import com.sophon.util.StringUtils;
 
 import java.io.File;
@@ -202,8 +203,8 @@ public class SophonFile extends File {
         // 如果是以classpath:开头的路劲,使用当前项目目录
         if (classpath.equals(pathname.substring(0, classpath.length()))) {
             pathname = pathname.replaceAll(classpath, "");
-            pathname = System.getProperty("user.dir").concat(pathname);
-            pathname = pathname.replaceAll("/", "\\\\");
+            pathname = SophonUtils.getSystemPropertyByUserDir().concat(pathname);
+            pathname = pathname.replaceAll("\\\\","/");
         }
         // 获取要操作的文件
         SophonFile file = new SophonFile(

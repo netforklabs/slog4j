@@ -92,4 +92,8 @@ public class SophonUtils {
         return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
     }
 
+    public static String getSystemPropertyByUserDir(){
+        return System.getProperty("user.dir").replaceAll("\\\\","/");
+    }
+
 }
