@@ -8,16 +8,38 @@
         <artifactId>oss-parent</artifactId>
         <version>7</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
-
-    <modules>
-        <module>slog4j-logger</module>
-    </modules>
-
-    <groupId>io.github.torocket</groupId>
+    <groupId>io.github.404NotFoundx</groupId>
     <artifactId>slog4j</artifactId>
     <version>1.0.0.CLV</version>
     <packaging>pom</packaging>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <tag>master</tag>
+        <url>git@github.com:404NotFoundx/slog4j.git</url>
+        <connection>scm:git:git@github.com:404NotFoundx/slog4j.git</connection>
+        <developerConnection>scm:git@github.com:404NotFoundx/slog4j.git</developerConnection>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>2B键盘</name>
+            <email>pagenotfound@foxmail.com</email>
+        </developer>
+        <developer>
+            <name>AdlerED</name>
+            <email>hui426509@gmail.com</email>
+        </developer>
+    </developers>
 
     <properties>
         <java.version>1.8</java.version>
@@ -43,6 +65,7 @@
         <maven.shade.version>3.0.0</maven.shade.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <commons.lang.version>3.9</commons.lang.version>
     </properties>
 
     <dependencies>
@@ -52,29 +75,47 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
         </dependency>
+        <!-- 阿里JSON解析工具类 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+        <!-- apache io包 -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons.io.version}</version>
+        </dependency>
+        <!-- javassist -->
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>${javasiss.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons.lang.version}</version>
+        </dependency>
     </dependencies>
 
-    <dependencyManagement>
-        <dependencies>
-            <!-- 阿里JSON解析工具类 -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>${fastjson.version}</version>
-            </dependency>
-            <!-- apache io包 -->
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>${commons.io.version}</version>
-            </dependency>
-            <!-- javassist -->
-            <dependency>
-                <groupId>org.javassist</groupId>
-                <artifactId>javassist</artifactId>
-                <version>${javasiss.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!--引入javadoc插件 -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven.doc.version}</version>
+                    <configuration>
+                        <!-- 禁用java 8 的DocLint新特性，以确保当javadoc有编译错误时，也能正常生成javadoc jar包-->
+                        <additionalparam>-Xdoclint:none</additionalparam>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>

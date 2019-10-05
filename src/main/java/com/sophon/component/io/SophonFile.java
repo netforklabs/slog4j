@@ -61,7 +61,7 @@ public class SophonFile extends File {
      */
     public String getSuffix() {
         String suffix = this.getName();
-        return suffix.substring(suffix.lastIndexOf("."));
+        return suffix.substring(suffix.lastIndexOf("src/main/java"));
     }
 
     /**
@@ -111,7 +111,7 @@ public class SophonFile extends File {
         File[] files = this.getParentFile().listFiles();
         for (File file : files) {
             String name = file.getName();
-            names.add(name.substring(0, name.lastIndexOf(".")));
+            names.add(name.substring(0, name.lastIndexOf("src/main/java")));
         }
         return names;
     }
@@ -138,7 +138,7 @@ public class SophonFile extends File {
      */
     public String getNoSuffixName() {
         String name = this.getName();
-        return name.substring(0, name.lastIndexOf("."));
+        return name.substring(0, name.lastIndexOf("src/main/java"));
     }
 
     /**
@@ -149,7 +149,7 @@ public class SophonFile extends File {
     public String getNewFileName() {
         String name = this.getName();
         String var1 = name.substring(0, name.lastIndexOf("_") + 1);
-        String var2 = name.substring(name.lastIndexOf("."));
+        String var2 = name.substring(name.lastIndexOf("src/main/java"));
         return var1 + getNewestFileIndex() + var2;
     }
 

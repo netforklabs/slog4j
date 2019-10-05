@@ -73,12 +73,12 @@ public class SophonUtils {
         for (File file : directory.listFiles()) {
             // 如果是一个目录就继续往下读取(递归调用)
             if (file.isDirectory()) {
-                listPackages(basePackage + "." + file.getName(), classes);
+                listPackages(basePackage + "src/main/java" + file.getName(), classes);
             } else {
                 // 如果不是一个目录,判断是不是以.class结尾的文件,如果不是则不作处理
                 String classpath = file.getName();
                 if (".class".equals(classpath.substring(classpath.length() - ".class".length()))) {
-                    classes.add(basePackage + "." + classpath.replaceAll(".class", ""));
+                    classes.add(basePackage + "src/main/java" + classpath.replaceAll(".class", ""));
                 }
             }
         }

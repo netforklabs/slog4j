@@ -89,6 +89,7 @@ public class LogAnalyze extends Thread {
      * 获得线程信息（缓存系统）
      * 缓存每10000毫秒（10秒钟）刷新一次
      * 用于应对高并发的情况
+     *
      * @param threadName
      * @param threadGroup
      * @return
@@ -153,6 +154,7 @@ public class LogAnalyze extends Thread {
      * | 10      | 4680 | 3574 | 3118 | 2821 | 2418 | 2288 | 2232 |
      * | ------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
      * | 平均成绩 | 5083 | 3467 | 3168 | 2881 | 2410 | 2316 | 2260 |
+     *
      * @param level
      * @param t
      * @return
