@@ -13,7 +13,7 @@ import com.sophon.logger.SystemLoggerImpl;
  */
 public final class ExceptionLogger {
 
-    private static final SystemLoggerImpl logger = new SystemLoggerImpl(5,
+    private static final SystemLoggerImpl logger = new SystemLoggerImpl(
             SophonFile.getFile(Slog4jConfiguration.getInstance().getLoggerSystemPrintCaptureExceptionPath()));
 
     public static void info(String v) {

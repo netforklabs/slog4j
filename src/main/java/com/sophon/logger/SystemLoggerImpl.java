@@ -18,8 +18,6 @@ import java.util.Date;
  */
 public class SystemLoggerImpl extends SophonLoggerImpl {
 
-    protected int trace = 2;
-
     private static final String formatString = "\\{\\}";
 
     // 日期格式化工具
@@ -28,16 +26,11 @@ public class SystemLoggerImpl extends SophonLoggerImpl {
     protected SophonWrite write;
 
     public SystemLoggerImpl() {
-    }
-
-    public SystemLoggerImpl(int trace) {
-        this.trace = trace;
         write = new SophonWriteBySize(2048,
                 SophonFile.getFile(Slog4jConfiguration.getInstance().getLoggerSystemPrintPath()));
     }
 
-    public SystemLoggerImpl(int trace,SophonFile file) {
-        this.trace = trace;
+    public SystemLoggerImpl(SophonFile file) {
         write = new SophonWriteBySize(2048, file);
     }
 
@@ -51,6 +44,7 @@ public class SystemLoggerImpl extends SophonLoggerImpl {
 
     @Override
     public String prefixGenerate(Level level, Thread t) {
+        int trace = t.getStackTrace().length - 1;
         String className = t.getStackTrace()[trace].getClassName();
         String methodName = t.getStackTrace()[trace].getMethodName();
         String lineNumber = String.valueOf(t.getStackTrace()[trace].getLineNumber());

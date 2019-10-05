@@ -10,35 +10,13 @@ import java.util.Set;
 
 /**
  * 普通日志打印的实现类
+ *
  * @author tiansheng
- * @date 2019/8/24 23:56
  * @version 1.0
+ * @date 2019/8/24 23:56
  * @since 1.8
  */
 public class SophonLoggerImpl implements SophonLogger {
-
-    /**
-     * 这是线程追踪数组的值
-     * 为了方便理解,举个栗子:
-     * 当前有 A,B 两个类
-     * <p>
-     * A 如果直接调用 slog.info("xxx"),那么上级线程就应该是 4!
-     * <p>
-     * 它们的调用关系是这样的: A ---> slog ---> SophonLoggerImpl
-     * <p>
-     * 所以我们 info 方法调用的线程就是 A, 所以 A 的线程值也就是4!
-     * <p>
-     * -----------------------------------------------------------------------------
-     * <p>
-     * 再假设 A 封装了 slog 类,B 通过 A.info("xxx") 来进行日志打印
-     * <p>
-     * 现在关系图就是这样了: B ---> A ---> slog ---> SophonLoggerImpl
-     * <p>
-     * 那么 trace 值就应该为 5 了,因为经过了 B、A、slog、MloggerImpl 4 个类,然后以此类推
-     * <p>
-     * 简单的说就是经过了一个类,追踪值为 2,经过两个追踪值为 3,经过了三个追踪值为 4
-     */
-    protected int trace = 2;
 
     private static final String formatString = "\\{\\}";
 
@@ -67,15 +45,6 @@ public class SophonLoggerImpl implements SophonLogger {
     protected final SophonWrite write = SophonIO.getWrite();
 
     public SophonLoggerImpl() {
-    }
-
-    /**
-     * 设置追踪哪个线程
-     *
-     * @param trace
-     */
-    public SophonLoggerImpl(int trace) {
-        this.trace = trace;
     }
 
     @Override
@@ -190,6 +159,7 @@ public class SophonLoggerImpl implements SophonLogger {
 
     @Override
     public String prefixGenerate(Level level, Thread t) {
+        int trace = t.getStackTrace().length - 1;
         String className = t.getStackTrace()[trace].getClassName();
         String methodName = t.getStackTrace()[trace].getMethodName();
         String lineNumber = String.valueOf(t.getStackTrace()[trace].getLineNumber());

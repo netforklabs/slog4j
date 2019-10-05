@@ -5,9 +5,10 @@ import java.lang.reflect.Method;
 
 /**
  * 计算程序运行时间
+ *
  * @author keyboard
- * @date 2019/6/29 0:52
  * @version 1.0
+ * @date 2019/6/29 0:52
  * @since 1.8
  */
 public class TimeCalc implements InvocationHandler {
@@ -25,11 +26,29 @@ public class TimeCalc implements InvocationHandler {
 
     /**
      * 调用方法
+     *
      * @param proxy 传入一个类的类对象
-     * @param name 传入当前proxy中的某个方法名
+     * @param name  传入当前proxy中的某个方法名
      */
     public static void invoke(Class<?> proxy, String name) {
         try {
+            Method method = proxy.getMethod(name);
+            new TimeCalc().invoke(proxy.newInstance(), method, null);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    /**
+     * 调用方法
+     *
+     * @param name 传入当前中的某个方法名
+     */
+    public static void invoke(String name) {
+        try {
+            Class<?> proxy = Class.forName(Thread.currentThread().getStackTrace()[2].getClassName());
             Method method = proxy.getMethod(name);
             new TimeCalc().invoke(proxy.newInstance(), method, null);
         } catch (NoSuchMethodException e) {

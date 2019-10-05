@@ -1,5 +1,6 @@
 package com.sophon.component.io;
 
+import com.sophon.component.security.SecurityManager;
 import com.sophon.config.Slog4jConfiguration;
 import com.sophon.util.SophonUtils;
 import com.sophon.util.StringUtils;
@@ -59,8 +60,7 @@ public class SophonFile extends File {
      * @return 文件后缀
      */
     public String getSuffix() {
-        String suffix = this.getName();
-        return suffix.substring(suffix.lastIndexOf("."));
+        return StringUtils.getSuffix(this.getName());
     }
 
     /**
@@ -108,9 +108,11 @@ public class SophonFile extends File {
     public ArrayList<String> getFileNamesByFolderNoSuffix() {
         ArrayList<String> names = new ArrayList();
         File[] files = this.getParentFile().listFiles();
+        SecurityManager securityManager = SecurityManager.getSecurityManager();
         for (File file : files) {
             String name = file.getName();
-            names.add(name.substring(0, name.lastIndexOf(".")));
+            if(!securityManager.logfile(name)) continue;
+            names.add(StringUtils.removeSuffix(name));
         }
         return names;
     }

@@ -117,4 +117,24 @@ public class StringUtils {
         return new int[]{start, end};
     }
 
+    /**
+     * 获取文件名后缀
+     * @param filename 文件名
+     * @return 后缀
+     */
+    public static String getSuffix(String filename){
+        int suffix = filename.lastIndexOf(".");
+        if(suffix == -1) return null;
+        return filename.substring(suffix);
+    }
+
+    /**
+     * 删除后缀
+     * @param filename 文件名
+     * @return 删除后缀后的文件名
+     */
+    public static String removeSuffix(String filename){
+        return filename.substring(0, filename.lastIndexOf("."));
+    }
+
 }

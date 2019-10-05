@@ -12,7 +12,7 @@ import com.sophon.logger.SystemLoggerImpl;
  */
 public final class SystemLogger {
 
-    private static final SophonLogger logger = new SystemLoggerImpl(5);
+    private static final SophonLogger logger = new SystemLoggerImpl();
 
     public static void info(String v) {
         logger.info(v);
